@@ -1,8 +1,9 @@
-# DCS-Scripting-Library
+## info
 I did not make thes files credit goes to https://github.com/asherao/DCS-Scripting-Library
   i modified the files to put all recent functions and updates in these files
   also now Enumerators, Server Functions, AI Tasks, Events should be included
   if i forgot something let me know i will try to update these files then
+# DCS-Scripting-Library
 
 Provides a baseline Scripting Library for DCS for use in VS Code. This incudes Intellisense and auto code completion. You have the option to add other Environment by simply drag and droping the `.lua` file into the directory. What's unique about it is that you don't have to have other windows open or be imbeded in a project to access the features it provides.
 
