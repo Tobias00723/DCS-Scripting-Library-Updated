@@ -17,7 +17,7 @@
 ---Lua syntax errors are automatically generated and placed in the dcs.log file.
 ---https://wiki.hoggitworld.com/view/DCS_singleton_env
 env = {}
-env.mission = {
+    env.mission = {
     --- Contains all coalition specific data including bullseye, nav_points, and all units.
     coalition = {
 
