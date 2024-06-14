@@ -228,14 +228,14 @@ do
     ---@param shapeId number
     ---@param coalition number
     ---@param id number
-    ---@param point1 table
-    ---@param parameter any
-    ---@param color table
-    ---@param fillColor table
-    ---@param lineType number
-    ---@param readOnly boolean|nil
-    ---@param message string|nil
-    function trigger.action.markupToAll(shapeId, coalition, id, point1, parameter, color, fillColor, lineType, readOnly, message) end
+    ---@param points table
+    ---@param color table|any
+    ---@param fillColor table|any
+    ---@param lineType number|any
+    ---@param readOnly boolean|nil|any
+    ---@param message string|nil|any
+    ---@param ... any
+    function trigger.action.markupToAll(shapeId, coalition, id, points , color, fillColor, lineType, readOnly, message, ...) end
 
     ---Creates a line on the F10 map from one point to another. Coalition Ids to be used.
     ---https://wiki.hoggitworld.com/view/DCS_func_lineToAll

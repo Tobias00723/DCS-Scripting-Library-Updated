@@ -656,6 +656,11 @@ do
     ---@return table
     ---@param typeName string
     function Unit.getDescByName(typeName) end
+    
+    ---Returns the runtime object Id associated with the unit. Every single object on the map is represented by a unique objectID value.
+    ---https://wiki.hoggitworld.com/view/DCS_func_getObjectID
+    ---@return number    
+    function Unit.getObjectID(self) end
 
 end
 
@@ -1236,6 +1241,22 @@ do
     ---@param detectionType2 number|nil enum
     ---@param ... number|nil enum
     function Controller.getDetectedTargets(self, detectionType1, detectionType2, ...) end
+
+    ---Sets the controlled aircraft group to the specified altitude in meters. Optional boolean keep when set to true will maintain that altitude on passing waypoints. If no present or false the aircraft will return to the altitude as defined by their route. Optional string altType will specify the altitude type used. If nil the altitude type of the current waypoint will be used. Accepted values are the altitude enumerator:
+    ---AI.Task.AltitudeType,
+    ---"RADIO" = "RADIO"
+    ---"BARO"  = "BARO"
+    ---https://wiki.hoggitworld.com/view/DCS_func_setAltitude
+    ---@param altitude number
+    ---@param keep boolean|nil
+    ---@param altType string|nil AI.Task.AltitudeType
+    function Controller.setAltitude(self , altitude , keep, altType) end
+
+    ---Sets the controlled group to go the specified speed in meters per second. Optional boolean keep when set to true will maintain that speed on passing waypoints. If no present or false the controlled group will return to the speed as defined by their route.
+    ---https://wiki.hoggitworld.com/view/DCS_func_setSpeed
+    ---@param speed number
+    ---@param keep boolean|nil
+    function Controller.setSpeed(self , speed , keep) end
 
 end
 

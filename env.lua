@@ -1042,29 +1042,25 @@ env = {
 
 ---Prints the passed string to the dcs.log with a prefix of 'info'. The optional variable defines whether or not a message box will pop up when the logging occurs.
 ---https://wiki.hoggitworld.com/view/DCS_func_info
----@return function
 ---@param log string
----@param showMessageBox boolean 
+---@param showMessageBox boolean|nil 
 function env.info(log, showMessageBox) end
 
 ---Prints the passed string to the dcs.log with a prefix of 'warning'. The optional variable defines whether or not a message box will pop up when the logging occurs.
 ---https://wiki.hoggitworld.com/view/DCS_func_warning
----@return function
 ---@param log string
----@param showMessageBox boolean 
+---@param showMessageBox boolean|nil 
 function env.warning(log, showMessageBox) end
 
 ---Prints the passed string to the dcs.log with a prefix of 'error'. The optional variable defines whether or not a message box will pop up when the logging occurs.
 ---https://wiki.hoggitworld.com/view/DCS_func_warning
----@return function
 ---@param log string
----@param showMessageBox boolean 
+---@param showMessageBox boolean|nil 
 function env.error(log, showMessageBox) end
 
 ---Prints the passed string to the dcs.log with a prefix of 'error'. The optional variable defines whether or not a message box will pop up when the logging occurs.
 ---https://wiki.hoggitworld.com/view/DCS_func_setErrorMessageBoxEnabled
 ---@example env.setErrorMessageBoxEnabled(false)
----@return function
 ---@param toggle boolean 
 function env.setErrorMessageBoxEnabled(toggle) end
 

@@ -30,7 +30,7 @@ do
     ---https://wiki.hoggitworld.com/view/DCS_func_addSubMenu
     ---@return table
     ---@param name string
-    ---@param path table
+    ---@param path table|nil
     function missionCommands.addSubMenu(name, path) end
 
     ---Removes the item of the specified path from the F10 radio menu for all. If the value is nil all items will be removed from the radio menu. If the path given is a submenu then all items nested within will be removed.
