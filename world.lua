@@ -37,7 +37,7 @@ function world.getMarkPanels() end
 
 ---Returns a table of airbase objects belonging to the specified coalition. Objects can be ships, static objects(FARP), or airbases on the map. When the function is run as world.getAirbases() no input values required, and the function returns all airbases, ships, and farps on the map.
 ---https://wiki.hoggitworld.com/view/DCS_func_getAirbases
----@return table
+---@return table<number, Airbase>
 ---@param coalitionid number
 function world.getAirbases(coalitionid) end
 
