@@ -11,16 +11,74 @@
     feel free to use these DCS prototypes
     no mentions or anything needed :)
 ]]
+
+-- TODO : make more classes of the getDescByName functions
+-- https://wiki.hoggitworld.com/view/DCS_func_getDescByName
+
+-- Unit.hasSensors and below check for classe
+
+
+
 ---@meta
+
+--- Represents the bounding box of an object with minimum and maximum coordinates.
+--- @class Box
+--- @field min vec3 The minimum 3D coordinates of the box
+--- @field max vec3 The maximum 3D coordinates of the box
+
+--- Represents the attributes of an aircraft with boolean values.
+--- @class Attributes
+--- @field Air boolean Indicates if the object is classified as Air
+--- @field Battle_airplanes boolean Indicates if the object is a battle airplane
+--- @field NonAndLightArmoredUnits boolean Indicates if the object is non or lightly armored
+--- @field Battleplanes boolean Indicates if the object is a battleplane
+--- @field Refuelable boolean Indicates if the object is refuelable
+--- @field All boolean Indicates if the object is classified under all
+--- @field Planes boolean Indicates if the object is a plane
+--- @field NonArmoredUnits boolean Indicates if the object is non-armored
+
+--- Represents the detailed information of an aircraft.
+--- @class decs
+--- @field speedMax0 number Maximum speed at sea level
+--- @field massEmpty number Empty mass of the aircraft in kg
+--- @field tankerType number Tanker type identifier
+--- @field range number Maximum range of the aircraft in km
+--- @field box Box Bounding box of the aircraft
+--- @field Hmax number Maximum operational altitude in meters
+--- @field Kmax number Maximum G-load
+--- @field category number Category of the aircraft
+--- @field speedMax10K number Maximum speed at 10,000 meters
+--- @field NyMin number Minimum load factor (G-force)
+--- @field fuelMassMax number Maximum fuel mass in kg
+--- @field speedMax number Maximum speed in km/h
+--- @field NyMax number Maximum load factor (G-force)
+--- @field massMax number Maximum mass of the aircraft in kg
+--- @field RCS number Radar Cross Section (RCS)
+--- @field displayName string Display name of the aircraft
+--- @field life number Structural life in years
+--- @field VyMax number Maximum climb rate in m/s
+--- @field attributes Attributes The attributes of the aircraft
+--- @field typeName string Type name of the aircraft
+--- @field Kab number Kab rating
+
+
+
+---@class Runway
+---@field course number The course or bearing in radians
+---@field Name number The identifier for the runway
+---@field position vec3 The position of the runway
+---@field length number The length of the runway in meters
+---@field width number The width of the runway in meters
+
 
 -- https://wiki.hoggitworld.com/view/Simulator_Scripting_Engine_Documentation
 
 ---Represents an object with body, unique name, category and type. Non-final class
 ---https://wiki.hoggitworld.com/view/DCS_Class_Object
 Object = {}
-
 ---Object.Category enum that stores object categories.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Object
+---@enum Object.Category
 Object.Category = {
     UNIT = 1,
     WEAPON = 2,
@@ -44,12 +102,15 @@ Unit = {}
 
 ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Unit
-Unit.Category = {
-    AIRPLANE = 0,
-    HELICOPTER = 1,
-    GROUND_UNIT = 2,
-    SHIP = 3,
-    STRUCTURE = 4
+Unit = {
+    ---@enum Unit_category
+    Category = {
+        AIRPLANE = 0,
+        HELICOPTER = 1,
+        GROUND_UNIT = 2,
+        SHIP = 3,
+        STRUCTURE = 4
+    }
 }
 
 ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
@@ -61,11 +122,14 @@ Unit.RefuelingSystem = {
 
 ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Unit
-Unit.SensorType = {
-    OPTIC = 0,
-    RADAR = 1,
-    IRST = 2,
-    RWR = 3
+Unit = {
+    ---@enum Unit_sensortype
+    SensorType = {
+        OPTIC = 0,
+        RADAR = 1,
+        IRST = 2,
+        RWR = 3
+    }
 }
 
 ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
@@ -164,14 +228,16 @@ Group = {}
 
 ---Represents a group of units.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Group
-Group.Category = {
-    AIRPLANE = 0,
-    HELICOPTER = 1,
-    GROUND = 2,
-    SHIP = 3,
-    TRAIN = 4
+Group = {
+    ---@enum groupCategory
+    Category = {
+        AIRPLANE = 0,
+        HELICOPTER = 1,
+        GROUND = 2,
+        SHIP = 3,
+        TRAIN = 4
+    }
 }
-
 ---Controller is an object that performs AI-routines. In other words a controller is an instance of the AI. Controller stores the current main task, active enroute tasks, and behavior options. Controllers also can perform commands. Controllers exist at both a group and unit level. However only planes and helicopters can be controlled individually at a unit level. Some functions can only work for Unit Controllers. Different tasks, options, and commands are available for the different group types. (Plane, Helicopter, Ground Unit, and Ship). See the linked articles on these subjects for more information.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Controller
 Controller = {}
@@ -205,13 +271,15 @@ Warehouse = {}
 ---The warehouse class gives control over warehouses that exist in airbase objects. These warehouses can limit the aircraft, munitions, and fuel available to coalition aircraft.
 ---**Documentation is poor so this might not be correct**
 ---https://wiki.hoggitworld.com/view/DCS_Class_Warehouse
-Warehouse.liquidtypes = {
-    jetfuel = 0,
-    Aviation_gasoline = 1,
-    MW50 = 2,
-    Diesel = 3
+Warehouse = {
+    ---@enum liquidType
+    liquidtypes = {
+        jetfuel = 0,
+        Aviation_gasoline = 1,
+        MW50 = 2,
+        Diesel = 3
+    }
 }
-
 
 ---@class Airbase
 Airbase = {}
@@ -220,7 +288,7 @@ do
 
     ---Changes the passed airbase object's coalition to the set value. Must be used with Airbase.autoCapture to disable auto capturing of the base, otherwise the base can revert back to a different coalition depending on the situation and built in game capture rules.
     ---https://wiki.hoggitworld.com/view/DCS_func_setCoalition
-    ---@param coa_enum number coalition.side
+    ---@param coa_enum side .
     function Airbase.setCoalition(self , coa_enum) end
 
     ---Enables or disables the airbase and FARP auto capture game mechanic where ownership of a base can change based on the presence of ground forces or the default setting assigned in the editor.
@@ -288,7 +356,7 @@ do
     ---https://wiki.hoggitworld.com/view/DCS_func_getUnit
     ---@ExampleDesc Returns the first unit in a group
     ---@Example local unit1 = Group.getByName('tanks'):getUnit(1)
-    ---@return any Unit
+    ---@return Unit class
     ---@param UnitIndex number
     function Airbase.getUnit(self, UnitIndex) end
 
@@ -310,19 +378,19 @@ do
 
     ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-    ---@return table vec3
+    ---@return vec3 class
     function Airbase.getPoint(self) end
 
     ---Returns a pos3 table of the objects current position and orientation in 3D space. X, Y, Z values are unit vectors defining the objects orientation. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map.Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPosition
     ---@ExampleDesc Position 3 is a table consisting of the point and orientation tables.
     ---@Exampele Position3 = {   p = Vec3, x = Vec3, y = Vec3, z = Vec3 }
-    ---@return table vec3
+    ---@return position3 class
     function Airbase.getPosition(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
     ---https://wiki.hoggitworld.com/view/DCS_func_getVelocity
-    ---@return table vec3
+    ---@return vec3 class
     function Airbase.getVelocity(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
@@ -332,7 +400,7 @@ do
 
     ---Returns an enumerator that defines the country that an object currently belongs to. Function also works with Unit, Static Object, Airbase, Weapon
     ---https://wiki.hoggitworld.com/view/DCS_func_getCountry
-    ---@return number enum country.id
+    ---@return countryid country
     function Airbase.getCountry(self) end
 
     ---Returns a localized string of the units callsign. In the case of airbases the callsign of world airbases is defined by the game. Callsigns for units, farps, or ships can be specified by the user with the mission editor or scripting engine.
@@ -349,15 +417,14 @@ do
     ---Returns a table with runway information like length, width, course, and Name. position: Returns the center of the runway width: width of the runway in meters Name: runway name, can be off course: bearing in radians. Multiply by -1 to make it useful
     ---https://wiki.hoggitworld.com/view/DCS_func_getRunways
     ---@Example { [1] = { ["course"] = -1.597741484642, ["Name"] = 8, ["position"] = { ["y"] = 952.94458007813, ["x"] = -360507.1875, ["z"] = -75590.0703125, }, ["length"] = 1859.3155517578, ["width"] = 60, }, [2] = { ["course"] = -2.5331676006317, ["Name"] = 26, ["position"] = { ["y"] = 952.94458007813, ["x"] = -359739.875, ["z"] = -75289.5078125, }, ["length"] = 1859.3155517578, ["width"] = 60, }, }
-    ---@Example TODO: Other example
-    ---@return table
+    ---@return table<number,Runway> class
     function Airbase.getRunways(self) end
 
     ---Returns a table of vec3 objects corresponding to the passed value. Seems to only ever return a single object "Tower" object. Have been unable to get it to work with other types.
     ---https://wiki.hoggitworld.com/view/DCS_func_getTechObjectPos
     ---@Example Return: { ["pos"] = { ["y"] = 30.01003074646, ["x"] = 11039.798828125, ["z"] = 367775.40625, }, }
-    ---@return table
-    ---@param ObjectType number number or string
+    ---@return table<"pos", vec3>
+    ---@param ObjectType number|string 
     function Airbase.getTechObjectPos(self, ObjectType) end
 
     ---Returns a boolean value for whether or not the ATC for the passed airbase object has been silenced.
@@ -367,9 +434,8 @@ do
 
     ---Sets the ATC belonging to an airbase object to be silent and unresponsive. This is useful for disabling the award winning ATC behavior in DCS. Note that this DOES NOT remove the airbase from the list. It just makes it unresponsive and silent to any radio calls to it. true  : enabled silent mode. false : disables silent mode.
     ---https://wiki.hoggitworld.com/view/DCS_func_setRadioSilentMode
-    ---@example TODO:
-    ---@return nil none
-    function Airbase.setRadioSilentMode(self) end
+    ---@param silent boolean    
+    function Airbase.setRadioSilentMode(self, silent) end
 
     ---Returns an instance of the calling class for the object of a specified name. The objects name is defined either in the mission editor or within functions that can dynamically spawn objects. All static objects and unit names must be unique. However groups may have the same name as a unit or static object. This function can provide access to non activated units and groups.
     ---https://wiki.hoggitworld.com/view/DCS_func_getByName
@@ -379,7 +445,7 @@ do
 
     ---Return a description table of the specified Object type. Object does not need to be in the mission in order to query its data. Function works with Unit, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDescByName
-    ---@return table
+    ---@return decs class
     ---@param typeName string
     function Airbase.getDescByName(typeName) end
 end
@@ -423,25 +489,25 @@ do
 
     ---Adds the passed amount of a liquid fuel into the warehouse inventory
     ---https://wiki.hoggitworld.com/view/DCS_func_addLiquid
-    ---@param liquidType number Warehouse.liquidtypes
+    ---@param liquidType liquidType
     ---@param count number number
     function Warehouse.addLiquid(self , liquidType , count) end
 
     ---Returns the amount of the passed liquid type within a given warehouse.
     ---https://wiki.hoggitworld.com/view/DCS_func_getLiquidAmount
-    ---@param liquidType number Warehouse.liquidtypes
+    ---@param liquidType liquidType
     ---@return number
     function Warehouse.getLiquidAmount(self , liquidType) end
 
     ---Adds the passed amount of a liquid fuel into the warehouse inventory
     ---https://wiki.hoggitworld.com/view/DCS_func_addLiquid
-    ---@param liquidType number Warehouse.liquidtypes
+    ---@param liquidType liquidType
     ---@param count number number
     function Warehouse.setLiquidAmount(self , liquidType , count) end
 
     ---Removes the set amount of liquid from the inventory in a warehouse.
     ---https://wiki.hoggitworld.com/view/DCS_func_removeLiquid
-    ---@param liquidType number Warehouse.liquidtypes
+    ---@param liquidType liquidType
     ---@param count number number
     function Warehouse.removeLiquid(self , liquidType , count) end
 
@@ -465,14 +531,13 @@ do
 
 end
 
-
 ---@class Unit
 Unit = {}
 
 do
     ---Returns an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object and how the function is called. See enumerators Group.Category, Object.Category, and Spot.Category for further reference.
     ---https://wiki.hoggitworld.com/view/DCS_func_getCategoryEx
-    ---@return enum
+    ---@return Unit_category enum
     function Unit.getCategoryEx(self) end
 
     ---Return a boolean value based on whether the object currently exists in the mission. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
@@ -537,19 +602,19 @@ do
 
     ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-    ---@return table vec3
+    ---@return vec3 class
     function Unit.getPoint(self) end
 
     ---Returns a pos3 table of the objects current position and orientation in 3D space. X, Y, Z values are unit vectors defining the objects orientation. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map.Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPosition
     ---@ExampleDesc Position 3 is a table consisting of the point and orientation tables.
     ---@Exampele Position3 = {   p = Vec3, x = Vec3, y = Vec3, z = Vec3 }
-    ---@return table vec3
+    ---@return position3 class
     function Unit.getPosition(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
     ---https://wiki.hoggitworld.com/view/DCS_func_getVelocity
-    ---@return table vec3
+    ---@return vec3 class
     function Unit.getVelocity(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
@@ -611,7 +676,7 @@ do
     ---https://wiki.hoggitworld.com/view/DCS_func_hasSensors
     ---@Example TODO:
     ---@return boolean
-    ---@param SensorType any enum
+    ---@param SensorType Unit_sensortype 
     ---@param SubCategory any enum
     function Unit.hasSensors(self, SensorType, SubCategory) end
 
@@ -796,19 +861,19 @@ do
 
     ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-    ---@return table vec3
+    ---@return vec3 class
     function Object.getPoint(self) end
 
     ---Returns a pos3 table of the objects current position and orientation in 3D space. X, Y, Z values are unit vectors defining the objects orientation. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map.Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPosition
     ---@ExampleDesc Position 3 is a table consisting of the point and orientation tables.
     ---@Exampele Position3 = {   p = Vec3, x = Vec3, y = Vec3, z = Vec3 }
-    ---@return table vec3
+    ---@return position3 class
     function Object.getPosition(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
     ---https://wiki.hoggitworld.com/view/DCS_func_getVelocity
-    ---@return table vec3
+    ---@return vec3 class
     function Object.getVelocity(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
@@ -885,19 +950,19 @@ do
 
     ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-    ---@return table vec3
+    ---@return vec3 class
     function StaticObject.getPoint(self) end
 
     ---Returns a pos3 table of the objects current position and orientation in 3D space. X, Y, Z values are unit vectors defining the objects orientation. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map.Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPosition
     ---@ExampleDesc Position 3 is a table consisting of the point and orientation tables.
     ---@Exampele Position3 = {   p = Vec3, x = Vec3, y = Vec3, z = Vec3 }
-    ---@return table vec3
+    ---@return position3 class
     function StaticObject.getPosition(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
     ---https://wiki.hoggitworld.com/view/DCS_func_getVelocity
-    ---@return table vec3
+    ---@return vec3 class
     function StaticObject.getVelocity(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
@@ -990,19 +1055,19 @@ do
 
     ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-    ---@return table vec3
+    ---@return vec3 class
     function SceneryObject.getPoint(self) end
 
     ---Returns a pos3 table of the objects current position and orientation in 3D space. X, Y, Z values are unit vectors defining the objects orientation. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map.Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPosition
     ---@ExampleDesc Position 3 is a table consisting of the point and orientation tables.
     ---@Exampele Position3 = {   p = Vec3, x = Vec3, y = Vec3, z = Vec3 }
-    ---@return table vec3
+    ---@return position3 class
     function SceneryObject.getPosition(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
     ---https://wiki.hoggitworld.com/view/DCS_func_getVelocity
-    ---@return table vec3
+    ---@return vec3 class
     function SceneryObject.getVelocity(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
@@ -1070,19 +1135,19 @@ do
 
     ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-    ---@return table vec3
+    ---@return vec3 class
     function Weapon.getPoint(self) end
 
     ---Returns a pos3 table of the objects current position and orientation in 3D space. X, Y, Z values are unit vectors defining the objects orientation. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map.Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPosition
     ---@ExampleDesc Position 3 is a table consisting of the point and orientation tables.
     ---@Exampele Position3 = {   p = Vec3, x = Vec3, y = Vec3, z = Vec3 }
-    ---@return table vec3
+    ---@return position3 class
     function Weapon.getPosition(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
     ---https://wiki.hoggitworld.com/view/DCS_func_getVelocity
-    ---@return table vec3
+    ---@return vec3 class
     function Weapon.getVelocity(self) end
 
     ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
@@ -1148,7 +1213,7 @@ do
     ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
     ---@example TODO:
-    ---@return table vec3
+    ---@return vec3 class
     function Spot.getPoint(self) end
 
     ---	Sets the destination point from which the source of the spot is drawn toward.

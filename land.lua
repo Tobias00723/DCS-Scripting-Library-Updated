@@ -12,6 +12,10 @@
 ]]
 ---@meta
 
+---@class vec2
+---@field x number
+---@field y number
+
 ---	The land singleton contains functions used to get information about the terrain geometry of a given map. Functions include getting data on the type and height of terrain at a specific points and raytracing functions.
 ---https://wiki.hoggitworld.com/view/DCS_singleton_land
 land = {}
@@ -23,7 +27,7 @@ land = {}
 ---
 ---newPoint= {x = point.x, y = land.getHeight({x = point.x, y = point.z}), z= point.z}
 ---@return number
----@param vec2 table
+---@param vec2 vec2
 function land.getHeight(vec2) end
 
 ---Returns the surface height and depth of a point. Useful for checking if the path is deep enough to support a given ship. Both values are positive. When checked over water at sea level the first value is always zero. When checked over water at altitude, for example the reservoir of the Inguri Dam, the first value is the corresponding altitude the water level is at.
@@ -35,35 +39,35 @@ function land.getHeight(vec2) end
 ---
 ---local alt, depth = land.getSurfaceHeightWithSeabed({x = p.x, y = p.z})
 ---@return number, number
----@param vec2 table
+---@param vec2 vec2
 function land.getSurfaceHeightWithSeabed(vec2) end
 
 ---Returns an enumerator for the surface type at a given point.
 ---https://wiki.hoggitworld.com/view/DCS_func_getSurfaceType
 ---@return any enum
----@param vec2 table
+---@param vec2 vec2
 function land.getSurfaceType(vec2) end
 
 ---Returns the boolean value if there is an terrain intersection via drawing a virtual line from the origin to the destination. Used for determining line of sight.
 ---https://wiki.hoggitworld.com/view/DCS_func_isVisible
 ---@return boolean
----@param origin table
----@param destination table
+---@param origin vec3
+---@param destination vec3
 function land.isVisible(origin, destination) end
 
 ---Returns an intercept point at which a ray drawn from the origin in the passed normalized direction for a specified distance. If no intersection found the function will return nil.
 ---https://wiki.hoggitworld.com/view/DCS_func_getIP
----@return any vec3
----@param origin table
----@param direction table
+---@return vec3 vec3
+---@param origin vec3
+---@param direction vec3
 ---@param distance number
 function land.getIP(origin, direction, distance) end
 
 ---Returns a table of vectors that make up the profile of the land between the two passed points. The spacing and quantity of returned vectors is not entirely known to the author. Requires further testing.
 ---https://wiki.hoggitworld.com/view/DCS_func_profile
----@return any table table of vec3
----@param vec3_1 table
----@param vec3_2 table
+---@return table<number, vec3>
+---@param vec3_1 vec3
+---@param vec3_2 vec3
 function land.profile(vec3_1, vec3_2) end
 
 ---Returns a coordinate of the nearest road from the passed point. NOTE that this function does not use vec2 or vec3. It uses individual values representing a vec2 for x and y. Valid road type values: 'roads' and 'railroads'

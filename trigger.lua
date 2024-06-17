@@ -12,6 +12,21 @@
 ]]
 ---@meta
 
+---@class vec3
+---@field x number
+---@field y number
+---@field z number
+
+---@class position3
+---@field p vec3
+---@field x vec3
+---@field y vec3
+---@field z vec3
+
+---@class TriggerZone
+---@field point vec3
+---@field radius number
+
 ---The trigger singleton contains a number of functions that mimic actions and conditions found within the mission editor triggers. As a result these functions provide an easy way to interface with triggers setup within the mission editor. Additionally a few trigger functions act as a gateway between mission editor triggers and related scripting functions.
 ---https://wiki.hoggitworld.com/view/DCS_singleton_trigger
 trigger = {}
@@ -23,14 +38,14 @@ trigger.action = {}
 do
     ---Creates an explosion at a given point at the specified power.
     ---https://wiki.hoggitworld.com/view/DCS_func_explosion
-    ---@param vec3 table
+    ---@param vec3 vec3
     ---@param power number
     function trigger.action.explosion(vec3, power) end
 
     ---Creates colored smoke marker at a given point. Smoke uses trigger.smokeColor enum
     ---https://wiki.hoggitworld.com/view/DCS_func_smoke
-    ---@param vec3 table
-    ---@param smokeColor number trigger.smokeColor
+    ---@param vec3 vec3
+    ---@param smokeColor smokeColor trigger.smokeColor
     function trigger.action.smoke(vec3, smokeColor) end
 
     ---Creates a large smoke effect on a vec3 point of a specified type and density.
@@ -44,7 +59,7 @@ do
     ---8 = huge smoke 
     ---Density is any value from 0 to 1. For example 0.5. Name is a unique name given to the smoke mark to be used with removing it.
     ---https://wiki.hoggitworld.com/view/DCS_func_effectSmokeBig
-    ---@param vec3 table
+    ---@param vec3 vec3
     ---@param smokePreset number
     ---@param density number
     ---@param name string|nil
@@ -58,14 +73,14 @@ do
 
     ---Creates an illumination bomb at the specified point. y variable defines the altitude at which the bomb will appear at. The illumination bomb will burn for 300 seconds (5 minutes). Additionally the bomb will fall toward the ground, so a minimum altitude is required to get the full illumination time. The power is a value between 1 and 1000000.
     ---https://wiki.hoggitworld.com/view/DCS_func_illuminationBomb
-    ---@param vec3 table
+    ---@param vec3 vec3
     ---@param power number
     function trigger.action.illuminationBomb(vec3, power) end
 
     ---Creates a signal flare at the given point in the specified color. The flare will be launched in the direction of the azimuth variable.
     ---https://wiki.hoggitworld.com/view/DCS_func_signalFlare
-    ---@param vec3 table
-    ---@param flareColor number
+    ---@param vec3 vec3
+    ---@param flareColor flareColor
     ---@param azimuth number
     function trigger.action.signalFlare(vec3, flareColor, azimuth) end
 
@@ -74,8 +89,8 @@ do
     ---Modulation Values:
     ---https://wiki.hoggitworld.com/view/DCS_func_radioTransmission
     ---@param filename string
-    ---@param point table
-    ---@param modulation any
+    ---@param point vec3
+    ---@param modulation modulation
     ---@param loop boolean
     ---@param frequency number
     ---@param power number
@@ -100,13 +115,13 @@ do
 
     ---Plays a sound file to all players on the specified coalition. The sound file must be placed inside of the miz file in order to be played.
     ---https://wiki.hoggitworld.com/view/DCS_func_outSoundForCoalition
-    ---@param coalition any
+    ---@param coalition side
     ---@param soundfile string
     function trigger.action.outSoundForCoalition(coalition, soundfile) end
 
     ---Plays a sound file to all players on the specified country. The sound file must be placed inside of the miz file in order to be played.
     ---https://wiki.hoggitworld.com/view/DCS_func_outSoundForCountry
-    ---@param country any
+    ---@param country countryid
     ---@param soundfile string
     function trigger.action.outSoundForCountry(country, soundfile) end
 
@@ -125,7 +140,7 @@ do
 
     ---Displays the passed string of text for the specified time to all players belonging to the specified coalition. Boolean clearview defines whether or not to use the old message display format. The old message display overwrites existing messages and is good for displaying anything that must be updated at a high rate like lap times.
     ---https://wiki.hoggitworld.com/view/DCS_func_outTextForCoalition
-    ---@param coalition any
+    ---@param coalition side
     ---@param text string
     ---@param displayTime number
     ---@param clearview boolean|nil
@@ -133,7 +148,7 @@ do
 
     ---Displays the passed string of text for the specified time to all players belonging to the specified country. Boolean clearview defines whether or not to use the old message display format. The old message display overwrites existing messages and is good for displaying anything that must be updated at a high rate like lap times.
     ---https://wiki.hoggitworld.com/view/DCS_func_outTextForCountry
-    ---@param country any
+    ---@param country countryid
     ---@param text string
     ---@param displayTime number
     ---@param clearview boolean|nil
@@ -162,7 +177,7 @@ do
 
     ---Adds a command to the "F10 Other" radio menu allowing players to call commands and set flags within the mission. Command is added for all players belonging to the specified coalition. The string name is the text that will be displayed in the F10 Other menu and is also used in the function to remove the command from the menu.
     ---https://wiki.hoggitworld.com/view/DCS_func_addOtherCommandForCoalition
-    ---@param coalition any
+    ---@param coalition side
     ---@param name string
     ---@param userFlagName string
     ---@param userFlagValue number
@@ -170,7 +185,7 @@ do
 
     ---Removes the command that matches the specified name input variable from the "F10 Other" radio menu if the command was added for coalition.
     ---https://wiki.hoggitworld.com/view/DCS_func_removeOtherCommandForCoalition
-    ---@param coalitionId any
+    ---@param coalitionId side
     ---@param name string
     function trigger.action.removeOtherCommandForCoalition(coalitionId, name) end
 
@@ -192,7 +207,7 @@ do
     ---https://wiki.hoggitworld.com/view/DCS_func_markToAll
     ---@param id number
     ---@param text string
-    ---@param vec3 table
+    ---@param vec3 vec3
     ---@param readOnly boolean|nil
     ---@param message string|nil
     function trigger.action.markToAll(id, text, vec3, readOnly, message) end
@@ -201,8 +216,8 @@ do
     ---https://wiki.hoggitworld.com/view/DCS_func_markToCoalition
     ---@param id number
     ---@param text string
-    ---@param vec3 table
-    ---@param coalitionId number
+    ---@param vec3 vec3
+    ---@param coalitionId side
     ---@param readOnly boolean|nil
     ---@param message string|nil
     function trigger.action.markToCoalition(id, text, vec3, coalitionId, readOnly, message) end
@@ -211,7 +226,7 @@ do
     ---https://wiki.hoggitworld.com/view/DCS_func_markToGroup
     ---@param id number
     ---@param text string
-    ---@param vec3 table
+    ---@param vec3 vec3
     ---@param groupId number
     ---@param readOnly boolean|nil
     ---@param message string|nil
@@ -226,9 +241,9 @@ do
     ---Creates the defined shape on the F10 map. Uses the same definitions as the specific functions to create different shapes with the only difference being the first parameter is used to define the shape. This function does have an additional type of shape of "freeform" which allows you to create an 3+ vertices shape in any format you wish. Shape Ids:
     ---https://wiki.hoggitworld.com/view/DCS_func_markupToAll
     ---@param shapeId number
-    ---@param coalition number
+    ---@param coalition side
     ---@param id number
-    ---@param points table
+    ---@param points vec3
     ---@param color table|any
     ---@param fillColor table|any
     ---@param lineType number|any
@@ -239,10 +254,10 @@ do
 
     ---Creates a line on the F10 map from one point to another. Coalition Ids to be used.
     ---https://wiki.hoggitworld.com/view/DCS_func_lineToAll
-    ---@param coalition number
+    ---@param coalition side
     ---@param id number
-    ---@param startPoint table vec3
-    ---@param endPoint table vec3
+    ---@param startPoint vec3
+    ---@param endPoint vec3
     ---@param color table
     ---@param lineType number
     ---@param readOnly boolean|nil
@@ -251,9 +266,9 @@ do
 
     ---Creates a circle on the map with a given radius, color, fill color, and outline. Coalition Ids to be used.
     ---https://wiki.hoggitworld.com/view/DCS_func_circleToAll
-    ---@param coalition number
+    ---@param coalition side
     ---@param id number
-    ---@param center table
+    ---@param center vec3
     ---@param radius number
     ---@param color table
     ---@param fillColor table
@@ -264,10 +279,10 @@ do
 
     ---Creates a rectangle on the map from the startpoint in one corner to the endPoint in the opposite corner. Coalition Ids to be used.
     ---https://wiki.hoggitworld.com/view/DCS_func_rectToAll
-    ---@param coalition number
+    ---@param coalition side
     ---@param id number
-    ---@param startPoint table
-    ---@param EndPoint table
+    ---@param startPoint vec3
+    ---@param EndPoint vec3
     ---@param color table
     ---@param fillColor table
     ---@param lineType number
@@ -277,12 +292,12 @@ do
 
     ---Creates a shape defined by the 4 points on the F10 map.
     ---https://wiki.hoggitworld.com/view/DCS_func_quadToAll Coalition Ids to be used.
-    ---@param coalition number
+    ---@param coalition side
     ---@param id number
-    ---@param point1 table
-    ---@param point2 table
-    ---@param point3 table
-    ---@param point4 table
+    ---@param point1 vec3
+    ---@param point2 vec3
+    ---@param point3 vec3
+    ---@param point4 vec3
     ---@param color table
     ---@param fillColor table
     ---@param lineType number
@@ -292,9 +307,9 @@ do
 
     ---Creates a text imposed on the map at a given point. Text scales with the map. Coalition Ids to be used.
     ---https://wiki.hoggitworld.com/view/DCS_func_textToAll
-    ---@param coalition number
+    ---@param coalition side
     ---@param id number
-    ---@param point table
+    ---@param point vec3
     ---@param color table
     ---@param fillColor table
     ---@param fontSize number
@@ -304,10 +319,10 @@ do
 
     ---Creates an arrow from the startPoint to the endPoint on the F10 map. The arrow will be "pointing at" the startPoint. There is no control over other dimensions of the arrow. Coalition Ids to be used.
     ---https://wiki.hoggitworld.com/view/DCS_func_arrowToAll
-    ---@param coalition number
+    ---@param coalition side
     ---@param id number
-    ---@param startPoint table
-    ---@param endPoint table
+    ---@param startPoint vec3
+    ---@param endPoint vec3
     ---@param color table
     ---@param fillColor table
     ---@param lineType number
@@ -357,13 +372,13 @@ do
     ---Updates the position of a mark that was defined at the last point given to create it. Can be used to "move" an existing mark from one place to the next without deleting it and creating a new one.
     ---https://wiki.hoggitworld.com/view/DCS_func_setMarkupPositionEnd
     ---@param id number
-    ---@param vec3 table
+    ---@param vec3 vec3
     function trigger.action.setMarkupPositionEnd(id, vec3) end
 
     ---Updates the position of a mark that was defined at the first point given to create it. Can be used to "move" an existing mark from one place to the next without deleting it and creating a new one.
     ---https://wiki.hoggitworld.com/view/DCS_func_setMarkupPositionStart
     ---@param id number
-    ---@param vec3 table
+    ---@param vec3 vec3
     function trigger.action.setMarkupPositionStart(id, vec3) end
 
 
@@ -414,14 +429,14 @@ do
     ---@Example 	The following creates a blue smoke plume on an aircraft named "IWishEDWouldDocumentFeaturesMore" that will be enabled as long as the aircraft is above 1000 meters.
     ---trigger.action.ctfColorTag('IWishEDWouldDocumentFeaturesMore', 5, 1000)
     ---@param unitName string
-    ---@param smokeColor any
+    ---@param smokeColor number
     ---@param altitude number
     function trigger.action.ctfColorTag(unitName, smokeColor, altitude) end
 
     ---Sets a user flag to the specified value.
     ---https://wiki.hoggitworld.com/view/DCS_func_setUserFlag
     ---@param flagNumFlagName string
-    ---@param userFlagValue any boolean or number
+    ---@param userFlagValue boolean|number
     function trigger.action.setUserFlag(flagNumFlagName, userFlagValue) end
 end
 ---The trigger singleton contains a number of functions that mimic actions and conditions found within the mission editor triggers. As a result these functions provide an easy way to interface with triggers setup within the mission editor. Additionally a few trigger functions act as a gateway between mission editor triggers and related scripting functions.
@@ -437,7 +452,7 @@ do
 
     ---Returns a trigger zone table of a given name
     ---https://wiki.hoggitworld.com/view/DCS_func_getZone
-    ---@return table TriggerZone
+    ---@return TriggerZone class
     ---@param zoneName string
     function trigger.misc.getZone(zoneName) end
 end

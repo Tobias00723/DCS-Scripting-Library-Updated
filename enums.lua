@@ -49,6 +49,7 @@ attributes.net.get_player_info = {
 ---The country enumerator contains the constant countryIds and strings for each country present in DCS World. Country ids are indexed starting at 0.
 ---https:--wiki.hoggitworld.com/view/DCS_enum_country
 country = {
+	---@enum countryid
 	id = {
 		RUSSIA                     = 0,
 		UKRAINE                    = 1,
@@ -577,6 +578,7 @@ world = {
 ---TODO:
 radio = {}
 
+---@enum modulation
 radio.modulation = {
     AM = 0,
     FM = 1
@@ -585,6 +587,7 @@ radio.modulation = {
 ---The trigger enumerator contains data for the color of smoke and flares that can be deployed as trigger actions.
 ---https:--wiki.hoggitworld.com/view/DCS_enum_trigger
 trigger = {
+	---@enum smokeColor
 	smokeColor = {
 		Green = 0,
 		Red = 1,
@@ -592,6 +595,7 @@ trigger = {
 		Orange = 3,
 		Blue = 4
 	},
+	---@enum flareColor
 	flareColor = {
 		Green = 0,
 		Red = 1,
@@ -600,16 +604,17 @@ trigger = {
 	}
 }
 
----The coalition enumerators define the available coalitions and services offered within those coalitions.
----https:--wiki.hoggitworld.com/view/DCS_enum_coalition
----TODO:
+---The coalition singleton contains functions that gets information on the all of the units within the mission. It also has two of the most powerful functions that are capable of spawning groups and static objects into the mission.
+---https://wiki.hoggitworld.com/view/DCS_singleton_coalition
 coalition = {
+	---@enum side
 	side = {
 		All = -1,
-		Neutral = 0,
-		Red = 1,
-		Blue = 2
+		NEUTRAL = 0,
+		RED = 1,
+		BLUE = 2
 	},
+	---@enum service
 	service = {
 		ATC = 0,
 		AWACS = 1,
