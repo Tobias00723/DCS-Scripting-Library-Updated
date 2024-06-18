@@ -652,7 +652,7 @@ do
 
     ---Return a description table of the given object. Table entries are dependent on the category of object and the sub-categories that may exist within that object type. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDesc
-    ---@return table
+    ---@return decs_Unit class
     function Unit.getDesc(self) end
 
     ---Returns a boolean value if the object in question has the passed attribute. See Article list of Attributes or db_attibutes.lua in C:\Program Files\Eagle Dynamics\DCS World\Scripts\Database for more details. Additionally attributes for each object are defined within their DB lua file. DB files provided on github for reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
