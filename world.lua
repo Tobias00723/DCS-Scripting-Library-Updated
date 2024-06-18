@@ -1,5 +1,16 @@
 ---@meta
 
+--- Represents a Mark in the game with various properties.
+--- @class Mark_panel
+--- @field idx number The index of the mark, unique identifier.
+--- @field time number The time associated with the mark.
+--- @field initiator Unit The unit that initiated the mark.
+--- @field coalition side The coalition associated with the mark. (-1 for neutral, 1 for RED, 2 for BLUE)
+--- @field groupID number The group ID associated with the mark. (-1 for none, or a specific group ID)
+--- @field text string The text associated with the mark.
+--- @field pos vec3 The position of the mark in 3D space.
+
+
 ---	The world singleton contains functions centered around two different but extremely useful functions. 1. Events and event handlers are all governed within world.2. A number of functions to get information about the game world.
 ---https://wiki.hoggitworld.com/view/DCS_singleton_world
 world = {}
@@ -24,21 +35,21 @@ function world.getPlayer() end
 ---Searches a defined volume of 3d space for the specified objects within it and then can run function on each returned object. Object category is either a single enum or a table of enums that defines the types of objects that will be searched for Search volume is the defined 3d space that will be searched. Handler is the function that will be run on each object that is found. Any data is a variable that is passed to the handler function, it can be anything.
 ---https://wiki.hoggitworld.com/view/DCS_func_searchObjects
 ---@return table
----@param ObjectCategory table/enum
----@param searchVolume any volume
----@param Handler any ObjectSeatchHandler
----@param data any
+---@param ObjectCategory Object.Category
+---@param searchVolume table 
+---@param Handler function ObjectSeatchHandler
+---@param data any|nil
 function world.searchObjects(ObjectCategory, searchVolume, Handler, data) end
 
 ---Returns a table of mark panels and drawn shapes indexed numerically that are present within the mission. Panel is designed with the mark points in mind, but still returns data for shapes created via markups.
 ---https://wiki.hoggitworld.com/view/DCS_func_getMarkPanels
----@return table
+---@return table<number, Mark_panel>
 function world.getMarkPanels() end
 
 ---Returns a table of airbase objects belonging to the specified coalition. Objects can be ships, static objects(FARP), or airbases on the map. When the function is run as world.getAirbases() no input values required, and the function returns all airbases, ships, and farps on the map.
 ---https://wiki.hoggitworld.com/view/DCS_func_getAirbases
 ---@return table<number, Airbase>
----@param coalitionid number
+---@param coalitionid side
 function world.getAirbases(coalitionid) end
 
 ---Searches the defined area passed to the function to remove craters, object wreckage, and any other debris within the search volume. Will not remove wreckage of scenery objects. See pages for the correct format of each volume type:

@@ -363,6 +363,7 @@ AI = {
                 CONE = "Cone",
                 DIAMOND = "Diamond"
             },
+			---@enum altType
             AltitudeType = {
                 RADIO = "RADIO",
                 BARO = "BARO"
@@ -501,7 +502,7 @@ AI.Skill = {
 	GOOD = 3,
 	HIGH = 4,
 	EXCELLENT = 5
-   }
+}
 
 ---The world enumerator contains a listing of events that can occur within the simulator, birthplace that defines how an object was spawned, and the shapes used with the world.searchObjects function. For each event see the pages for each event type
 ---https:--wiki.hoggitworld.com/view/DCS_enum_world
@@ -565,6 +566,7 @@ world = {
 		wsBirthPlace_Ship_Cold = 11,
 		wsBirthPlace_Ship_Hot = 12
 	},
+	---@enum world_VolumeType
 	VolumeType = {
 		SEGMENT = 0,
 		BOX = 1,
@@ -606,21 +608,22 @@ trigger = {
 
 ---The coalition singleton contains functions that gets information on the all of the units within the mission. It also has two of the most powerful functions that are capable of spawning groups and static objects into the mission.
 ---https://wiki.hoggitworld.com/view/DCS_singleton_coalition
-coalition = {
-	---@enum side
-	side = {
-		All = -1,
-		NEUTRAL = 0,
-		RED = 1,
-		BLUE = 2
-	},
-	---@enum service
-	service = {
-		ATC = 0,
-		AWACS = 1,
-		TANKER = 2,
-		FAC = 3
-	}
+---@enum side
+coalition.side = {
+	All = -1,
+	NEUTRAL = 0,
+	RED = 1,
+	BLUE = 2
+}
+
+---The coalition singleton contains functions that gets information on the all of the units within the mission. It also has two of the most powerful functions that are capable of spawning groups and static objects into the mission.
+---https://wiki.hoggitworld.com/view/DCS_singleton_coalition
+---@enum service
+coalition.service = {
+	ATC = 0,
+	AWACS = 1,
+	TANKER = 2,
+	FAC = 3
 }
 
 ---	The Weapon enumerator contains tables used to identify the capabilities and types of a particular weapon. Additionally the Weapon.flag table is large table that defines every category of weapon. Weapon.flag information is available in its own article.

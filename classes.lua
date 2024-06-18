@@ -21,47 +21,50 @@
 
 ---@meta
 
---- Represents the bounding box of an object with minimum and maximum coordinates.
---- @class Box
---- @field min vec3 The minimum 3D coordinates of the box
---- @field max vec3 The maximum 3D coordinates of the box
 
---- Represents the attributes of an aircraft with boolean values.
---- @class Attributes
---- @field Air boolean Indicates if the object is classified as Air
---- @field Battle_airplanes boolean Indicates if the object is a battle airplane
---- @field NonAndLightArmoredUnits boolean Indicates if the object is non or lightly armored
---- @field Battleplanes boolean Indicates if the object is a battleplane
---- @field Refuelable boolean Indicates if the object is refuelable
---- @field All boolean Indicates if the object is classified under all
---- @field Planes boolean Indicates if the object is a plane
---- @field NonArmoredUnits boolean Indicates if the object is non-armored
+---**Unit Desc Class**
 
---- Represents the detailed information of an aircraft.
---- @class decs
---- @field speedMax0 number Maximum speed at sea level
---- @field massEmpty number Empty mass of the aircraft in kg
---- @field tankerType number Tanker type identifier
---- @field range number Maximum range of the aircraft in km
---- @field box Box Bounding box of the aircraft
---- @field Hmax number Maximum operational altitude in meters
---- @field Kmax number Maximum G-load
---- @field category number Category of the aircraft
---- @field speedMax10K number Maximum speed at 10,000 meters
---- @field NyMin number Minimum load factor (G-force)
---- @field fuelMassMax number Maximum fuel mass in kg
---- @field speedMax number Maximum speed in km/h
---- @field NyMax number Maximum load factor (G-force)
---- @field massMax number Maximum mass of the aircraft in kg
---- @field RCS number Radar Cross Section (RCS)
---- @field displayName string Display name of the aircraft
---- @field life number Structural life in years
---- @field VyMax number Maximum climb rate in m/s
---- @field attributes Attributes The attributes of the aircraft
---- @field typeName string Type name of the aircraft
---- @field Kab number Kab rating
+---Represents the bounding box of an object with minimum and maximum coordinates.
+---@class Box
+---@field min vec3 The minimum 3D coordinates of the box
+---@field max vec3 The maximum 3D coordinates of the box
 
+---Represents the attributes of an aircraft with boolean values.
+---@class Attributes
+---@field Air boolean Indicates if the object is classified as Air
+---@field Battle_airplanes boolean Indicates if the object is a battle airplane
+---@field NonAndLightArmoredUnits boolean Indicates if the object is non or lightly armored
+---@field Battleplanes boolean Indicates if the object is a battleplane
+---@field Refuelable boolean Indicates if the object is refuelable
+---@field All boolean Indicates if the object is classified under all
+---@field Planes boolean Indicates if the object is a plane
+---@field NonArmoredUnits boolean Indicates if the object is non-armored
 
+---Represents the detailed information of an aircraft.
+---@class decs_Unit
+---@field speedMax0 number Maximum speed at sea level
+---@field massEmpty number Empty mass of the aircraft in kg
+---@field tankerType number Tanker type identifier
+---@field range number Maximum range of the aircraft in km
+---@field box Box Bounding box of the aircraft
+---@field Hmax number Maximum operational altitude in meters
+---@field Kmax number Maximum G-load
+---@field category number Category of the aircraft
+---@field speedMax10K number Maximum speed at 10,000 meters
+---@field NyMin number Minimum load factor (G-force)
+---@field fuelMassMax number Maximum fuel mass in kg
+---@field speedMax number Maximum speed in km/h
+---@field NyMax number Maximum load factor (G-force)
+---@field massMax number Maximum mass of the aircraft in kg
+---@field RCS number Radar Cross Section (RCS)
+---@field displayName string Display name of the aircraft
+---@field life number Structural life in years
+---@field VyMax number Maximum climb rate in m/s
+---@field attributes Attributes The attributes of the aircraft
+---@field typeName string Type name of the aircraft
+---@field Kab number Kab rating
+
+---**Runway Class**
 
 ---@class Runway
 ---@field course number The course or bearing in radians
@@ -69,6 +72,67 @@
 ---@field position vec3 The position of the runway
 ---@field length number The length of the runway in meters
 ---@field width number The width of the runway in meters
+
+
+---**Airfield Desc Class**
+
+
+---Represents the attributes of an Airfield.
+---@class EntityAttributes_airfield
+---@field Airfields boolean Indicates if the entity is an airfield
+
+---Represents an entity with life, attributes, and other properties.
+---@class desc_Airfield
+---@field life number The life parameter of the entity
+---@field attributes EntityAttributes_airfield The attributes of the entity
+---@field _origin string The origin or source of the entity
+---@field category number The category of the entity
+---@field typeName string The type name of the entity
+---@field displayName string The display name of the entity
+
+
+---**Object Desc Class**
+
+
+---@class desc_Object
+---@field life number
+---@field box Box
+
+
+---**Weapon desc Class**
+
+---@class Warhead
+---@field type WarheadType The type of the warhead
+---@field mass number The mass of the warhead
+---@field caliber number The caliber of the warhead
+---@field explosiveMass number|nil The explosive mass for HE and AP(+HE) warheads
+---@field shapedExplosiveMass number|nil The shaped explosive mass for shaped explosive warheads
+---@field shapedExplosiveArmorThickness number|nil The armor thickness for shaped explosive warheads
+
+
+---@class desc_weapon
+---@field category Weapon_Cat field only accessable when Weapon.Category is 0
+---@field warhead Warhead field only accessable when Weapon.Category is 0
+---@field guidance Weapon_guidance field only accessable when Weapon.Category is 1 or 3
+---@field rangeMin number field only accessable when Weapon.Category is 1
+---@field rangeMaxAltMin number field only accessable when Weapon.Category is 1
+---@field rangeMaxAltMax number field only accessable when Weapon.Category is 1
+---@field altMin number field only accessable when Weapon.Category is 1 or 3
+---@field altMax number field only accessable when Weapon.Category is 1 or 3
+---@field Nmax number field only accessable when Weapon.Category is 1
+---@field fuseDist number field only accessable when Weapon.Category is 1
+---@field distMin number field only accessable when Weapon.Category is 2
+---@field distMax number field only accessable when Weapon.Category is 2
+
+
+---**DetectedTarget Controller.getDetectedTargets**
+
+---Applies only to a Unit Controller. Cannot be used at the group level.
+---@class DetectedTarget_func
+---@field object Object
+---@field visible boolean
+---@field type boolean
+---@field distance boolean
 
 
 -- https://wiki.hoggitworld.com/view/Simulator_Scripting_Engine_Documentation
@@ -102,15 +166,13 @@ Unit = {}
 
 ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Unit
-Unit = {
-    ---@enum Unit_category
-    Category = {
-        AIRPLANE = 0,
-        HELICOPTER = 1,
-        GROUND_UNIT = 2,
-        SHIP = 3,
-        STRUCTURE = 4
-    }
+---@enum Unit_category
+Unit.Category = {
+    AIRPLANE = 0,
+    HELICOPTER = 1,
+    GROUND_UNIT = 2,
+    SHIP = 3,
+    STRUCTURE = 4
 }
 
 ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
@@ -122,18 +184,17 @@ Unit.RefuelingSystem = {
 
 ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Unit
-Unit = {
-    ---@enum Unit_sensortype
-    SensorType = {
-        OPTIC = 0,
-        RADAR = 1,
-        IRST = 2,
-        RWR = 3
-    }
+---@enum Unit_sensortype
+Unit.SensorType = {
+    OPTIC = 0,
+    RADAR = 1,
+    IRST = 2,
+    RWR = 3
 }
 
 ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Unit
+---@enum Unit_SensorSub_cat_optic
 Unit.OpticType = {
     TV = 0,
     LLTV = 1,
@@ -143,6 +204,7 @@ Unit.OpticType = {
 
 ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Unit
+---@enum Unit_SensorSub_cat_radar
 Unit.RadarType = {
     AS = 0,
     SS = 1
@@ -166,6 +228,7 @@ Weapon = {}
 
 ---Represents a weapon object: shell, rocket, missile and bomb
 ---https://wiki.hoggitworld.com/view/DCS_Class_Weapon
+---@enum Weapon_Cat
 Weapon.Category = {
     SHELL = 0,
     MISSILE = 1,
@@ -175,6 +238,7 @@ Weapon.Category = {
 
 ---Represents a weapon object: shell, rocket, missile and bomb
 ---https://wiki.hoggitworld.com/view/DCS_Class_Weapon
+---@enum Weapon_guidance
 Weapon.GuidanceType = {
     INS = 1,
     IR = 2,
@@ -199,6 +263,7 @@ Weapon.MissileCategory = {
 
 ---Represents a weapon object: shell, rocket, missile and bomb
 ---https://wiki.hoggitworld.com/view/DCS_Class_Weapon
+---@enum WarheadType
 Weapon.WarheadType = {
     AP = 0,
     HE = 1,
@@ -228,15 +293,13 @@ Group = {}
 
 ---Represents a group of units.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Group
-Group = {
-    ---@enum groupCategory
-    Category = {
-        AIRPLANE = 0,
-        HELICOPTER = 1,
-        GROUND = 2,
-        SHIP = 3,
-        TRAIN = 4
-    }
+---@enum groupCategory
+Group.Category = {
+    AIRPLANE = 0,
+    HELICOPTER = 1,
+    GROUND = 2,
+    SHIP = 3,
+    TRAIN = 4
 }
 ---Controller is an object that performs AI-routines. In other words a controller is an instance of the AI. Controller stores the current main task, active enroute tasks, and behavior options. Controllers also can perform commands. Controllers exist at both a group and unit level. However only planes and helicopters can be controlled individually at a unit level. Some functions can only work for Unit Controllers. Different tasks, options, and commands are available for the different group types. (Plane, Helicopter, Ground Unit, and Ship). See the linked articles on these subjects for more information.
 ---https://wiki.hoggitworld.com/view/DCS_Class_Controller
@@ -271,20 +334,18 @@ Warehouse = {}
 ---The warehouse class gives control over warehouses that exist in airbase objects. These warehouses can limit the aircraft, munitions, and fuel available to coalition aircraft.
 ---**Documentation is poor so this might not be correct**
 ---https://wiki.hoggitworld.com/view/DCS_Class_Warehouse
-Warehouse = {
-    ---@enum liquidType
-    liquidtypes = {
-        jetfuel = 0,
-        Aviation_gasoline = 1,
-        MW50 = 2,
-        Diesel = 3
-    }
+---@enum liquidType
+Warehouse.liquidtypes = {
+    jetfuel = 0,
+    Aviation_gasoline = 1,
+    MW50 = 2,
+    Diesel = 3
 }
 
 ---@class Airbase
 Airbase = {}
 
-do 
+do
 
     ---Changes the passed airbase object's coalition to the set value. Must be used with Airbase.autoCapture to disable auto capturing of the base, otherwise the base can revert back to a different coalition depending on the situation and built in game capture rules.
     ---https://wiki.hoggitworld.com/view/DCS_func_setCoalition
@@ -445,7 +506,7 @@ do
 
     ---Return a description table of the specified Object type. Object does not need to be in the mission in order to query its data. Function works with Unit, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDescByName
-    ---@return decs class
+    ---@return desc_Airfield class
     ---@param typeName string
     function Airbase.getDescByName(typeName) end
 end
@@ -674,15 +735,13 @@ do
 
     ---Returns true if the unit has the specified sensors. If SensorType is not specified the function will return true if the unit has any type of sensors. Some sensorTypes have additional subcategories which can be used to further specify for certain sensors.
     ---https://wiki.hoggitworld.com/view/DCS_func_hasSensors
-    ---@Example TODO:
     ---@return boolean
     ---@param SensorType Unit_sensortype 
-    ---@param SubCategory any enum
+    ---@param SubCategory Unit_SensorSub_cat_optic|Unit_SensorSub_cat_radar enum
     function Unit.hasSensors(self, SensorType, SubCategory) end
 
     ---Returns two values. The first value is a boolean indicating if any radar on the Unit is operational. The second value is the Object the radar is most interested in and/or actively tracking.
     ---https://wiki.hoggitworld.com/view/DCS_func_getRadar
-    ---@Example TODO:
     ---@return boolean, Object class
     function Unit.getRadar(self) end
 
@@ -695,13 +754,11 @@ do
 
     ---Returns a table of friendly cargo objects indexed numerically and sorted by distance from the helicopter. Returns nil if used on any object other than a helicopter.
     ---https://wiki.hoggitworld.com/view/DCS_func_getNearestCargos
-    ---@Example TODO:
-    ---@return table
+    ---@return table<number, Object>
     function Unit.getNearestCargos(self) end
 
     ---Sets the passed group or unit objects radar emitters on or off. Can be used on sam sites for example to shut down the radar without setting AI off or changing the alarm state.
     ---https://wiki.hoggitworld.com/view/DCS_func_enableEmission
-    ---@return nil nothing
     ---@param setting boolean
     function Unit.enableEmission(self, setting) end
 
@@ -718,7 +775,7 @@ do
 
     ---Return a description table of the specified Object type. Object does not need to be in the mission in order to query its data. Function works with Unit, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDescByName
-    ---@return table
+    ---@return decs_Unit class
     ---@param typeName string
     function Unit.getDescByName(typeName) end
     
@@ -850,7 +907,7 @@ do
 
     ---Return a description table of the given object. Table entries are dependent on the category of object and the sub-categories that may exist within that object type. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDesc
-    ---@return table
+    ---@return desc_Object class
     function Object.getDesc(self) end
 
     ---Returns a boolean value if the object in question has the passed attribute. See Article list of Attributes or db_attibutes.lua in C:\Program Files\Eagle Dynamics\DCS World\Scripts\Database for more details. Additionally attributes for each object are defined within their DB lua file. DB files provided on github for reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
@@ -939,7 +996,7 @@ do
 
     ---Return a description table of the given object. Table entries are dependent on the category of object and the sub-categories that may exist within that object type. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDesc
-    ---@return table
+    ---@return desc_Object class
     function StaticObject.getDesc(self) end
 
     ---Returns a boolean value if the object in question has the passed attribute. See Article list of Attributes or db_attibutes.lua in C:\Program Files\Eagle Dynamics\DCS World\Scripts\Database for more details. Additionally attributes for each object are defined within their DB lua file. DB files provided on github for reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
@@ -996,7 +1053,7 @@ do
 
     ---Return a description table of the specified Object type. Object does not need to be in the mission in order to query its data. Function works with Unit, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDescByName
-    ---@return table
+    ---@return desc_Object class
     ---@param typeName string
     function StaticObject.getDescByName(typeName) end
 
@@ -1044,7 +1101,7 @@ do
 
     ---Return a description table of the given object. Table entries are dependent on the category of object and the sub-categories that may exist within that object type. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDesc
-    ---@return table
+    ---@return desc_Object class
     function SceneryObject.getDesc(self) end
 
     ---Returns a boolean value if the object in question has the passed attribute. See Article list of Attributes or db_attibutes.lua in C:\Program Files\Eagle Dynamics\DCS World\Scripts\Database for more details. Additionally attributes for each object are defined within their DB lua file. DB files provided on github for reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
@@ -1077,7 +1134,7 @@ do
 
     ---Return a description table of the specified Object type. Object does not need to be in the mission in order to query its data. Function works with Unit, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDescByName
-    ---@return SceneryObject class
+    ---@return desc_Object class
     ---@param typeName string
     function SceneryObject.getDescByName(typeName) end
 
@@ -1124,7 +1181,7 @@ do
 
     ---Return a description table of the given object. Table entries are dependent on the category of object and the sub-categories that may exist within that object type. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDesc
-    ---@return table
+    ---@return desc_weapon class
     function Weapon.getDesc(self) end
 
     ---Returns a boolean value if the object in question has the passed attribute. See Article list of Attributes or db_attibutes.lua in C:\Program Files\Eagle Dynamics\DCS World\Scripts\Database for more details. Additionally attributes for each object are defined within their DB lua file. DB files provided on github for reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
@@ -1172,7 +1229,7 @@ do
 
     ---Return a description table of the specified Object type. Object does not need to be in the mission in order to query its data. Function works with Unit, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDescByName
-    ---@return Weapon class
+    ---@return desc_weapon class
     ---@param typeName string
     function Weapon.getDescByName(typeName) end
 end
@@ -1193,33 +1250,29 @@ do
 
     ---Creates a laser ray emanating from the given object to a point in 3d space. localRef is technically an optional variable, however the functions format requires an entry to be made. If not used, simply replace with nil If optional variable laserCode is not present the beam will automatically be set to a IR beam. If laserCode is specified the beam is a laser which can be used to guide laser guided bombs.Laser code is any 4 digit number between 1111 and 1788.
     ---https://wiki.hoggitworld.com/view/DCS_func_createLaser
-    ---@example TODO:
     ---@return Spot class
     ---@param source Unit|Object
-    ---@param localRef table vec3
-    ---@param point table vec3
+    ---@param localRef vec3
+    ---@param point vec3
     ---@param laseCode number
     function Spot.createLaser(source, localRef, point, laseCode) end
 
     ---Creates an infrared ray emanating from the given object to a point in 3d space. Can be seen with night vision goggles. localRef is technically an optional variable, however the functions format requires an entry to be made. If not used, simply replace with nil.
     ---https://wiki.hoggitworld.com/view/DCS_func_createInfraRed
-    ---@example TODO:
     ---@return Spot class
     ---@param source Unit|Object
-    ---@param localRef table vec3
-    ---@param point table vec3
+    ---@param localRef vec3
+    ---@param point vec3
     function Spot.createInfraRed(source, localRef, point) end
 
     ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
     ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-    ---@example TODO:
     ---@return vec3 class
     function Spot.getPoint(self) end
 
     ---	Sets the destination point from which the source of the spot is drawn toward.
     ---https://wiki.hoggitworld.com/view/DCS_func_setPoint
-    ---@example TODO:
-    ---@param vec3 table
+    ---@param vec3 vec3
     function Spot.setPoint(self, vec3) end
 
     ---Sets the number that is used to define the laser code for which laser designation can track. Default and max value is 1688
@@ -1277,13 +1330,11 @@ do
 
     ---Enables or disables the AI controller for the specified group or unit. When AI is turned off the units are incapable of moving, shooting, or detecting targets. Function CAN NOT be used on aircraft or helicopters. This function will only work on ground or naval forces! When the value passed is false the AI is set off. When the value passed is true the AI is set on.
     ---https://wiki.hoggitworld.com/view/DCS_func_setOnOff
-    ---@example TODO:
     ---@param value boolean
     function Controller.setOnOff(self, value) end
 
     ---Forces the controller to become aware of the specified target, without the controller manually detecting the object itself. Applies only to a Unit Controller. Cannot be used at the group level.
     ---https://wiki.hoggitworld.com/view/DCS_func_knowTarget
-    ---@example TODO:
     ---@param object Object
     ---@param type boolean|nil
     ---@param distance boolean|nil
@@ -1291,8 +1342,8 @@ do
 
     ---Returns multiple entries that define a number of values if the target is detected by the Unit or group associated with the controller. Values returned are: |boolean detected, -- boolean value if the target is detected| boolean visible, -- boolean value if target is visible by line of sight| ModelTime lastTime, -- the last model time that the target was detected| boolean type, -- if the type of target is known| boolean distance, -- if distance to the target is known| Vec3 lastPos, -- last known position of the target| Vec3 lastVel -- last know velocity vector of the tar|. Function is available at the unit level for all unit types. When used with a Group Controller the function will return expected values only with Ground and Ship groups.
     ---https://wiki.hoggitworld.com/view/DCS_func_isTargetDetected
-    ---@return any multiple
-    ---@param target any object
+    ---@return boolean detected , boolean visible , number lastTime , boolean type , boolean distance , vec3 lastPos , vec3 lastVel
+    ---@param target Object
     ---@param detectionType1 number|nil enum
     ---@param detectionType2 number|nil enum
     ---@param ... number|nil enum
@@ -1301,7 +1352,7 @@ do
 
     ---Returns a table of detected targets that are detected by the different detection methods. If not detection method is specified, then all forms of detection will be used. Applies only to a Unit Controller. Cannot be used at the group level.
     ---https://wiki.hoggitworld.com/view/DCS_func_getDetectedTargets
-    ---@return table
+    ---@return DetectedTarget_func class
     ---@param detectionType1 number|nil enum
     ---@param detectionType2 number|nil enum
     ---@param ... number|nil enum
@@ -1314,7 +1365,7 @@ do
     ---https://wiki.hoggitworld.com/view/DCS_func_setAltitude
     ---@param altitude number
     ---@param keep boolean|nil
-    ---@param altType string|nil AI.Task.AltitudeType
+    ---@param altType altType|nil
     function Controller.setAltitude(self , altitude , keep, altType) end
 
     ---Sets the controlled group to go the specified speed in meters per second. Optional boolean keep when set to true will maintain that speed on passing waypoints. If no present or false the controlled group will return to the speed as defined by their route.
