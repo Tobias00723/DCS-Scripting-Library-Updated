@@ -29,7 +29,7 @@ coord = {}
 ---@return vec3 vec3
 ---@param latitude number GeoCoord
 ---@param longitude number GeoCoord
----@param altitude number 
+---@param altitude number|nil 
 function  coord.LLtoLO(latitude, longitude, altitude) end
 
 ---Returns multiple values of a given vec3 point in latitude, longitude, and altitude.
