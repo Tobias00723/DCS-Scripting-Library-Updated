@@ -26,13 +26,6 @@ function coalition.addGroup(countryId, groupCategory, groupData) end
 
 ---Dynamically spawns a static object belonging to the specified country into the mission. This function follows the same rules as coalition.addGroup except for the object table not perfectly matching the format of a static object as seen in the mission file. Static Objects name cannot be shared with an existing object, if it is the existing object will be destroyed on the spawning of the new object. - If unitId is not specified or matches an existing object, a new Id will be generated. - Coalition of the object is defined based on the country the object is spawning to.
 ---https://wiki.hoggitworld.com/view/DCS_func_addStaticObject
----@return StaticObject Class
----@param countryId countryid 
----@param groupData table
-function coalition.addGroup(countryId, groupData) end
-
----Dynamically spawns a static object belonging to the specified country into the mission. This function follows the same rules as coalition.addGroup except for the object table not perfectly matching the format of a static object as seen in the mission file. Static Objects name cannot be shared with an existing object, if it is the existing object will be destroyed on the spawning of the new object. - If unitId is not specified or matches an existing object, a new Id will be generated. - Coalition of the object is defined based on the country the object is spawning to.
----https://wiki.hoggitworld.com/view/DCS_func_addStaticObject
 ---@return StaticObject class
 ---@param countryId countryid
 ---@param groupData table

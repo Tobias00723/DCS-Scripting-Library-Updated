@@ -64,6 +64,32 @@
 ---@field typeName string Type name of the aircraft
 ---@field Kab number Kab rating
 
+
+
+---@class Ammo_table
+---@field count number x anount of the weapon present on the plane
+---@field desc Ammo_desc
+
+--- Represents the detailed description of a missile.
+---@class Ammo_desc
+---@field missileCategory number The category of the missile.
+---@field rangeMaxAltMax number The maximum range at the maximum altitude.
+---@field rangeMin number The minimum range.
+---@field displayName string The display name of the missile.
+---@field rangeMaxAltMin number The maximum range at the minimum altitude.
+---@field altMax number The maximum altitude.
+---@field RCS number The radar cross-section.
+---@field box Box The bounding box dimensions of the missile.
+---@field altMin number The minimum altitude.
+---@field life number The life expectancy or durability.
+---@field fuseDist number The fuse distance.
+---@field category number The category identifier.
+---@field guidance number The guidance system identifier.
+---@field warhead Warhead The warhead details.
+---@field typeName string The type name of the missile.
+---@field Nmax number The maximum overload.
+
+
 ---**Runway Class**
 
 ---@class Runway
@@ -73,7 +99,15 @@
 ---@field length number The length of the runway in meters
 ---@field width number The width of the runway in meters
 
+---**Airfield parking class table**
 
+---@class Parking_airfield 
+---@field Term_Index number Term_index is the id for the parking
+---@field vTerminalPos vec3 vTerminal pos is its vec3 position in the world
+---@field TO_AC boolean
+---@field Term_Index_0 number
+---@field Term_Type number  16 : Valid spawn points on runway | 40 : Helicopter only spawn | 68 : Hardened Air Shelter | 72 : Open/Shelter air airplane only | 100 : Small shelter | 104: Open air spawn
+---@field fDistToRW number fDistToRW is the distance to the take-off position for the active runway from the parking.
 ---**Airfield Desc Class**
 
 
@@ -471,7 +505,7 @@ do
 
     ---Returns a table of parking data for a given airbase. If the optional value is passed only available parking will be returned, otherwise all parking at the base is returned. Term types have the following enumerated values: TODO:
     ---https://wiki.hoggitworld.com/view/DCS_func_getParking
-    ---@return table
+    ---@return table<number, Parking_airfield>
     ---@param available boolean
     function Airbase.getParking(self, available) end
 
@@ -725,7 +759,7 @@ do
 
     ---Returns an ammo table for all types of loaded ammunition on a given object. Ammo table is indexed by ammo type and contains a weapon description table and a count variable defining "how much" is on board.
     ---https://wiki.hoggitworld.com/view/DCS_func_getAmmo
-    ---@return table
+    ---@return table<number, Ammo_table>
     function Unit.getAmmo(self) end
 
     ---Returns a table defining each of the sensors available to the specified unit.
