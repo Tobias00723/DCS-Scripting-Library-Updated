@@ -162,6 +162,14 @@ do
     ---@param clearview boolean|nil
     function trigger.action.outTextForGroup(groupId, text, displayTime, clearview) end
 
+    ---Displays the passed string of text for the specified time to all players in the specified unit. The unit is defined by its unitId. Boolean clearview defines whether or not to use the old message display format. The old message display overwrites existing messages and is good for displaying anything that must be updated at a high rate like lap times.
+    ---https://wiki.hoggitworld.com/view/DCS_func_outTextForUnit
+    ---@param unitId number
+    ---@param text string
+    ---@param displayTime number
+    ---@param clearview boolean|nil
+    function trigger.action.outTextForUnit(unitId , text, displayTime, clearview) end
+
 
     ---Adds a command to the "F10 Other" radio menu allowing players to call commands and set flags within the mission. Command is added for both teams. The string name is the text that will be displayed in the F10 Other menu and is also used in the function to remove the command from the menu.
     ---https://wiki.hoggitworld.com/view/DCS_func_addOtherCommand
