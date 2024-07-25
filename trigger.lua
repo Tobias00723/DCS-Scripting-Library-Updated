@@ -438,7 +438,7 @@ do
     ---trigger.action.ctfColorTag('IWishEDWouldDocumentFeaturesMore', 5, 1000)
     ---@param unitName string
     ---@param smokeColor number
-    ---@param altitude number
+    ---@param altitude number|nil
     function trigger.action.ctfColorTag(unitName, smokeColor, altitude) end
 
     ---Sets a user flag to the specified value.
