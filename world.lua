@@ -11,15 +11,322 @@
 --- @field pos vec3 The position of the mark in 3D space.
 
 
----	The world singleton contains functions centered around two different but extremely useful functions. 1. Events and event handlers are all governed within world.2. A number of functions to get information about the game world.
+--/*EVENT's*/
+
+---@class Event_SHOT
+---@field id 1            -- The event ID (always 1 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that initiated the shot
+---@field weapon Weapon   -- The weapon that was fired
+
+---@class Event_HIT
+---@field id 2            -- The event ID (always 2 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that fired the weapon
+---@field weapon Weapon   -- The weapon that hit the target
+---@field target Object   -- The object that was hit
+
+---@class Event_TAKEOFF
+---@field id 3             -- The event ID (always 3 for this event)
+---@field time number      -- The time at which the event occurred
+---@field initiator Unit   -- The unit that took off
+---@field place Airbase    -- The place from where the unit took off (Airbase, FARP, or Ship)
+---@field subPlace number  -- Additional information, often used for specifying sub-places (default is 0)
+
+---@class Event_LAND
+---@field id 4             -- The event ID (always 4 for this event)
+---@field time number      -- The time at which the event occurred
+---@field initiator Unit   -- The unit that has landed
+---@field place Airbase    -- The place where the unit landed (Airbase, FARP, or Ship)
+---@field subPlace number  -- Additional information, often used for specifying sub-places (default is 0)
+
+---@class Event_CRASH
+---@field id 5             -- The event ID (always 5 for this event)
+---@field time number      -- The time at which the event occurred
+---@field initiator Unit   -- The unit that has crashed
+
+---@class Event_EJECTION
+---@field id 6             -- The event ID (always 6 for this event)
+---@field time number      -- The time at which the event occurred
+---@field initiator Unit   -- The unit that has ejected
+---@field target Object    -- The object representing the ejector seat or pilot that ejected
+
+---@class Event_REFUELING
+---@field id 7             -- The event ID (always 7 for this event)
+---@field time number      -- The time at which the event occurred
+---@field initiator Unit   -- The unit that is receiving fuel
+
+---@class Event_DEAD
+---@field id 8             -- The event ID (always 8 for this event)
+---@field time number      -- The time at which the event occurred
+---@field initiator Object -- The object that was destroyed
+
+---@class Event_PILOT_DEAD
+---@field id 9             -- The event ID (always 9 for this event)
+---@field time number      -- The time at which the event occurred
+---@field initiator Unit   -- The unit that the pilot was in when the pilot died
+
+---@class Event_BASE_CAPTURED
+---@field id 10            -- The event ID (always 10 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that captured the base
+---@field place Airbase   -- The airbase or FARP that was captured
+---@field subPlace number -- Additional information or sub-places (default is 0)
+
+---@class Event_MISSION_START
+---@field id 11            -- The event ID (always 11 for this event)
+---@field time number     -- The time at which the mission start event occurred
+
+---@class Event_MISSION_END
+---@field id 12            -- The event ID (always 12 for this event)
+---@field time number     -- The time at which the mission end event occurred
+
+---@class Event_TOOK_CONTROL
+---@field id 13           -- The event ID (always 13 for this event)
+
+---@class Event_REFUELING_STOP
+---@field id 14            -- The event ID (always 14 for this event)
+---@field time number     -- The time at which the refueling stop event occurred
+---@field initiator Unit  -- The unit that was receiving fuel
+
+---@class Event_BIRTH
+---@field id 15            -- The event ID (always 15 for this event)
+---@field time number     -- The time at which the birth event occurred
+---@field initiator Object -- The object that was spawned into the mission
+
+---@class Event_HUMAN_FAILURE
+---@field id 16            -- The event ID (always 16 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that had the system failure
+
+---@class Event_DETAILED_FAILURE
+---@field id 17            -- The event ID (always 17 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that had the failure
+
+---@class Event_ENGINE_STARTUP
+---@field id 18            -- The event ID (always 18 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that is starting its engines
+
+---@class Event_ENGINE_SHUTDOWN
+---@field id 19            -- The event ID (always 19 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that is shutting down its engines
+
+---@class Event_PLAYER_ENTER_UNIT
+---@field id 20            -- The event ID (always 20 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that is being taken control of
+
+---@class Event_PLAYER_LEAVE_UNIT
+---@field id 21            -- The event ID (always 21 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that the player left
+
+---@class Event_PLAYER_COMMENT
+---@field id 22            -- The event ID (always 22 for this event)
+---@field time number     -- The time at which the event occurred
+---@field comment string  -- The comment or message associated with the event
+
+---@class Event_SHOOTING_START
+---@field id 23            -- The event ID (always 23 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that is shooting
+---@field target Object   -- The unit or object that is being targeted
+---@field weapon_name string -- The name of the weapon being used
+
+---@class Event_SHOOTING_END
+---@field id 24            -- The event ID (always 24 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that stopped shooting
+---@field weapon_name string -- The name of the weapon that stopped firing
+
+---@class Event_MARK_ADDED
+---@field id 25            -- The event ID (always 25 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that added the mark
+---@field coalition number -- The coalition ID associated with the mark
+---@field groupID number  -- The group ID associated with the mark
+---@field text string     -- The text of the mark
+---@field pos vec3        -- The position of the mark
+
+---@class Event_MARK_CHANGE
+---@field id 26            -- The event ID (always 26 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that changed the mark
+---@field coalition number -- The coalition ID associated with the mark
+---@field groupID number  -- The group ID associated with the mark
+---@field text string     -- The updated text of the mark
+---@field pos vec3        -- The updated position of the mark
+
+---@class Event_MARK_REMOVE
+---@field id 27            -- The event ID (always 27 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that removed the mark
+---@field coalition number -- The coalition ID associated with the mark
+---@field groupID number  -- The group ID associated with the mark
+---@field text string     -- The text of the mark
+---@field pos vec3        -- The position of the mark
+
+---@class Event_KILL
+---@field id 28            -- The event ID (always 28 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that killed the target
+---@field weapon Weapon   -- The weapon used in the kill
+---@field target Unit    -- The unit that was killed
+---@field weapon_name string -- The name of the weapon used
+
+---@class Event_SCORE
+---@field id 29            -- The event ID (always 29 for this event)
+---@field time number     -- The time at which the event occurred
+
+---@class Event_UNIT_LOST
+---@field id 30            -- The event ID (always 30 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that was lost
+
+---@class Event_LANDING_AFTER_EJECTION
+---@field id 31            -- The event ID (always 31 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Object -- The object representing the ejected pilot
+---@field place Unit      -- The aircraft that the pilot ejected from
+---@field subplace number -- Additional information related to the landing (usually 0)
+
+---@class Event_PARATROOPER_LENDING
+---@field id 32
+
+---@class Event_DISCARD_CHAIR_AFTER_EJECTION
+---@field id 33            -- The event ID (always 33 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Object -- The ejector seat object
+---@field target Object   -- The pilot object
+
+---@class Event_WEAPON_ADD
+---@field id 34            -- The event ID (always 34 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The aircraft that has the weapon
+---@field weapon_name string -- The name of the added weapon
+
+---@class Event_TRIGGER_ZONE
+---@field id 35
+
+---@class Event_LANDING_QUALITY_MARK
+---@field id 36            -- The event ID (always 36 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that landed
+---@field place Unit      -- The location where the aircraft landed
+---@field comment string  -- The LSO score associated with the landing
+---@field subPlace number -- Additional information related to the landing (usually 0)
+
+---@class Event_BDA
+---@field id 37
+
+---@class Event_AI_ABORT_MISSION
+---@field id 38            -- The event ID (always 38 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The AI aircraft that aborted the mission
+
+---@class Event_DAYNIGHT
+---@field id 39
+
+---@class Event_FLIGHT_TIME
+---@field id 40
+
+---@class Event_PLAYER_SELF_KILL_PILOT
+---@field id 41
+
+---@class Event_PLAYER_CAPTURE_AIRFIELD
+---@field id 42
+
+---@class Event_EMERGENCY_LANDING
+---@field id 43
+
+---@class Event_UNIT_CREATE_TASK
+---@field id 44
+
+---@class Event_UNIT_DELETE_TASK
+---@field id 45
+
+---@class Event_SIMULATION_START
+---@field id 46
+
+---@class Event_WEAPON_REARM
+---@field id 47
+
+---@class Event_WEAPON_DROP
+---@field id 48            -- The event ID (always 48 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The aircraft that jettisoned the weapon
+---@field weapon_name string -- The name of the jettisoned weapon
+
+---@class Event_UNIT_TASK_COMPLETE
+---@field id 49
+
+---@class Event_UNIT_TASK_STAGE
+---@field id 50
+
+---@class Event_MAC_EXTRA_SCORE
+---@field id 51
+
+---@class Event_MISSION_RESTART
+---@field id 52
+
+---@class Event_MISSION_WINNER
+---@field id 53
+
+---@class Event_RUNWAY_TAKEOFF
+---@field id 54            -- The event ID (always 54 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that took off
+---@field place Object    -- The object from where the unit took off (Airbase, FARP, or Ship)
+---@field subPlace number -- Additional information related to the takeoff (usually 0)
+
+---@class Event_RUNWAY_TOUCH
+---@field id 55            -- The event ID (always 55 for this event)
+---@field time number     -- The time at which the event occurred
+---@field initiator Unit  -- The unit that landed
+---@field place Object    -- The object where the unit landed (Airbase, FARP, or Ship)
+---@field subPlace number -- Additional information related to the landing (usually 0)
+
+---@class Event_MAC_LMS_RESTART
+---@field id 56
+
+---@class Event_SIMULATION_FREEZE
+---@field id 57
+
+---@class Event_SIMULATION_UNFREEZE
+---@field id 58
+
+---@class Event_HUMAN_AIRCRAFT_REPAIR_START
+---@field id 59
+
+---@class Event_HUMAN_AIRCRAFT_REPAIR_FINISH
+---@field id 60
+
+---@class Event_MAX
+---@field id 61
+
+---@class Event_info
+---@field id number Number that represents the event see [world.event]
+
+--Missing info 32, 35, 37, 39, 40, 41, 42, 43, 44, 45, 46, 47, 49, 50, 51, 52, 53, 56, 57, 58, 59, 60, 61
+
+---The world singleton contains functions centered around two different but extremely useful functions. 1. Events and event handlers are all governed within world.2. A number of functions to get information about the game world.
 ---https://wiki.hoggitworld.com/view/DCS_singleton_world
 world = {}
 
----	Adds a function as an event handler that executes whenever a simulator event occurs. The most common uses of event handlers are to track statistics of units within a given scenario and to execute code based on certain events occurring. Handlers are passed event tables which contains numerous data regarding the event. For examples of the event tables returned, reference the event page on the wiki to get more information regarding the event.
+---Adds a function as an event handler that executes whenever a simulator event occurs. The most common uses of event handlers are to track statistics of units within a given scenario and to execute code based on certain events occurring. Handlers are passed event tables which contains numerous data regarding the event. For examples of the event tables returned, reference the event page on the wiki to get more information regarding the event.
 ---https://wiki.hoggitworld.com/view/DCS_func_addEventHandler
 ---@return function
----@param handler any EventHandler
+---@param handler table EventHandler
 function world.addEventHandler(handler) end
+
+---Adds a function as an event handler that executes whenever a simulator event occurs. The most common uses of event handlers are to track statistics of units within a given scenario and to execute code based on certain events occurring. Handlers are passed event tables which contains numerous data regarding the event. For examples of the event tables returned, reference the event page on the wiki to get more information regarding the event.
+---[Event info](https://wiki.hoggitworld.com/view/Category:Events)
+---@param self table
+---@param event_info Event_info EventHandler
+function world.onEvent(self, event_info) end
 
 ---Removes the specified event handler from handling events. Use this when an event handler has outlived its usefulness.
 ---https://wiki.hoggitworld.com/view/DCS_func_removeEventHandler

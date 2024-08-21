@@ -388,120 +388,167 @@ AI = {
 
 ---The AI table contains a list of constants for Options, Tasks, and Skills.
 ---https:--wiki.hoggitworld.com/view/DCS_enum_AI
-AI.Option = {
-            Air = {
-                id = {
-                    ROE = 0,
-                    REACTION_ON_THREAT = 1,
-                    RADAR_USING = 3,
-                    FLARE_USING = 4,
-                    Formation = 5,
-                    RTB_ON_BINGO = 6,
-                    SILENCE = 7,
-                    RTB_ON_OUT_OF_AMMO = 10,
-                    ECM_USING = 13,
-                    PROHIBIT_AA = 14,
-                    PROHIBIT_JETT = 15,
-                    PROHIBIT_AB = 16,
-                    PROHIBIT_AG = 17,
-                    MISSILE_ATTACK = 18,
-                    PROHIBIT_WP_PASS_REPORT = 19,
-                    OPTION_RADIO_USAGE_CONTACT = 21,
-                    OPTION_RADIO_USAGE_ENGAGE = 22,
-                    OPTION_RADIO_USAGE_KILL = 23,
-                    JETT_TANKS_IF_EMPTY = 25,
-                    FORCED_ATTACK = 26
-                },
-                val = {
-                    ROE = {
-                        WEAPON_FREE = 0,
-                        OPEN_FIRE_WEAPON_FREE = 1,
-                        OPEN_FIRE = 2,
-                        RETURN_FIRE = 3,
-                        WEAPON_HOLD = 4
-                    },
-                    REACTION_ON_THREAT = {
-                        NO_REACTION = 0,
-                        PASSIVE_DEFENCE = 1,
-                        EVADE_FIRE = 2,
-                        BYPASS_AND_ESCAPE = 3,
-                        ALLOW_ABORT_MISSION = 4
-                    },
-                    RADAR_USING = {
-                        NEVER = 0,
-                        FOR_ATTACK_ONLY = 1,
-                        FOR_SEARCH_IF_REQUIRED = 2,
-                        FOR_CONTINUOUS_SEARCH = 3
-                    },
-                    FLARE_USING = {
-                        NEVER = 0,
-                        AGAINST_FIRED_MISSILE = 1,
-                        WHEN_FLYING_IN_SAM_WEZ = 2,
-                        WHEN_FLYING_NEAR_ENEMIES = 3
-                    },
-                    ECM_USING = {
-                        NEVER_USE = 0,
-                        USE_IF_ONLY_LOCK_BY_RADAR = 1,
-                        USE_IF_DETECTED_LOCK_BY_RADAR = 2,
-                        ALWAYS_USE = 3
-                    },
-                    MISSILE_ATTACK = {
-                        MAX_RANGE = 0,
-                        NEZ_RANGE = 1,
-                        HALF_WAY_RMAX_NEZ = 2,
-                        TARGET_THREAT_EST = 3,
-                        RANDOM_RANGE = 4
-                    }
-                }
-            },
-            Ground = {
-                id = {
-                    ROE = 0,
-                    FORMATION = 5,
-                    DISPERSE_ON_ATTACK = 8,
-                    ALARM_STATE = 9,
-                    ENGAGE_AIR_WEAPONS = 20,
-                    AC_ENGAGEMENT_RANGE_RESTRICTION = 24,
-                    Restrict_AAA_min = 27,
-                    Restrict_Targets = 28,
-                    Restrict_AAA_max = 29
-                },
-                val = {
-                    ALARM_STATE = {
-                        AUTO = 0,
-                        GREEN = 1,
-                        RED = 2
-                    },
-                    ROE = {
-                        OPEN_FIRE = 2,
-                        RETURN_FIRE = 3,
-                        WEAPON_HOLD = 4
-                    }
-                }
-            },
-            Naval = {
-                id = {
-                    ROE = 0
-                },
-                val = {
-                    ROE = {
-                        OPEN_FIRE = 2,
-                        RETURN_FIRE = 3,
-                        WEAPON_HOLD = 4
-                    }
-                }
-            }
-        }
-
----The AI table contains a list of constants for Options, Tasks, and Skills.
----https:--wiki.hoggitworld.com/view/DCS_enum_AI
-AI.Skill = {
-	PLAYER = 0,
-	CLIENT = 1,
-	AVERAGE = 2,
-	GOOD = 3,
-	HIGH = 4,
-	EXCELLENT = 5
+AI = {
+	Option = {
+		Air = {
+			id = {
+				ECM_USING = 13,
+				FLARE_USING = 4,
+				FORCED_ATTACK = 26,
+				FORMATION = 5,
+				JETT_TANKS_IF_EMPTY = 25,
+				MISSILE_ATTACK = 18,
+				NO_OPTION = -1,
+				OPTION_RADIO_USAGE_CONTACT = 21,
+				OPTION_RADIO_USAGE_ENGAGE = 22,
+				OPTION_RADIO_USAGE_KILL = 23,
+				PREFER_VERTICAL = 32,
+				PROHIBIT_AA = 14,
+				PROHIBIT_AB = 16,
+				PROHIBIT_AG = 17,
+				PROHIBIT_JETT = 15,
+				PROHIBIT_WP_PASS_REPORT = 19,
+				RADAR_USING = 3,
+				REACTION_ON_THREAT = 1,
+				ROE = 0,
+				RTB_ON_BINGO = 6,
+				RTB_ON_OUT_OF_AMMO = 10,
+				SILENCE = 7,
+			},
+			val = {
+				ECM_USING = {
+					ALWAYS_USE = 3,
+					NEVER_USE = 0,
+					USE_IF_DETECTED_LOCK_BY_RADAR = 2,
+					USE_IF_ONLY_LOCK_BY_RADAR = 1,
+				},
+				FLARE_USING = {
+					AGAINST_FIRED_MISSILE = 1,
+					NEVER = 0,
+					WHEN_FLYING_IN_SAM_WEZ = 2,
+					WHEN_FLYING_NEAR_ENEMIES = 3,
+				},
+				MISSILE_ATTACK = {
+					HALF_WAY_RMAX_NEZ = 2,
+					MAX_RANGE = 0,
+					NEZ_RANGE = 1,
+					RANDOM_RANGE = 4,
+					TARGET_THREAT_EST = 3,
+				},
+				RADAR_USING = {
+					FOR_ATTACK_ONLY = 1,
+					FOR_CONTINUOUS_SEARCH = 3,
+					FOR_SEARCH_IF_REQUIRED = 2,
+					NEVER = 0,
+				},
+				REACTION_ON_THREAT = {
+					ALLOW_ABORT_MISSION = 4,
+					BYPASS_AND_ESCAPE = 3,
+					EVADE_FIRE = 2,
+					NO_REACTION = 0,
+					PASSIVE_DEFENCE = 1,
+				},
+				ROE = {
+					OPEN_FIRE = 2,
+					OPEN_FIRE_WEAPON_FREE = 1,
+					RETURN_FIRE = 3,
+					WEAPON_FREE = 0,
+					WEAPON_HOLD = 4,
+				},
+			},
+		},
+		Ground = {
+			id = {
+				AC_ENGAGEMENT_RANGE_RESTRICTION = 24,
+				ALARM_STATE = 9,
+				DISPERSE_ON_ATTACK = 8,
+				ENGAGE_AIR_WEAPONS = 20,
+				EVASION_OF_ARM = 31,
+				FORMATION = 5,
+				NO_OPTION = -1,
+				ROE = 0,
+			},
+			val = {
+				ALARM_STATE = {
+					AUTO = 0,
+					GREEN = 1,
+					RED = 2,
+				},
+				ROE = {
+					OPEN_FIRE = 2,
+					RETURN_FIRE = 3,
+					WEAPON_HOLD = 4,
+				},
+			},
+		},
+		Naval = {
+			id = {
+				NO_OPTION = -1,
+				ROE = 0,
+			},
+			val = {
+				ROE = {
+					OPEN_FIRE = 2,
+					RETURN_FIRE = 3,
+					WEAPON_HOLD = 4,
+				},
+			},
+		},
+	},
+	Skill = {
+		AVERAGE = "Average",
+		CLIENT = "Client",
+		EXCELLENT = "Excellent",
+		GOOD = "Good",
+		HIGH = "High",
+		PLAYER = "Player",
+	},
+	Task = {
+		AltitudeType = {
+			BARO = "BARO",
+			RADIO = "RADIO",
+		},
+		Designation = {
+			AUTO = "Auto",
+			IR_POINTER = "IR-Pointer",
+			LASER = "Laser",
+			NO = "No",
+			WP = "WP",
+		},
+		OrbitPattern = {
+			CIRCLE = "Circle",
+			RACE_TRACK = "Race-Track",
+		},
+		TurnMethod = {
+			FIN_POINT = "Fin Point",
+			FLY_OVER_POINT = "Fly Over Point",
+		},
+		VehicleFormation = {
+			CONE = "Cone",
+			DIAMOND = "Diamond",
+			ECHELON_LEFT = "EchelonL",
+			ECHELON_RIGHT = "EchelonR",
+			OFF_ROAD = "Off Road",
+			ON_ROAD = "On Road",
+			RANK = "Rank",
+			VEE = "Vee",
+		},
+		WaypointType = {
+			LAND = "Land",
+			TAKEOFF = "TakeOff",
+			TAKEOFF_PARKING = "TakeOffParking",
+			TAKEOFF_PARKING_HOT = "TakeOffParkingHot",
+			TURNING_POINT = "Turning Point",
+		},
+		WeaponExpend = {
+			ALL = "All",
+			FOUR = "Four",
+			HALF = "Half",
+			ONE = "One",
+			QUARTER = "Quarter",
+			TWO = "Two",
+		},
+	},
 }
 
 ---The world enumerator contains a listing of events that can occur within the simulator, birthplace that defines how an object was spawned, and the shapes used with the world.searchObjects function. For each event see the pages for each event type
@@ -554,9 +601,22 @@ world = {
 		S_EVENT_EMERGENCY_LANDING = 43,
 		S_EVENT_UNIT_CREATE_TASK = 44,
 		S_EVENT_UNIT_DELETE_TASK = 45,
-		S_EVENT_MAX = 46,
+		S_EVENT_SIMULATION_START = 46,
+		S_EVENT_WEAPON_REARM = 47,
+		S_EVENT_WEAPON_DROP = 48,
+		S_EVENT_UNIT_TASK_COMPLETE = 49,
+		S_EVENT_UNIT_TASK_STAGE = 50,
+		S_EVENT_MAC_EXTRA_SCORE = 51,
+		S_EVENT_MISSION_RESTART = 52,
+		S_EVENT_MISSION_WINNER = 53,
 		S_EVENT_RUNWAY_TAKEOFF = 54,
 		S_EVENT_RUNWAY_TOUCH = 55,
+		S_EVENT_MAC_LMS_RESTART = 56,
+		S_EVENT_SIMULATION_FREEZE = 57,
+		S_EVENT_SIMULATION_UNFREEZE = 58,
+		S_EVENT_HUMAN_AIRCRAFT_REPAIR_START = 59,
+		S_EVENT_HUMAN_AIRCRAFT_REPAIR_FINISH = 60,
+		S_EVENT_MAX = 61,
 	},
 	BirthPlace = {
 		wsBirthPlace_Air = 1,
@@ -840,3 +900,18 @@ DCS = {
 	"UNIT_ROLE",--"artillery_commander", "instructor", etc
 	"UNIT_INVISIBLE_MAP_ICON",--ME invisible map icon
 }
+
+Enums_dontuse = {
+	---@enum Enum_ShapeID
+	ShapeID = {
+		Line = 1,
+		Circle = 2,
+		Rect = 3,
+		Arrow = 4,
+		Text = 5,
+		Quad = 6,
+		Freeform = 7,
+	}
+}
+
+_APP_VERSION = "DCS VERISON NUMBER"

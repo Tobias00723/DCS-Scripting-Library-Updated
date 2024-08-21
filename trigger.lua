@@ -248,7 +248,7 @@ do
 
     ---Creates the defined shape on the F10 map. Uses the same definitions as the specific functions to create different shapes with the only difference being the first parameter is used to define the shape. This function does have an additional type of shape of "freeform" which allows you to create an 3+ vertices shape in any format you wish. Shape Ids:
     ---https://wiki.hoggitworld.com/view/DCS_func_markupToAll
-    ---@param shapeId number
+    ---@param shapeId Enum_ShapeID
     ---@param coalition side
     ---@param id number
     ---@param points vec3

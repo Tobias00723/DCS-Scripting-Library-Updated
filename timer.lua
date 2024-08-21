@@ -30,7 +30,7 @@ function timer.scheduleFunction(functionToCall, anyFunctionArguement, modelTime)
 ---Removes a scheduled function as defined by the functionId from executing. Essentially will "destroy" the function.
 ---https://wiki.hoggitworld.com/view/DCS_func_removeFunction
 ---@return function
----@param functionId number
+---@param functionId number|nil
 function timer.removeFunction(functionId) end
 
 ---Re-Schedules an already scheduled function to run at a different time in the future.
