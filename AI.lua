@@ -18,8 +18,6 @@
 do
     ---@meta
 
-    AI = {}
-
     do
         --AI.Option.Air.val
         do
@@ -42,18 +40,7 @@ do
 
     ---The AI table contains a list of constants for Options, Tasks, and Skills.
     ---https://wiki.hoggitworld.com/view/DCS_enum_AI
-    AI = {
-
-        Task = {
-
-
-
-
-
-
-
-        },
-    }
+    AI = {}
 
     ---@enum AI.Option.Air.id
     AI.Option.Air.id = {
