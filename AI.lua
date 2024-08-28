@@ -179,7 +179,7 @@ do
     }
 
     ---@enum AI.Task.AltitudeType
-    AltitudeType = {
+    AI.Task.AltitudeType = {
         BARO = "BARO",
         RADIO = "RADIO",
     }
