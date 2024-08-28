@@ -1,36 +1,44 @@
----@diagnostic disable: undefined-doc-name
-
 --[[
-    updated by Tobias00723
-    orignial author : unkown ;/
-    
+
+    Script by Tobias00723
     from the TGFB server
     Discord : https://discord.gg/hEHd4A3czx
     any questions?                   ^^
-    find me on the my discord server ^^
+    find me on my discord server ^^
 
-    feel free to use these DCS prototypes
-    no mentions or anything needed :)
+    These scripts are opensource and free to use for everybody.
+    But i would appreaciate some credit if you "borrow" some code ;p
+
 ]]
+do
+    ---@meta
 
----@meta
+    --classes
+    do
+    end
 
----atmosphere is a singleton whose functions return atmospheric data about the mission. Currently limited only to wind data.
-atmosphere = {}
+    ---atmosphere is a singleton whose functions return atmospheric data about the mission. Currently limited only to wind data.
+    ---@class atmosphere
+    atmosphere = {}
 
----Returns a velocity vector of the wind at a specified point
----@param vec3 vec3
----@return vec3 vec3
-function atmosphere.getWind(vec3) end
+    --Functions
+    do
+        ---Returns the temperature and pressure at a given point in 3d space. Temperature is returned in Kelvins Pressure is returned in Pascals
+        ---https://wiki.hoggitworld.com/view/DCS_func_getTemperatureAndPressure
+        ---@param vec3 vec3
+        ---@return number Kelvins , number Pascals
+        function atmosphere.getTemperatureAndPressure(vec3) end
 
----Returns a velocity vector of the wind at a specified point, this time factoring turbulence into the equation.
----@param vec3 vec3
----@return vec3 vec3
-function atmosphere.getWindWithTurbulence(vec3) end
+        ---Returns a velocity vector of the wind at a specified point
+        ---https://wiki.hoggitworld.com/view/DCS_func_getWind
+        ---@param vec3 vec3
+        ---@return vec3
+        function atmosphere.getWind(vec3) end
 
----Returns the temperature and pressure at a given point in 3d space. Temperature is returned in Kelvins Pressure is returned in Pascals
----@param vec3 vec3
----@return Temp number , Pressure number
-function atmosphere.getTemperatureAndPressure(vec3) end
-
-return atmosphere
+        ---Returns a velocity vector of the wind at a specified point, this time factoring turbulence into the equation.
+        ---@param vec3 vec3
+        ---@return vec3
+        ---https://wiki.hoggitworld.com/view/DCS_func_getWindWithTurbulence
+        function atmosphere.getWindWithTurbulence(vec3) end
+    end
+end
