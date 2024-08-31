@@ -1453,7 +1453,7 @@ do
                         name = "",
 
                         --- List of all planes in mission
-                        ---@type Plane_Group_DATA
+                        ---@type table<number, Plane_Group_DATA>
                         plane = {
                             frequency = 305, ---@type number
                             modulation = 0, ---@type number
