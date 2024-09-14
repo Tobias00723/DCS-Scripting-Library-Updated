@@ -27,7 +27,7 @@ do
             ---@field ping number Ping in ms of the player
             ---@field side number check coalition.side
             ---@field slot string slotid of player
-            ---@field id number Plyerid of the player in the server
+            ---@field id Player_id Plyerid of the player in the server
             ---@field name string player name in the server
             ---@field ucid string user id unique for every player
             ---@field started boolean unkown
