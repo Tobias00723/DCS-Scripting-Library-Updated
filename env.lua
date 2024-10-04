@@ -1356,6 +1356,46 @@ do
                 end
             end
         end
+
+        --[[WAREHOUSE DATA]]
+        do
+            --Aircraft_table
+            do
+                ---@class Warehouse_data_aircraft
+                ---@field initialAmount number
+                ---@field linkDynTempl? number Groupid for dyn template that is linked to this unit
+                ---@field wsType Wherehouse_recource_map see https://wiki.hoggitworld.com/view/DCS_func_getResourceMap
+                ---@field unlimited boolean
+            end
+
+            --Sup table
+            do
+                ---@class Warehouse_data_sup
+                ---@field Id number
+                ---@field type "airports"|string
+            end
+            ---@class Warehouse_data
+            ---@field allowHotStart boolean
+            ---@field unlimitedMunitions boolean
+            ---@field methanol_mixture table<"InitFuel", number>
+            ---@field OperatingLevel_Air number
+            ---@field diesel table<"InitFuel", number>
+            ---@field speed number
+            ---@field dynamicSpawn boolean
+            ---@field unlimitedAircrafts boolean
+            ---@field unlimitedFuel boolean
+            ---@field jet_fuel table<"InitFuel", number>
+            ---@field periodicity number
+            ---@field suppliers table<number, Warehouse_data_sup>|{}
+            ---@field coalition "RED"|"BLUE"|string
+            ---@field dynamicCargo boolean
+            ---@field OperatingLevel_Eqp number
+            ---@field gasoline table<"InitFuel", number>
+            ---@field aircrafts table<"helicopters"|"planes", table<TypeNames_AC|TypeNames_Heli, Warehouse_data_aircraft>>|{}
+            ---@field weapons {}|table
+            ---@field OperatingLevel_Fuel number
+            ---@field size number
+        end
     end
 
     ---env contains basic logging functions useful for debugging scripting commands. The input text is automatically added to dcs.log in your saved games folder, default location: C:\Users\<<userName>>\Saved Games\DCS\Logs.
@@ -2341,51 +2381,36 @@ do
         } -- end of ["weather"]
     }     -- end of ["missionData"]
 
+
     env.warehouses = {
         -- [airbaseId] = warehouseTable for additional airbases can be added similarly
+        ---@type table<number,Warehouse_data>
         airports = {
             [1] = {
                 gasoline = {
-                    ---@type number
                     InitFuel = 100,
                 },
-
-                ---@type boolean
+                allowHotStart = false,
+                dynamicCargo = false,
+                dynamicSpawn = true,
                 unlimitedMunitions = true,
-
                 methanol_mixture = {
-                    ---@type number
                     InitFuel = 100,
                 },
-
-                ---@type number
                 OperatingLevel_Air = 10,
-
                 diesel = {
-                    ---@type number
                     InitFuel = 100,
                 },
-
-                ---@type number
                 speed = 16.666666,
-
-                ---@type number
                 size = 100,
-
-                ---@type number
                 periodicity = 30,
-
                 suppliers = {
-                    ---@type table
                     [1] = {
-                        ---@type number
                         Id = 23,
-                        ---@type string
                         type = "airports",
                     },
                 },
 
-                ---@type string
                 coalition = "blue",
 
                 jet_fuel = {
@@ -2393,93 +2418,66 @@ do
                     InitFuel = 100,
                 },
 
-                ---@type number
                 OperatingLevel_Eqp = 10,
 
-                ---@type boolean
                 unlimitedFuel = true,
 
-                ---@type table
                 aircrafts = {},
 
-                ---@type table
                 weapons = {},
 
-                ---@type number
                 OperatingLevel_Fuel = 10,
 
-                ---@type boolean
                 unlimitedAircrafts = true,
             },
         },
-
+        ---@type table<number,Warehouse_data>
         warehouses = {
-            gasoline = {
-                ---@type number
-                InitFuel = 100,
-            },
-
-            ---@type boolean
-            unlimitedMunitions = true,
-
-            methanol_mixture = {
-                ---@type number
-                InitFuel = 100,
-            },
-
-            ---@type number
-            OperatingLevel_Air = 10,
-
-            diesel = {
-                ---@type number
-                InitFuel = 100,
-            },
-
-            ---@type number
-            speed = 16.666666,
-
-            ---@type number
-            size = 100,
-
-            ---@type number
-            periodicity = 30,
-
-            suppliers = {
-                ---@type table
-                [1] = {
-                    ---@type number
-                    Id = 23,
-                    ---@type string
-                    type = "airports",
+            [1] = {
+                gasoline = {
+                    InitFuel = 100,
                 },
-            },
+                allowHotStart = false,
+                dynamicCargo = false,
+                dynamicSpawn = true,
+                unlimitedMunitions = true,
+                methanol_mixture = {
+                    InitFuel = 100,
+                },
+                OperatingLevel_Air = 10,
+                diesel = {
+                    InitFuel = 100,
+                },
+                speed = 16.666666,
+                size = 100,
+                periodicity = 30,
+                suppliers = {
+                    [1] = {
+                        Id = 23,
+                        type = "airports",
+                    },
+                },
 
-            ---@type string
-            coalition = "blue",
+                coalition = "blue",
 
-            jet_fuel = {
-                ---@type number
-                InitFuel = 100,
-            },
+                jet_fuel = {
+                    ---@type number
+                    InitFuel = 100,
+                },
 
-            ---@type number
-            OperatingLevel_Eqp = 10,
+                OperatingLevel_Eqp = 10,
 
-            ---@type boolean
-            unlimitedFuel = true,
+                unlimitedFuel = true,
 
-            ---@type table
-            aircrafts = {},
+                aircrafts = {},
 
-            ---@type table
-            weapons = {},
+                weapons = {},
 
-            ---@type number
-            OperatingLevel_Fuel = 10,
+                OperatingLevel_Fuel = 10,
 
-            ---@type boolean
-            unlimitedAircrafts = true,
-        },
+                unlimitedAircrafts = true,
+            }
+        }
     }
 
     env.Mode = {
