@@ -1542,7 +1542,7 @@ do
                             uncontrolled = false ---@type boolean
                         },
                         --- List of all helicopter in mission
-                        ---@type table
+                        ---@type table<number, Plane_Group_DATA>
                         helicopter = {},
 
                         --- List of all ships in mission

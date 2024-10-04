@@ -32,6 +32,15 @@ do
         CARGO = 6,
     }
 
+    ---Classes
+    do
+        ---@alias Enum_Objects
+        ---| Unit
+        ---| Weapon
+        ---| StaticObject
+        ---| SceneryObject
+        ---| Airbase
+    end
     --No Docu
     Object.database_ = {}
 
@@ -54,6 +63,7 @@ do
 
         ---Return an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object. See enumerators Group.Category, Object.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Object.Category.
         ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
+        ---@param self Object|Enum_Objects
         ---@return Object.Category
         function Object.getCategory(self) end
 

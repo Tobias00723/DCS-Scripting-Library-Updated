@@ -66,7 +66,7 @@ do
 
             --- Represents the detailed description of a missile.
             ---@class Ammo_desc
-            ---@field missileCategory number The category of the missile.
+            ---@field missileCategory Weapon.MissileCategory The category of the missile.
             ---@field rangeMaxAltMax number The maximum range at the maximum altitude.
             ---@field rangeMin number The minimum range.
             ---@field displayName string The display name of the missile.
@@ -77,8 +77,8 @@ do
             ---@field altMin number The minimum altitude.
             ---@field life number The life expectancy or durability.
             ---@field fuseDist number The fuse distance.
-            ---@field category number The category identifier.
-            ---@field guidance number The guidance system identifier.
+            ---@field category Weapon.Category The category identifier.
+            ---@field guidance Weapon.GuidanceType The guidance system identifier.
             ---@field warhead Warhead The warhead details.
             ---@field typeName string The type name of the missile.
             ---@field Nmax number The maximum overload.

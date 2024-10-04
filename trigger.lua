@@ -34,11 +34,31 @@ do
             ---| 7 Freeform
         end
 
+        do
+            ---@alias Enum_LineTypes
+            ---| 0 No Line
+            ---| 1 Solid
+            ---| 2 Dashed
+            ---| 3 Dotted
+            ---| 4 Dot Dash
+            ---| 5 Long Dash
+            ---| 6 Two Dash
+        end
+
         --Zone Data
         do
             ---@class Trig_zone_data
             ---@field zoneId number
             ---@field name string
+        end
+
+        --Color info
+        do
+            ---@class Enum_color_tbl
+            ---@field r number  Red color
+            ---@field g number  Green color
+            ---@field b number  Blue color
+            ---@field a number  Alpha color
         end
     end
 
@@ -110,7 +130,7 @@ do
             ---@param endPoint vec3
             ---@param color table
             ---@param fillColor table
-            ---@param lineType number
+            ---@param lineType Enum_LineTypes
             ---@param readOnly boolean|nil
             ---@param message string|nil
             function trigger.action.arrowToAll(coalition, id, startPoint, endPoint, color, fillColor, lineType, readOnly,
@@ -125,7 +145,7 @@ do
             ---@param radius number
             ---@param color table
             ---@param fillColor table
-            ---@param lineType number
+            ---@param lineType Enum_LineTypes
             ---@param readOnly boolean|nil
             ---@param message string|nil
             function trigger.action.circleToAll(coalition, id, center, radius, color, fillColor, lineType, readOnly,
@@ -197,7 +217,7 @@ do
             ---@param startPoint vec3
             ---@param endPoint vec3
             ---@param color table
-            ---@param lineType number
+            ---@param lineType Enum_LineTypes
             ---@param readOnly boolean|nil
             ---@param message string|nil
             function trigger.action.lineToAll(coalition, id, startPoint, endPoint, color, lineType, readOnly, message) end
@@ -237,11 +257,11 @@ do
             ---@param coalition coalition.side|-1
             ---@param id number
             ---@param points vec3
-            ---@param color table|any
-            ---@param fillColor table|any
-            ---@param lineType number|any
-            ---@param readOnly boolean|nil|any
-            ---@param message string|nil|any
+            ---@param color Enum_color_tbl|any
+            ---@param fillColor Enum_color_tbl|any
+            ---@param lineType Enum_LineTypes|any
+            ---@param readOnly? boolean|nil|any
+            ---@param message? string|nil|any
             ---@param ... any
             function trigger.action.markupToAll(shapeId, coalition, id, points, color, fillColor, lineType, readOnly,
                                                 message, ...)
@@ -280,7 +300,7 @@ do
             ---https://wiki.hoggitworld.com/view/DCS_func_outText
             ---@param text string
             ---@param displayTime number
-            ---@param clearview boolean|nil
+            ---@param clearview? boolean
             function trigger.action.outText(text, displayTime, clearview) end
 
             ---Displays the passed string of text for the specified time to all players belonging to the specified coalition. Boolean clearview defines whether or not to use the old message display format. The old message display overwrites existing messages and is good for displaying anything that must be updated at a high rate like lap times.
@@ -288,7 +308,7 @@ do
             ---@param coalition coalition.side
             ---@param text string
             ---@param displayTime number
-            ---@param clearview boolean|nil
+            ---@param clearview? boolean
             function trigger.action.outTextForCoalition(coalition, text, displayTime, clearview) end
 
             ---Displays the passed string of text for the specified time to all players belonging to the specified country. Boolean clearview defines whether or not to use the old message display format. The old message display overwrites existing messages and is good for displaying anything that must be updated at a high rate like lap times.
@@ -296,7 +316,7 @@ do
             ---@param country country.id
             ---@param text string
             ---@param displayTime number
-            ---@param clearview boolean|nil
+            ---@param clearview? boolean
             function trigger.action.outTextForCountry(country, text, displayTime, clearview) end
 
             ---Displays the passed string of text for the specified time to all players in the specified group. The group is defined by its groupId. Boolean clearview defines whether or not to use the old message display format. The old message display overwrites existing messages and is good for displaying anything that must be updated at a high rate like lap times.
@@ -304,7 +324,7 @@ do
             ---@param groupId number
             ---@param text string
             ---@param displayTime number
-            ---@param clearview boolean|nil
+            ---@param clearview? boolean
             function trigger.action.outTextForGroup(groupId, text, displayTime, clearview) end
 
             ---Displays the passed string of text for the specified time to all players in the specified unit. The unit is defined by its unitId. Boolean clearview defines whether or not to use the old message display format. The old message display overwrites existing messages and is good for displaying anything that must be updated at a high rate like lap times.
@@ -312,7 +332,7 @@ do
             ---@param unitId number
             ---@param text string
             ---@param displayTime number
-            ---@param clearview boolean|nil
+            ---@param clearview? boolean
             function trigger.action.outTextForUnit(unitId, text, displayTime, clearview) end
 
             ---Pushes the task of the specified index to the front of the tasking queue.
@@ -331,7 +351,7 @@ do
             ---@param point4 vec3
             ---@param color table
             ---@param fillColor table
-            ---@param lineType number
+            ---@param lineType Enum_LineTypes
             ---@param readOnly boolean|nil
             ---@param message string|nil
             function trigger.action.quadToAll(coalition, id, point1, point2, point3, point4, color, fillColor, lineType,
