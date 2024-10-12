@@ -146,6 +146,10 @@ do
         RWR = 3
     }
 
+    ---same as Unit.getObjectID
+    ---@type number
+    Unit.id_ = 0
+
 
 
 

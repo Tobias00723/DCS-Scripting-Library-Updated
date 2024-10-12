@@ -55,10 +55,10 @@ do
         --Color info
         do
             ---@class Enum_color_tbl
-            ---@field r number  Red color
-            ---@field g number  Green color
-            ---@field b number  Blue color
-            ---@field a number  Alpha color
+            ---@field [1] number  Red color
+            ---@field [2] number  Green color
+            ---@field [3] number  Blue color
+            ---@field [4] number  Alpha color
         end
     end
 

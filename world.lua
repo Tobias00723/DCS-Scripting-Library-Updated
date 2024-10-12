@@ -429,6 +429,11 @@ do
         }
     }
 
+    ---List of all current event handelars
+    ---get id abtained by using world.addEventHandler(handler)
+    ---@type table<number, any>
+    world.eventHandlers = {}
+
 
     --Functions
     do
@@ -441,7 +446,7 @@ do
         ---Returns a table of airbase objects belonging to the specified coalition. Objects can be ships, static objects(FARP), or airbases on the map. When the function is run as world.getAirbases() no input values required, and the function returns all airbases, ships, and farps on the map.
         ---https://wiki.hoggitworld.com/view/DCS_func_getAirbases
         ---@return table<number, Airbase>
-        ---@param coalitionid coalition.side
+        ---@param coalitionid coalition.side|nil
         function world.getAirbases(coalitionid) end
 
         ---Returns a table of mark panels and drawn shapes indexed numerically that are present within the mission. Panel is designed with the mark points in mind, but still returns data for shapes created via markups.
