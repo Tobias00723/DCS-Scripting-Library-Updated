@@ -31,6 +31,8 @@ do
     ---@class SceneryObject
     SceneryObject = {}
 
+    ---@type number
+    SceneryObject.id_ = 0
 
     --Functions
     do
