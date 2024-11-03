@@ -212,8 +212,12 @@ do
         ---@param fromId Player_id|nil
         function net.send_chat_to(message, playerId, fromId) end
 
-        --No Docu
-        function net.set_name() end
+        --changes the playername in the mission
+        --No documenation
+        ---@param name string
+        ---@param id Player_id
+        ---@param ... unknown
+        function net.set_name(name, id, ...) end
 
         --No Docu
         function net.set_slot() end

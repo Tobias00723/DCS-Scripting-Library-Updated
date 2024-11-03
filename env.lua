@@ -44,8 +44,8 @@ do
                 ---@class env.mission.coalition.side.Country
                 ---@field id number ID of the country
                 ---@field name string Name of the country
-                ---@field plane table List of all planes in mission
-                ---@field helicopter table List of all helicopters in mission
+                ---@field plane table<number, Plane_Group_DATA> List of all planes in mission
+                ---@field helicopter table<number, Plane_Group_DATA> List of all helicopters in mission
                 ---@field ship table List of all ships in mission
                 ---@field vehicle table List of all vehicles in mission
                 ---@field static table List of all static objects in mission

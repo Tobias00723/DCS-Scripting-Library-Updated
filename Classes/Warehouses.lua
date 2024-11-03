@@ -1923,7 +1923,7 @@ do
         ---A wsType table can also be used, however the last digit with wsTypes has been known to change. {4, 4, 7, 322}
         ---https://wiki.hoggitworld.com/view/DCS_func_getItemCount
         ---@return number
-        ---@param itemName string|table string or table
+        ---@param itemName wsType|table<number, wsType> string or table
         function Warehouse.getItemCount(self, itemName) end
 
         ---Returns the amount of the passed liquid type within a given warehouse.
