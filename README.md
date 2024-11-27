@@ -1,6 +1,6 @@
 ## info
-I did not make thes files credit goes to https://github.com/asherao/DCS-Scripting-Library
-  i modified the files to put all recent functions and updates in these files
+  Most files have been remade for the recent DCS updated on the scripting side but the original idea and concept was made by https://github.com/asherao/DCS-Scripting-Library
+  i heavely modified the files to put all recent functions and updates in these files
   also now Enumerators, Server Functions, AI Tasks, Events should be included
   if i forgot something let me know i will try to update these files then
 # DCS-Scripting-Library
