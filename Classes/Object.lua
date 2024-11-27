@@ -43,7 +43,9 @@ do
     end
     --No Docu
     Object.database_ = {}
-
+    
+    ---@type number
+    Object.id_ = 0
 
     --Functions
     do

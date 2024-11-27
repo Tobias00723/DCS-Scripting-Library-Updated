@@ -32,6 +32,9 @@ do
         LASER = 1
     }
 
+    ---@type number
+    Spot.id_ = 0
+
     --Functions
     do
         ---Creates an infrared ray emanating from the given object to a point in 3d space. Can be seen with night vision goggles. localRef is technically an optional variable, however the functions format requires an entry to be made. If not used, simply replace with nil.
@@ -57,7 +60,7 @@ do
 
         ---Return an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object. See enumerators Group.Category, Object.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Object.Category.
         ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
-        ---@return Object.Category
+        ---@return Object.Category, Spot.Category
         function Spot.getCategory(self) end
 
         ---Returns an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object and how the function is called. See enumerators Group.Category, Object.Category, and Spot.Category for further reference.

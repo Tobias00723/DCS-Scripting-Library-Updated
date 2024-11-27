@@ -25,7 +25,7 @@ do
         do
             ---@class Net_player_info
             ---@field ping number Ping in ms of the player
-            ---@field side number check coalition.side
+            ---@field side coalition.side check coalition.side
             ---@field slot string slotid of player
             ---@field id Player_id Plyerid of the player in the server
             ---@field name string player name in the server

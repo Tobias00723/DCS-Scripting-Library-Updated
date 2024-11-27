@@ -76,6 +76,9 @@ do
         SHIP = 2
     }
 
+    ---@type number
+    Airbase.id_ = 0
+
 
     do
         ---Enables or disables the airbase and FARP auto capture game mechanic where ownership of a base can change based on the presence of ground forces or the default setting assigned in the editor.
@@ -94,7 +97,7 @@ do
 
         ---Returns an instance of the calling class for the object of a specified name. The objects name is defined either in the mission editor or within functions that can dynamically spawn objects. All static objects and unit names must be unique. However groups may have the same name as a unit or static object. This function can provide access to non activated units and groups.
         ---https://wiki.hoggitworld.com/view/DCS_func_getByName
-        ---@return Airbase
+        ---@return Airbase|nil
         ---@param name string
         function Airbase.getByName(name) end
 
@@ -105,7 +108,7 @@ do
 
         ---Return an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object. See enumerators Group.Category, Object.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Object.Category.
         ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
-        ---@return Object.Category
+        ---@return Object.Category, Airbase.Category
         function Airbase.getCategory(self) end
 
         ---Returns an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object and how the function is called. See enumerators Group.Category, Object.Category, and Spot.Category for further reference.

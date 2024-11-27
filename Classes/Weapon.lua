@@ -49,6 +49,9 @@ do
     ---@class Weapon
     Weapon = {}
 
+    ---@type number
+    Weapon.id_ = 0
+
     ---Represents a weapon object: shell, rocket, missile and bomb
     ---https://wiki.hoggitworld.com/view/DCS_Class_Weapon
     ---@enum Weapon.Category
@@ -169,7 +172,7 @@ do
     do
         ---Return an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object. See enumerators Group.Category, Object.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Object.Category.
         ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
-        ---@return Object.Category
+        ---@return Object.Category, Weapon.Category
         function Weapon.getCategory(self) end
 
         ---Returns an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object and how the function is called. See enumerators Group.Category, Object.Category, and Spot.Category for further reference.
@@ -223,11 +226,6 @@ do
             ---@param ... unknown
             ---@return Unit_Attributes|table
             function Weapon.getAttributes(self, ...) end
-
-            ---Return an enumerator of the category for the specific Weapon. The enumerator returned is dependent on the category of the Weapon. See enumerators Group.Category, Weapon.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Weapon.Category.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
-            ---@return Object.Category
-            function Weapon.getCategory(self) end
 
             ---Returns a string of the name of the object as defined by the mission editor or dynamic spawning functions. Function also works with Unit, Static Object, Airbase When run as Weapon.getName(obj) the value can be different than if run via Weapon.getName(obj) or obj:getName(). It appears to be returning the runtime Id.
             ---https://wiki.hoggitworld.com/view/DCS_func_getName

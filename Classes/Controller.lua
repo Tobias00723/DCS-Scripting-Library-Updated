@@ -44,6 +44,8 @@ do
         DLINK = 32
     }
 
+    ---@type number
+    Controller.id_ = 0
 
     --Functions
     do

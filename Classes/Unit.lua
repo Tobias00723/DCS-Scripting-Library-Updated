@@ -150,12 +150,6 @@ do
     ---@type number
     Unit.id_ = 0
 
-
-
-
-
-
-
     --Functions
     do
         --No Docu
@@ -208,7 +202,7 @@ do
 
         ---Returns an instance of the calling class for the object of a specified name. The objects name is defined either in the mission editor or within functions that can dynamically spawn objects. All static objects and unit names must be unique. However groups may have the same name as a unit or static Unit. This function can provide access to non activated units and groups.
         ---https://wiki.hoggitworld.com/view/DCS_func_getByName
-        ---@return Unit class
+        ---@return Unit|nil
         ---@param name string
         function Unit.getByName(name) end
 
@@ -222,11 +216,6 @@ do
         ---@param ... unknown
         ---@return table<number, StaticObject>
         function Unit.getCargosOnBoard(self, ...) end
-
-        ---Return an enumerator of the category for the specific Unit. The enumerator returned is dependent on the category of the Unit. See enumerators Group.Category, Unit.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Unit.Category.
-        ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
-        ---@return Unit.Category
-        function Unit.getCategory(self) end
 
         ---Returns an enumerator of the category for the specific Unit. The enumerator returned is dependent on the category of the object and how the function is called. See enumerators Group.Category, Unit.Category, and Spot.Category for further reference.
         ---https://wiki.hoggitworld.com/view/DCS_func_getCategoryEx
@@ -434,7 +423,7 @@ do
 
             ---Return an enumerator of the category for the specific Unit. The enumerator returned is dependent on the category of the Unit. See enumerators Group.Category, Unit.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Unit.Category.
             ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
-            ---@return Object.Category
+            ---@return Object.Category, Unit.Category
             function Unit.getCategory(self) end
 
             ---Returns a string of the name of the object as defined by the mission editor or dynamic spawning functions. Function also works with Unit, Static Object, Airbase When run as Unit.getName(obj) the value can be different than if run via Unit.getName(obj) or obj:getName(). It appears to be returning the runtime Id.

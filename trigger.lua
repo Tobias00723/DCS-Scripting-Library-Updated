@@ -290,8 +290,11 @@ do
             ---@param soundfile string
             function trigger.action.outSoundForGroup(groupId, soundfile) end
 
-            ---No Docu
-            function trigger.action.outSoundForUnit() end
+            ---Plays a sound file to all players in the specified unit. Unit is specified by the corresponding UnitId The sound file must be placed inside of the miz file in order to be played.
+            ---https://wiki.hoggitworld.com/view/DCS_func_outSoundForUnit
+            ---@param unitId number
+            ---@param soundfile string
+            function trigger.action.outSoundForUnit(unitId, soundfile) end
 
             ---No Docu
             function trigger.action.outSoundStop() end

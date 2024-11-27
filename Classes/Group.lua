@@ -33,6 +33,9 @@ do
         TRAIN = 4
     }
 
+    ---@type number
+    Group.id_ = 0
+
     --Functions
     do
         ---Activates the group if the group has a delayed start or late activation.
@@ -55,13 +58,13 @@ do
 
         ---Returns an instance of the calling class for the object of a specified name. The objects name is defined either in the mission editor or within functions that can dynamically spawn objects. All static objects and unit names must be unique. However groups may have the same name as a unit or static object. This function can provide access to non activated units and groups.
         ---https://wiki.hoggitworld.com/view/DCS_func_getByName
-        ---@return Group
+        ---@return Group|nil
         ---@param name string
         function Group.getByName(name) end
 
         ---Return an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object. See enumerators Group.Category, Object.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Object.Category.
         ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
-        ---@return Object.Category
+        ---@return Object.Category, Group.Category
         function Group.getCategory(self) end
 
         ---Returns an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object and how the function is called. See enumerators Group.Category, Object.Category, and Spot.Category for further reference.
