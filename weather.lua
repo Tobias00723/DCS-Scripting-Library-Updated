@@ -21,29 +21,35 @@ do
     ---No documention
     ---added in DCS 2.9.10 update
     ---@class weather
-    weather = {}
+    world.weather = {}
 
     --Functions
     do
-        
-        ---No docu
-        ---@param ... unknown
-        function weather.getFogThickness(...) end
 
         ---No docu
         ---@param ... unknown
-        function weather.getFogVisibilityDistance(...) end
+        ---@return number
+        function world.weather.getFogThickness(...) end
 
         ---No docu
         ---@param ... unknown
-        function weather.setFogAnimation(...) end
+        ---@return number
+        function world.weather.getFogVisibilityDistance(...) end
 
         ---No docu
         ---@param ... unknown
-        function weather.setFogThickness(...) end
+        function world.weather.setFogAnimation(...) end
 
         ---No docu
+        ---how high the volumetric fog will come
+        ---@param Layer_thickness number in meters
         ---@param ... unknown
-        function weather.setFogVisibilityDistance(...) end
+        function world.weather.setFogThickness(Layer_thickness, ...) end
+
+        ---No docu
+        ---how far you can see with the fog
+        ---@param visibilityDistance number in meters
+        ---@param ... unknown
+        function world.weather.setFogVisibilityDistance(visibilityDistance, ...) end
     end
 end
