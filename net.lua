@@ -213,7 +213,7 @@ do
         function net.send_chat_to(message, playerId, fromId) end
 
         --changes the playername in the mission
-        --No documenation
+        --No docu
         ---@param name string
         ---@param id Player_id
         ---@param ... unknown

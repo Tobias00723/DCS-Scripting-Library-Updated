@@ -1906,10 +1906,11 @@ do
         ---@param name string
         function Warehouse.getByName(name) end
 
-        --No Docu
-        ---@param self Warehouse
-        ---@param ... unknown
-        function Warehouse.getCargoAsWarehouse(self, ...) end
+        --https://wiki.hoggitworld.com/view/DCS_func_getCargoAsWarehouse
+        --Returns a warehouse object that exists within the passed Static Object cargo crate. Can be used to "physicalize" the contents of a cargo object to hold X warehouse inventory.
+        ---@param static StaticObject
+        ---@return Warehouse
+        function Warehouse.getCargoAsWarehouse(static) end
 
         ---Returns a full itemized list of everything currently in a warehouse. If a category is set to unlimited then the table will be returned empty.
         ---Aircraft and weapons are indexed by strings.
