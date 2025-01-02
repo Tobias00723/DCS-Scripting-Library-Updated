@@ -44,17 +44,20 @@ do
                 ---@class env.mission.coalition.side.Country
                 ---@field id number ID of the country
                 ---@field name string Name of the country
-                ---@field plane table<number, Plane_Group_DATA> List of all planes in mission
-                ---@field helicopter table<number, Plane_Group_DATA> List of all helicopters in mission
-                ---@field ship table List of all ships in mission
-                ---@field vehicle table List of all vehicles in mission
-                ---@field static table List of all static objects in mission
+                ---@field plane? Plane_Group_DATA List of all planes in mission
+                ---@field helicopter? Plane_Group_DATA List of all helicopters in mission
+                ---@field ship? table List of all ships in mission
+                ---@field vehicle? Vehicle_Group_DATA List of all vehicles in mission
+                ---@field static? table List of all static objects in mission
             end
 
             ---Plane Group DATA
             do
                 --- Aircraft data
                 ---@class Plane_Group_DATA
+                ---@field group table<number, Plane_Group_DATA_group>
+                
+                ---@class Plane_Group_DATA_group
                 ---@field frequency number Frequency of the aircraft
                 ---@field modulation number Modulation setting of the aircraft
                 ---@field groupId number Group ID of the aircraft
@@ -117,6 +120,54 @@ do
 
                 ---@class Aircraft.Payload.Pylon
                 ---@field CLSID string CLSID of the pylon
+            end
+
+            ---Vehicle Group DATA
+            do
+                ---@class Vehicle_Group_DATA
+                ---@field group table<number, Vehicle_Group_DATA_group>
+
+                ---@class Vehicle_Group_DATA_group
+                ---@field visible boolean
+                ---@field tasks table
+                ---@field uncontrollable boolean
+                ---@field task string their 'assignmend' ak 'fac' , 'Ground Nothing'
+                ---@field taskSelected boolean
+                ---@field route Vehicle_Group_DATA_group_route
+                ---@field units table<number, Vehicle_Group_DATA_group_units>
+                ---@field x number
+                ---@field y number
+                ---@field name string
+                ---@field start_time number
+
+                ---@class Vehicle_Group_DATA_group_route
+                ---@field spans table
+                ---@field points table<number, Vehicle_Group_DATA_group_route_point>
+
+                ---@class Vehicle_Group_DATA_group_route_point
+                ---@field alt number
+                ---@field type AI.Task.WaypointType
+                ---@field ETA number
+                ---@field alt_type AI.Task.AltitudeType
+                ---@field formation_template string
+                ---@field y number
+                ---@field x number
+                ---@field ETA_locked boolean
+                ---@field speed boolean
+                ---@field action AI.Task.VehicleFormation
+                ---@field task Task
+                ---@field speed_locked boolean
+
+                ---@class Vehicle_Group_DATA_group_units
+                ---@field skill AI.Skill
+                ---@field coldAtStart boolean
+                ---@field type TypeNames_Ground
+                ---@field unitId number
+                ---@field x number
+                ---@field y number
+                ---@field name string
+                ---@field heading number
+                ---@field playerCanDrive boolean
             end
 
             ---Tasks
@@ -1420,60 +1471,6 @@ do
                 --- Coalition's navigation points
                 ---@type table<number, env.mission.coalition.side.nav_points>
                 nav_points = {
-                    [1] = {
-                        --- Type of the navigation point
-                        ---@type string
-                        type = "Default", -- Replace with actual type
-
-                        --- Comment associated with the navigation point
-                        ---@type string
-                        comment = "", -- Replace with actual comment
-
-                        --- Callsign string for the navigation point
-                        ---@type string
-                        callsignStr = "ADDER", -- Replace with actual callsign string
-
-                        --- Unique identifier for the navigation point
-                        ---@type number
-                        id = 165, -- Replace with actual ID
-
-                        --- Properties of the navigation point
-                        properties = {
-                            --- Vertical navigation setting
-                            ---@type number
-                            vnav = 1, -- Replace with actual vnav value
-
-                            --- Scale setting
-                            ---@type number
-                            scale = 0, -- Replace with actual scale value
-
-                            --- Vertical angle setting
-                            ---@type number
-                            vangle = 0, -- Replace with actual vertical angle
-
-                            --- Angle setting
-                            ---@type number
-                            angle = 0, -- Replace with actual angle
-
-                            --- Steer setting
-                            ---@type number
-                            steer = 2 -- Replace with actual steer value
-                        },            -- end of ["properties"]
-
-                        --- Y coordinate of the navigation point
-                        ---@type number
-                        y = 565294.38378226, -- Replace with actual Y coordinate
-
-                        --- X coordinate of the navigation point
-                        ---@type number
-                        x = -258679.99585824, -- Replace with actual X coordinate
-
-                        --- Numeric callsign for the navigation point
-                        ---@type number
-                        callsign = 8 -- Replace with actual numeric callsign
-                    },               -- end of [1]
-
-                    -- Add more navigation points as needed
                 }, -- end of ["nav_points"]
 
                 --- name of side
@@ -1483,120 +1480,6 @@ do
                 --- Coalition's units by country
                 ---@type table<country.id, env.mission.coalition.side.Country>
                 country = {
-                    [1] = {
-                        --- ID of the country
-                        ---@type number
-                        id = 0,
-
-                        --- name of country
-                        ---@type string
-                        name = "",
-
-                        --- List of all planes in mission
-                        ---@type table<number, Plane_Group_DATA>
-                        plane = {
-                            frequency = 305, ---@type number
-                            modulation = 0, ---@type number
-                            groupId = 3, ---@type number
-                            tasks = {}, ---@type table
-                            route = {
-                                points = {
-                                    {
-                                        alt = 18, ---@type number
-                                        type = "TakeOffParking", ---@type AI.Task.WaypointType
-                                        action = "TakeOff", ---@type AI.Task.WaypointType
-                                        alt_type = "BARO", ---@type AI.Task.AltitudeType
-                                        form = "TakeOffParking", ---@type AI.Task.WaypointType
-                                        y = 636897.0625, ---@type number
-                                        x = -317688.125, ---@type number
-                                        speed = 138.88888888889, ---@type number
-                                        task = {
-                                            id = "ComboTask", ---@type string
-                                            params = {
-                                                [1] = {
-                                                    enabled = true, ---@type boolean
-                                                    auto = true, ---@type boolean
-                                                    id = "WrappedAction", ---@type string
-                                                    number = 1, ---@type number
-                                                    params = {
-                                                        action = {
-                                                            id = "EPLRS", ---@type string
-                                                            params = {
-                                                                value = true, ---@type boolean
-                                                                groupId = 1 ---@type number
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        airdromeId = 24 ---@type number
-                                    },
-                                    -- Additional points...
-                                }
-                            },
-                            hidden = false, ---@type boolean
-                            units = {
-                                {
-                                    alt = 18, ---@type number
-                                    hardpoint_racks = true, ---@type boolean
-                                    alt_type = "BARO", ---@type AI.Task.AltitudeType
-                                    livery_id = "Dark_Viper", ---@type string
-                                    skill = "Excellent", ---@type AI.Skill
-                                    parking = "15", ---@type string
-                                    speed = 138.88888888889, ---@type number
-                                    AddPropAircraft = {}, ---@type table
-                                    type = "F-16C_50", ---@type string
-                                    unitId = 10, ---@type number
-                                    psi = 1.7703702498393, ---@type number
-                                    parking_id = "30", ---@type string
-                                    x = -317688.125, ---@type number
-                                    name = "Aerial-1-1", ---@type string
-                                    payload = {
-                                        pylons = {
-                                            [1] = { CLSID = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}" },
-                                            [2] = { CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" },
-
-                                            -- Additional pylons...
-                                        },
-                                        fuel = 3249, ---@type number
-                                        flare = 60, ---@type number
-                                        ammo_type = 5, ---@type number
-                                        chaff = 60, ---@type number
-                                        gun = 100 ---@type number
-                                    },
-                                    onboard_num = "010", ---@type string
-                                    callsign = { 1, 1, name = "Enfield11", 3 }, ---@type table<number, number|string>
-                                    heading = -1.7703702498393, ---@type number
-                                    y = 636897.0625 ---@type number
-                                },
-                                -- Additional units...
-                            },
-                            y = 636897.0625, ---@type number
-                            radioSet = false, ---@type boolean
-                            name = "Aerial-1", ---@type string
-                            communication = true, ---@type boolean
-                            x = -317688.125, ---@type number
-                            start_time = 0, ---@type number
-                            task = "CAP", ---@type string
-                            uncontrolled = false ---@type boolean
-                        },
-                        --- List of all helicopter in mission
-                        ---@type table<number, Plane_Group_DATA>
-                        helicopter = {},
-
-                        --- List of all ships in mission
-                        ---@type table
-                        ship = {},
-
-                        --- List of all vehicles in mission
-                        ---@type table
-                        vehicle = {},
-
-                        --- List of all static in mission
-                        ---@type table
-                        static = {},
-                    }
                 } -- Example placeholder for units
             },
 
@@ -1611,59 +1494,6 @@ do
                 --- Coalition's navigation points
                 ---@type table<number, env.mission.coalition.side.nav_points>
                 nav_points = {
-                    [1] = {
-                        --- Type of the navigation point
-                        ---@type string
-                        type = "Default", -- Replace with actual type
-
-                        --- Comment associated with the navigation point
-                        ---@type string
-                        comment = "", -- Replace with actual comment
-
-                        --- Callsign string for the navigation point
-                        ---@type string
-                        callsignStr = "ADDER", -- Replace with actual callsign string
-
-                        --- Unique identifier for the navigation point
-                        ---@type number
-                        id = 165, -- Replace with actual ID
-
-                        --- Properties of the navigation point
-                        properties = {
-                            --- Vertical navigation setting
-                            ---@type number
-                            vnav = 1, -- Replace with actual vnav value
-
-                            --- Scale setting
-                            ---@type number
-                            scale = 0, -- Replace with actual scale value
-
-                            --- Vertical angle setting
-                            ---@type number
-                            vangle = 0, -- Replace with actual vertical angle
-
-                            --- Angle setting
-                            ---@type number
-                            angle = 0, -- Replace with actual angle
-
-                            --- Steer setting
-                            ---@type number
-                            steer = 2 -- Replace with actual steer value
-                        },            -- end of ["properties"]
-
-                        --- Y coordinate of the navigation point
-                        ---@type number
-                        y = 565294.38378226, -- Replace with actual Y coordinate
-
-                        --- X coordinate of the navigation point
-                        ---@type number
-                        x = -258679.99585824, -- Replace with actual X coordinate
-
-                        --- Numeric callsign for the navigation point
-                        ---@type number
-                        callsign = 8 -- Replace with actual numeric callsign
-                    },               -- end of [1]
-
                     -- Add more navigation points as needed
                 }, -- end of ["nav_points"]
 
@@ -1674,120 +1504,6 @@ do
                 --- Coalition's units by country
                 ---@type table<country.id, env.mission.coalition.side.Country>
                 country = {
-                    [1] = {
-                        --- ID of the country
-                        ---@type number
-                        id = 0,
-
-                        --- name of country
-                        ---@type string
-                        name = "",
-
-                        --- List of all planes in mission
-                        ---@type Plane_Group_DATA
-                        plane = {
-                            frequency = 305, ---@type number
-                            modulation = 0, ---@type number
-                            groupId = 3, ---@type number
-                            tasks = {}, ---@type table
-                            route = {
-                                points = {
-                                    {
-                                        alt = 18, ---@type number
-                                        type = "TakeOffParking", ---@type AI.Task.WaypointType
-                                        action = "TakeOff", ---@type AI.Task.WaypointType
-                                        alt_type = "BARO", ---@type AI.Task.AltitudeType
-                                        form = "TakeOffParking", ---@type AI.Task.WaypointType
-                                        y = 636897.0625, ---@type number
-                                        x = -317688.125, ---@type number
-                                        speed = 138.88888888889, ---@type number
-                                        task = {
-                                            id = "ComboTask", ---@type string
-                                            params = {
-                                                [1] = {
-                                                    enabled = true, ---@type boolean
-                                                    auto = true, ---@type boolean
-                                                    id = "WrappedAction", ---@type string
-                                                    number = 1, ---@type number
-                                                    params = {
-                                                        action = {
-                                                            id = "EPLRS", ---@type string
-                                                            params = {
-                                                                value = true, ---@type boolean
-                                                                groupId = 1 ---@type number
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        airdromeId = 24 ---@type number
-                                    },
-                                    -- Additional points...
-                                }
-                            },
-                            hidden = false, ---@type boolean
-                            units = {
-                                {
-                                    alt = 18, ---@type number
-                                    hardpoint_racks = true, ---@type boolean
-                                    alt_type = "BARO", ---@type AI.Task.AltitudeType
-                                    livery_id = "Dark_Viper", ---@type string
-                                    skill = "Excellent", ---@type AI.Skill
-                                    parking = "15", ---@type string
-                                    speed = 138.88888888889, ---@type number
-                                    AddPropAircraft = {}, ---@type table
-                                    type = "F-16C_50", ---@type string
-                                    unitId = 10, ---@type number
-                                    psi = 1.7703702498393, ---@type number
-                                    parking_id = "30", ---@type string
-                                    x = -317688.125, ---@type number
-                                    name = "Aerial-1-1", ---@type string
-                                    payload = {
-                                        pylons = {
-                                            [1] = { CLSID = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}" },
-                                            [2] = { CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" },
-
-                                            -- Additional pylons...
-                                        },
-                                        fuel = 3249, ---@type number
-                                        flare = 60, ---@type number
-                                        ammo_type = 5, ---@type number
-                                        chaff = 60, ---@type number
-                                        gun = 100 ---@type number
-                                    },
-                                    onboard_num = "010", ---@type string
-                                    callsign = { 1, 1, name = "Enfield11", 3 }, ---@type table<number, number|string>
-                                    heading = -1.7703702498393, ---@type number
-                                    y = 636897.0625 ---@type number
-                                },
-                                -- Additional units...
-                            },
-                            y = 636897.0625, ---@type number
-                            radioSet = false, ---@type boolean
-                            name = "Aerial-1", ---@type string
-                            communication = true, ---@type boolean
-                            x = -317688.125, ---@type number
-                            start_time = 0, ---@type number
-                            task = "CAP", ---@type string
-                            uncontrolled = false ---@type boolean
-                        },
-                        --- List of all helicopter in mission
-                        ---@type table
-                        helicopter = {},
-
-                        --- List of all ships in mission
-                        ---@type table
-                        ship = {},
-
-                        --- List of all vehicles in mission
-                        ---@type table
-                        vehicle = {},
-
-                        --- List of all static in mission
-                        ---@type table
-                        static = {},
-                    }
                 } -- Example placeholder for units
             },
 
@@ -1802,59 +1518,6 @@ do
                 --- Coalition's navigation points
                 ---@type table<number, env.mission.coalition.side.nav_points>
                 nav_points = {
-                    [1] = {
-                        --- Type of the navigation point
-                        ---@type string
-                        type = "Default", -- Replace with actual type
-
-                        --- Comment associated with the navigation point
-                        ---@type string
-                        comment = "", -- Replace with actual comment
-
-                        --- Callsign string for the navigation point
-                        ---@type string
-                        callsignStr = "ADDER", -- Replace with actual callsign string
-
-                        --- Unique identifier for the navigation point
-                        ---@type number
-                        id = 165, -- Replace with actual ID
-
-                        --- Properties of the navigation point
-                        properties = {
-                            --- Vertical navigation setting
-                            ---@type number
-                            vnav = 1, -- Replace with actual vnav value
-
-                            --- Scale setting
-                            ---@type number
-                            scale = 0, -- Replace with actual scale value
-
-                            --- Vertical angle setting
-                            ---@type number
-                            vangle = 0, -- Replace with actual vertical angle
-
-                            --- Angle setting
-                            ---@type number
-                            angle = 0, -- Replace with actual angle
-
-                            --- Steer setting
-                            ---@type number
-                            steer = 2 -- Replace with actual steer value
-                        },            -- end of ["properties"]
-
-                        --- Y coordinate of the navigation point
-                        ---@type number
-                        y = 565294.38378226, -- Replace with actual Y coordinate
-
-                        --- X coordinate of the navigation point
-                        ---@type number
-                        x = -258679.99585824, -- Replace with actual X coordinate
-
-                        --- Numeric callsign for the navigation point
-                        ---@type number
-                        callsign = 8 -- Replace with actual numeric callsign
-                    },               -- end of [1]
-
                     -- Add more navigation points as needed
                 }, -- end of ["nav_points"]
 
@@ -1865,120 +1528,6 @@ do
                 --- Coalition's units by country
                 ---@type table<country.id, env.mission.coalition.side.Country>
                 country = {
-                    [1] = {
-                        --- ID of the country
-                        ---@type number
-                        id = 0,
-
-                        --- name of country
-                        ---@type string
-                        name = "",
-
-                        --- List of all planes in mission
-                        ---@type Plane_Group_DATA
-                        plane = {
-                            frequency = 305, ---@type number
-                            modulation = 0, ---@type number
-                            groupId = 3, ---@type number
-                            tasks = {}, ---@type table
-                            route = {
-                                points = {
-                                    {
-                                        alt = 18, ---@type number
-                                        type = "TakeOffParking", ---@type AI.Task.WaypointType
-                                        action = "TakeOff", ---@type AI.Task.WaypointType
-                                        alt_type = "BARO", ---@type AI.Task.AltitudeType
-                                        form = "TakeOffParking", ---@type AI.Task.WaypointType
-                                        y = 636897.0625, ---@type number
-                                        x = -317688.125, ---@type number
-                                        speed = 138.88888888889, ---@type number
-                                        task = {
-                                            id = "ComboTask", ---@type string
-                                            params = {
-                                                [1] = {
-                                                    enabled = true, ---@type boolean
-                                                    auto = true, ---@type boolean
-                                                    id = "WrappedAction", ---@type string
-                                                    number = 1, ---@type number
-                                                    params = {
-                                                        action = {
-                                                            id = "EPLRS", ---@type string
-                                                            params = {
-                                                                value = true, ---@type boolean
-                                                                groupId = 1 ---@type number
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        airdromeId = 24 ---@type number
-                                    },
-                                    -- Additional points...
-                                }
-                            },
-                            hidden = false, ---@type boolean
-                            units = {
-                                {
-                                    alt = 18, ---@type number
-                                    hardpoint_racks = true, ---@type boolean
-                                    alt_type = "BARO", ---@type AI.Task.AltitudeType
-                                    livery_id = "Dark_Viper", ---@type string
-                                    skill = "Excellent", ---@type AI.Skill
-                                    parking = "15", ---@type string
-                                    speed = 138.88888888889, ---@type number
-                                    AddPropAircraft = {}, ---@type table
-                                    type = "F-16C_50", ---@type string
-                                    unitId = 10, ---@type number
-                                    psi = 1.7703702498393, ---@type number
-                                    parking_id = "30", ---@type string
-                                    x = -317688.125, ---@type number
-                                    name = "Aerial-1-1", ---@type string
-                                    payload = {
-                                        pylons = {
-                                            [1] = { CLSID = "{6CEB49FC-DED8-4DED-B053-E1F033FF72D3}" },
-                                            [2] = { CLSID = "{C8E06185-7CD6-4C90-959F-044679E90751}" },
-
-                                            -- Additional pylons...
-                                        },
-                                        fuel = 3249, ---@type number
-                                        flare = 60, ---@type number
-                                        ammo_type = 5, ---@type number
-                                        chaff = 60, ---@type number
-                                        gun = 100 ---@type number
-                                    },
-                                    onboard_num = "010", ---@type string
-                                    callsign = { 1, 1, name = "Enfield11", 3 }, ---@type table<number, number|string>
-                                    heading = -1.7703702498393, ---@type number
-                                    y = 636897.0625 ---@type number
-                                },
-                                -- Additional units...
-                            },
-                            y = 636897.0625, ---@type number
-                            radioSet = false, ---@type boolean
-                            name = "Aerial-1", ---@type string
-                            communication = true, ---@type boolean
-                            x = -317688.125, ---@type number
-                            start_time = 0, ---@type number
-                            task = "CAP", ---@type string
-                            uncontrolled = false ---@type boolean
-                        },
-                        --- List of all helicopter in mission
-                        ---@type table
-                        helicopter = {},
-
-                        --- List of all ships in mission
-                        ---@type table
-                        ship = {},
-
-                        --- List of all vehicles in mission
-                        ---@type table
-                        vehicle = {},
-
-                        --- List of all static in mission
-                        ---@type table
-                        static = {},
-                    }
                 } -- Example placeholder for units
             },
 

@@ -42,6 +42,19 @@ do
     ---https://wiki.hoggitworld.com/view/DCS_enum_AI
     AI = {}
 
+    AI.Option = {}
+    AI.Option.Air = {}
+    AI.Option.Air.val = {}
+
+    AI.Option.Ground = {}
+    AI.Option.Ground.val = {}
+
+    AI.Option.Naval = {}
+    AI.Option.Naval.val = {}
+
+    AI.Task = {}
+
+
     ---@enum AI.Option.Air.id
     AI.Option.Air.id = {
         NO_OPTION = -1,
