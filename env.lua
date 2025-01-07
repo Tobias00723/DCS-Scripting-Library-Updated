@@ -172,6 +172,153 @@ do
 
             ---Tasks
             do
+                ---@alias Task_Aircraft
+                ---| Task_attackGroup
+                ---| Task_attackUnit
+                ---| Task_Bombing
+                ---| Task_Stafing
+                ---| Task_Carpet_Bombing
+                ---| Task_AttackMapObject
+                ---| Task_BombingRunway
+                ---| Task_Orbit
+                ---| Task_Refueling
+                ---| Task_follow
+                ---| Task_followBigFormation
+                ---| Task_Escord
+                ---| Task_FAC_AttackGroup
+                ---| Task_Recovery_Tanker
+                ---| Enroute_Tasks_engageTargets
+                ---| Enroute_Tasks_engageTargetsInZone
+                ---| Enroute_Tasks_engageGroup
+                ---| Enroute_Tasks_engageUnit
+                ---| Enroute_Tasks_AWACS
+                ---| Enroute_Tasks_Tanker
+                ---| Enroute_Tasks_FAC_engageGroup
+                ---| Enroute_Tasks_FAC
+                
+                ---@alias Task_Aircraft_command
+                ---| Commands_Tasks_Script
+                ---| Commands_Tasks_SetCallsign
+                ---| Commands_Tasks_SetFrequency
+                ---| Commands_Tasks_SetFrequencyForUnit
+                ---| Commands_Tasks_SwitchWaypoint
+                ---| Commands_Tasks_SwitchAction
+                ---| Commands_Tasks_SetInvisible
+                ---| Commands_Tasks_SetImmortal
+                ---| Commands_Tasks_SetUnlimitedFuel
+                ---| Commands_Tasks_ActivateBeacon
+                ---| Commands_Tasks_DeactivateBeacon
+                ---| Commands_Tasks_EPLRS
+                ---| Commands_Tasks_Start
+                ---| Commands_Tasks_TransmitMessage
+                ---| Commands_Tasks_StopTransmission
+                ---| Commands_Tasks_SmokeOnOff
+                
+                ---@alias Task_Heli
+                ---| Task_attackGroup
+                ---| Task_attackUnit
+                ---| Task_Bombing
+                ---| Task_Stafing
+                ---| Task_AttackMapObject
+                ---| Task_BombingRunway
+                ---| Task_Orbit
+                ---| Task_land
+                ---| Task_follow
+                ---| Task_Escord
+                ---| Task_Embarking
+                ---| Task_FAC_AttackGroup
+                ---| Task_disembarkFromTransport
+                ---| Task_CargoTransportation
+                ---| Task_GroundEscord
+                ---| Enroute_Tasks_engageTargets
+                ---| Enroute_Tasks_engageTargetsInZone
+                ---| Enroute_Tasks_engageGroup
+                ---| Enroute_Tasks_engageUnit
+                ---| Enroute_Tasks_AWACS
+                ---| Enroute_Tasks_Tanker
+                ---| Enroute_Tasks_FAC_engageGroup
+                ---| Enroute_Tasks_FAC
+                
+                ---@alias Task_Heli_command
+                ---| Commands_Tasks_Script
+                ---| Commands_Tasks_SetCallsign
+                ---| Commands_Tasks_SetFrequency
+                ---| Commands_Tasks_SetFrequencyForUnit
+                ---| Commands_Tasks_SwitchWaypoint
+                ---| Commands_Tasks_SwitchAction
+                ---| Commands_Tasks_SetInvisible
+                ---| Commands_Tasks_SetImmortal
+                ---| Commands_Tasks_SetUnlimitedFuel
+                ---| Commands_Tasks_ActivateBeacon
+                ---| Commands_Tasks_DeactivateBeacon
+                ---| Commands_Tasks_EPLRS
+                ---| Commands_Tasks_Start
+                ---| Commands_Tasks_TransmitMessage
+                ---| Commands_Tasks_StopTransmission
+                ---| Commands_Tasks_SmokeOnOff
+
+                ---@alias Task_Ground
+                ---| Task_Embarking
+                ---| Task_FireAtPoint
+                ---| Task_Hold
+                ---| Task_FAC_AttackGroup
+                ---| Task_EmbarkToTransport Infentry only
+                ---| Task_disembarkFromTransport
+                ---| Task_goToWaypoint
+                ---| Enroute_Tasks_EWR
+                ---| Enroute_Tasks_FAC_engageGroup
+                ---| Enroute_Tasks_FAC
+
+                ---@alias Task_Ground_command
+                ---| Commands_Tasks_Script
+                ---| Commands_Tasks_SetCallsign
+                ---| Commands_Tasks_SetFrequency
+                ---| Commands_Tasks_StopRoute
+                ---| Commands_Tasks_SwitchAction
+                ---| Commands_Tasks_SetInvisible
+                ---| Commands_Tasks_SetImmortal
+                ---| Commands_Tasks_ActivateBeacon
+                ---| Commands_Tasks_DeactivateBeacon
+                ---| Commands_Tasks_EPLRS
+                ---| Commands_Tasks_TransmitMessage
+                ---| Commands_Tasks_StopTransmission
+
+                ---@alias Task_Ship
+                ---| Task_FireAtPoint
+
+                ---@alias Task_Ship_command
+                ---| Commands_Tasks_Script
+                ---| Commands_Tasks_SetInvisible
+                ---| Commands_Tasks_SetImmortal
+                ---| Commands_Tasks_ActivateBeacon
+                ---| Commands_Tasks_DeactivateBeacon
+                ---| Commands_Tasks_ActivateICLS
+                ---| Commands_Tasks_DeactivateICLS
+                ---| Commands_Tasks_EPLRS
+                ---| Commands_Tasks_TransmitMessage
+                ---| Commands_Tasks_StopTransmission
+                ---| Commands_Tasks_ActivateLink4
+                ---| Commands_Tasks_DeactivateLink4
+                ---| Commands_Tasks_ActivateACLS
+                ---| Commands_Tasks_DeactivateACLS
+                ---| Commands_Tasks_LoadingShip
+
+                ---@alias Task_type
+                ---| 'CAP'
+                ---| 'CAS'
+                ---| 'Fighter Sweep'
+                ---| 'Intercept'
+                ---| 'SEAD'
+                ---| 'AntiShip'
+                ---| 'Ground Attack'
+                ---| 'Pinpoint Strike'
+                ---| 'RunwayAttack'
+                ---| 'Escord'
+                ---| 'Transport'
+                ---| 'AFAC'
+                ---| 'Tanker'
+                ---| 'AWACS'
+
                 ---@alias Task_Wrappers
                 ---| Tasks_TaskWrapper_mission
                 ---| Tasks_TaskWrapper_ComboTask
@@ -439,7 +586,7 @@ do
 
                         ---@class Task_Params_AttackGroup
                         ---@field groupId number The ID of the target group (required).
-                        ---@field weaponType? number The type of weapon to be used (optional).
+                        ---@field weaponType? Weapon.flag The type of weapon to be used (optional).
                         ---@field expend? AI.Task.WeaponExpend The weapon expend type (optional).
                         ---@field directionEnabled? boolean If true, specifies direction; otherwise, false or nil (optional).
                         ---@field direction? number The direction in degrees for the attack (optional).
@@ -543,7 +690,7 @@ do
                         --- Description: Assigns the nearest world object to the point for AI to attack.
                         --- https://wiki.hoggitworld.com/view/DCS_task_attackMapObject
                         ---@class Task_AttackMapObject
-                        ---@field id 'BombingRunway' The identifier for the task, should be 'AttackMapObject'.
+                        ---@field id 'AttackMapObject' The identifier for the task, should be 'AttackMapObject'.
                         ---@field params Task_Params_AttackMapObject Configuration parameters for the AttackMapObject task.
 
                         ---@class Task_Params_AttackMapObject
@@ -720,7 +867,7 @@ do
                         ---https://wiki.hoggitworld.com/view/DCS_task_hold
                         ---@class Task_Hold
                         ---@field id 'Hold' The identifier for the task, should be 'Hold'.
-                        ---@field params table Configuration parameters for the Hold task.
+                        ---@field params table Configuration parameters for the Hold task. (empty)
                     end
 
                     --Task_FAC_AttackGroup
@@ -939,7 +1086,7 @@ do
                         ---https://wiki.hoggitworld.com/view/DCS_task_tanker
                         ---@class Enroute_Tasks_Tanker
                         ---@field id 'Tanker' The identifier for the task, should be 'Tanker'.
-                        ---@field params table Configuration parameters for the Tanker task.
+                        ---@field params table Configuration parameters for the Tanker task. (empty)
                     end
 
                     --Enroute_Tasks_EWR

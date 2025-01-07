@@ -480,7 +480,7 @@ do
         ---Searches a defined volume of 3d space for the specified objects within it and then can run function on each returned object. Object category is either a single enum or a table of enums that defines the types of objects that will be searched for Search volume is the defined 3d space that will be searched. Handler is the function that will be run on each object that is found. Any data is a variable that is passed to the handler function, it can be anything.
         ---https://wiki.hoggitworld.com/view/DCS_func_searchObjects
         ---@return table
-        ---@param ObjectCategory Object.Category|table
+        ---@param ObjectCategory Object.Category|table<number, Object.Category>
         ---@param searchVolume table
         ---@param Handler function ObjectSeatchHandler
         ---@param data any|nil
