@@ -245,7 +245,7 @@ do
             ---Returns a table of what the unit 'can do' varies from unit to unit also can be obtained by getdesc().attributes
             ---@param self Unit
             ---@param ... unknown
-            ---@return Unit_Attributes|table
+            ---@return Attributes
             function Airbase.getAttributes(self, ...) end
 
             ---Returns a string of the name of the object as defined by the mission editor or dynamic spawning functions. Function also works with Unit, Static Object, Airbase When run as Unit.getName(obj) the value can be different than if run via Unit.getName(obj) or obj:getName(). It appears to be returning the runtime Id.
@@ -278,7 +278,7 @@ do
             ---Returns a boolean value if the object in question has the passed attribute. See Article list of Attributes or db_attibutes.lua in C:\Program Files\Eagle Dynamics\DCS World\Scripts\Database for more details. Additionally attributes for each object are defined within their DB lua file. DB files provided on github for reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
             ---https://wiki.hoggitworld.com/view/DCS_func_hasAttribute
             ---@return boolean
-            ---@param attribute string
+            ---@param attribute Attributes
             function Airbase.hasAttribute(self, attribute) end
 
             ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase

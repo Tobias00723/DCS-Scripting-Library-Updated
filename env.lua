@@ -814,7 +814,7 @@ do
                         ---@field groupId number The unique groupId of the group to be escorted (required).
                         ---@field pos vec3 The relative position (in 3D space) that the controlled flight will form up on (required).
                         ---@field engagementDistMax number The maximum distance within which the AI will engage threats from the escorted group (required).
-                        ---@field targetTypes table<string> An array of object attributes that the AI will engage (required).
+                        ---@field targetTypes table<Attributes> An array of object attributes that the AI will engage (required).
                         ---@field lastWptIndexFlag? boolean If true, the AI will follow the group until it reaches a specified waypoint (optional, default is true).
                         ---@field lastWptIndex? number The waypoint index at which the following group will stop its task. Must be set if lastWptIndexFlag is set to false (optional, default is -1).
                     end
@@ -967,7 +967,7 @@ do
                         ---@field engagementDistMax number Defines the length of the orbit around the ground group. Helicopters will fly up to this distance before returning to the escorted group.
                         ---@field lastWptIndexFlag boolean (Default: True) If true, the AI will follow the group until it reaches a specified waypoint.
                         ---@field lastWptIndex number (Default: -1) Identifies the waypoint at which the escorting helicopters will stop their task. Must be set if `lastWptIndexFlag` is not false.
-                        ---@field targetTypes table<string> An array of object attributes which the AI will engage.
+                        ---@field targetTypes table<Attributes> An array of object attributes which the AI will engage.
                         ---@field lastWptIndexFlagChangedManually boolean (Optional) Possibly indicates if the `lastWptIndexFlag` was manually changed. Its exact purpose is unclear, but it is set to true in the mission editor.
                     end
 
@@ -1005,7 +1005,7 @@ do
                         ---@class Taks_Params_EngageTargets
                         ---@field maxDist number (Optional) The maximum distance in meters from their route that the group will deviate to engage a target.
                         ---@field maxDistEnabled boolean (Optional) Required to be true if `maxDist` is used. Determines whether `maxDist` should be checked.
-                        ---@field targetTypes table<string> An array of attribute names defining valid targets for engagement.
+                        ---@field targetTypes table<Attributes> An array of attribute names defining valid targets for engagement.
                         ---@field priority number (Optional) The priority of the task. Lower values indicate higher priority. Defaults to 0.
                     end
 
