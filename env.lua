@@ -478,6 +478,7 @@ do
                 ---| Commands_Tasks_ActivateACLS
                 ---| Commands_Tasks_DeactivateACLS
                 ---| Commands_Tasks_LoadingShip
+                ---| Commands_Tasks_Set_Option
 
                 --Task wrapper
                 do
@@ -521,7 +522,10 @@ do
                         ---https://wiki.hoggitworld.com/view/DCS_task_comboTask
                         ---@class Tasks_TaskWrapper_ComboTask
                         ---@field id 'ComboTask' string Identifier for the task type
-                        ---@field params table<number, Task> List of tasks to be executed sequentially
+                        ---@field params Tasks_TaskWrapper_ComboTask_Tasks List of tasks to be executed sequentially
+    
+                        ---@class Tasks_TaskWrapper_ComboTask_Tasks
+                        ---@field tasks table<number, Task>
                     end
 
                     --Tasks_TaskWrapper_ControlledTask
@@ -554,21 +558,13 @@ do
                         --- For: Airplanes, Helicopters, Ships, Ground Vehicles
                         --- Available Under: All
                         --- Description: Functions as a wrapper for setting commands and options as a task within a mission, comboTask, or controlledTask. This task allows you to encapsulate commands and options within a single task structure.
-                        --- https://wiki.hoggitworld.com/view/DCS_command_wrappedAction
+                        --- https://wiki.hoggitworld.com/view/DCS_task_wrappedAction
                         ---@class Tasks_TaskWrapper_WrappedAction
                         ---@field id 'WrappedAction' The identifier for the task, should be 'WrappedAction'.
                         ---@field params Tasks_TaskWrapper_WrappedAction.params_command Configuration parameters for the WrappedAction task.
 
                         ---@class Tasks_TaskWrapper_WrappedAction.params_command
                         ---@field action table<Task_Commands>
-
-                        ---@class Tasks_TaskWrapper_WrappedAction.params_Setting
-                        ---@field id "option"
-                        ---@field params Tasks_TaskWrapper_WrappedAction.params_Setting.params
-
-                        ---@class Tasks_TaskWrapper_WrappedAction.params_Setting.params
-                        ---@field name AI.Option.Air.id|AI.Option.Ground.id|AI.Option.Naval.id
-                        ---@field value AI.Option.Air.val|AI.Option.Ground.val|AI.Option.Naval.val
                     end
                 end
 
@@ -851,9 +847,9 @@ do
                         ---@class Task_Params_FireAtPoint
                         ---@field point vec2 The vec2 coordinate or x and y values defining where the AI will aim (required).
                         ---@field radius? number Optional radius in meters defining the area AI will attempt to hit.
-                        ---@field expendQty? number Specifies the number of shots to be fired (optional).
+                        ---@field expendQty? AI.Task.WeaponExpend Specifies the number of shots to be fired (optional).
                         ---@field expendQtyEnabled? boolean If true, the `expendQty` value will be used (optional).
-                        ---@field weaponType? number Specifies the weapon type to be used for the task (optional).
+                        ---@field weaponType? Weapon.flag Specifies the weapon type to be used for the task (optional).
                         ---@field altitude? number Specifies the altitude at which the AI will aim (optional).
                         ---@field alt_type? number Determines whether the altitude is defined by AGL (1) or MSL (0) (optional).
                         ---@field counterbattaryRadius? number For ground groups only: Specifies the radius in meters from the group leader within which the group will move in random directions after completing the FireAtPoint task (optional).
@@ -882,13 +878,13 @@ do
 
                         ---@class Task_Params_FAC_AttackGroup
                         ---@field groupId number The ID of the group to be assigned by the JTAC. (Required)
-                        ---@field weaponType number The weapon type enumerator that defines the preferred weapon of choice. (Optional)
-                        ---@field designation AI.Task.Designation Enumerator defining the preferred designation to be used. (Optional)
-                        ---@field datalink boolean Boolean value to determine if the JTAC will send the 9-line via SADL. Defaults to true. (Optional)
-                        ---@field frequency number The frequency for JTAC communication. (Optional)
-                        ---@field modulation radio.modulation Enumerator defining the modulation type for radio communication. (Optional)
-                        ---@field callname number The callsign ID for the JTAC. (Optional)
-                        ---@field number number The callsign number for the JTAC. (Optional)
+                        ---@field weaponType? Weapon.flag The weapon type enumerator that defines the preferred weapon of choice. (Optional)
+                        ---@field designation? AI.Task.Designation Enumerator defining the preferred designation to be used. (Optional)
+                        ---@field datalink? boolean Boolean value to determine if the JTAC will send the 9-line via SADL. Defaults to true. (Optional)
+                        ---@field frequency? number The frequency for JTAC communication. (Optional)
+                        ---@field modulation? radio.modulation Enumerator defining the modulation type for radio communication. (Optional)
+                        ---@field callname? number The callsign ID for the JTAC. (Optional)
+                        ---@field number? number The callsign number for the JTAC. (Optional)
                     end
 
                     --Task_EmbarkToTransport
@@ -904,7 +900,7 @@ do
                         ---@class Task_Params_EmbarkToTransport
                         ---@field x number The x-coordinate of the point where AI expects to be picked up. (Required)
                         ---@field y number The y-coordinate of the point where AI expects to be picked up. (Required)
-                        ---@field zoneRadius number Radius around the pickup point where the ground units will wait. (Optional)
+                        ---@field zoneRadius? number Radius around the pickup point where the ground units will wait. (Optional)
                     end
 
                     --Task_disembarkFromTransport
@@ -920,7 +916,7 @@ do
                         ---@class Task_Params_DisembarkFromTransport
                         ---@field x number The x-coordinate of the point where the AI will be dropped off. (Required)
                         ---@field y number The y-coordinate of the point where the AI will be dropped off. (Required)
-                        ---@field zoneRadius number Radius around the drop-off point where the infantry group will disembark. (Optional)
+                        ---@field zoneRadius? number Radius around the drop-off point where the infantry group will disembark. (Optional)
                     end
 
                     --Task_CargoTransportation
@@ -934,8 +930,8 @@ do
                         ---@field params Task_Params_CargoTransportation Configuration parameters for the CargoTransportation task.
 
                         ---@class Task_Params_CargoTransportation
-                        ---@field groupId number The ID of the static object representing the cargo container. (Optional)
-                        ---@field zoneId number The ID of a trigger zone. (Optional)
+                        ---@field groupId? number The ID of the static object representing the cargo container. (Optional)
+                        ---@field zoneId? number The ID of a trigger zone. (Optional)
                     end
 
                     --Task_goToWaypoint
@@ -968,7 +964,7 @@ do
                         ---@field lastWptIndexFlag boolean (Default: True) If true, the AI will follow the group until it reaches a specified waypoint.
                         ---@field lastWptIndex number (Default: -1) Identifies the waypoint at which the escorting helicopters will stop their task. Must be set if `lastWptIndexFlag` is not false.
                         ---@field targetTypes table<Attributes> An array of object attributes which the AI will engage.
-                        ---@field lastWptIndexFlagChangedManually boolean (Optional) Possibly indicates if the `lastWptIndexFlag` was manually changed. Its exact purpose is unclear, but it is set to true in the mission editor.
+                        ---@field lastWptIndexFlagChangedManually? boolean (Optional) Possibly indicates if the `lastWptIndexFlag` was manually changed. Its exact purpose is unclear, but it is set to true in the mission editor.
                     end
 
                     --Task_Recovery_Tanker
@@ -985,8 +981,8 @@ do
                         ---@field groupId number The unique ID of the naval group that the tanker will follow.
                         ---@field speed number The speed of the tanker in meters per second.
                         ---@field altitude number The altitude at which the tanker orbits, in meters.
-                        ---@field lastWptIndexFlag boolean (Optional) If true, the task will end when the naval group reaches the waypoint specified by `lastWptIndex`. Required if `lastWptIndex` is to be used.
-                        ---@field lastWptIndex number (Optional) The waypoint index of the naval group. When this waypoint is reached, the recovery tanker will end the task. Must be set if `lastWptIndexFlag` is true.
+                        ---@field lastWptIndexFlag? boolean (Optional) If true, the task will end when the naval group reaches the waypoint specified by `lastWptIndex`. Required if `lastWptIndex` is to be used.
+                        ---@field lastWptIndex? number (Optional) The waypoint index of the naval group. When this waypoint is reached, the recovery tanker will end the task. Must be set if `lastWptIndexFlag` is true.
                     end
                 end
 
@@ -1112,14 +1108,14 @@ do
 
                         ---@class Taks_Params_FAC_EngageGroup
                         ---@field groupId number The ID of the group to be assigned by the JTAC.
-                        ---@field weaponType number Defines the preferred weapon of choice to engage the enemy. (Optional)
-                        ---@field designation AI.Task.Designation AI.Task.Designation Enumerator defining the preferred designation to be used. (Optional)
-                        ---@field datalink boolean Boolean value that determines whether or not the JTAC will send the 9-line via SADL. (Optional, default: true)
-                        ---@field frequency number Frequency for the JTAC communication. (Optional)
-                        ---@field modulation radio.modulation radio.modulation Modulation type for radio communication. (Optional)
-                        ---@field callname number Callsign ID for the JTAC. (Optional)
-                        ---@field number number Callsign number for the JTAC. (Optional)
-                        ---@field priority number The priority of the tasking; the lower the number, the more important the objective is. (Optional, default: 0)
+                        ---@field weaponType? number Defines the preferred weapon of choice to engage the enemy. (Optional)
+                        ---@field designation? AI.Task.Designation AI.Task.Designation Enumerator defining the preferred designation to be used. (Optional)
+                        ---@field datalink? boolean Boolean value that determines whether or not the JTAC will send the 9-line via SADL. (Optional, default: true)
+                        ---@field frequency? number Frequency for the JTAC communication. (Optional)
+                        ---@field modulation? radio.modulation radio.modulation Modulation type for radio communication. (Optional)
+                        ---@field callname? number Callsign ID for the JTAC. (Optional)
+                        ---@field number? number Callsign number for the JTAC. (Optional)
+                        ---@field priority? number The priority of the tasking; the lower the number, the more important the objective is. (Optional, default: 0)
                     end
 
                     --Enroute_Tasks_FAC
@@ -1379,7 +1375,7 @@ do
                         ---@field params Taks_Params_ActivateICLS Configuration parameters for the ActivateICLS task.
 
                         ---@class Taks_Params_ActivateICLS
-                        ---@field type '131584' A fixed value, usually 131584, indicating the type of ICLS beacon.
+                        ---@field type 131584 A fixed value, usually 131584, indicating the type of ICLS beacon.
                         ---@field channel number The channel number for the ICLS beacon, ranging from 1 to 20.
                         ---@field unitId number The unique identifier of the ship that has the ICLS system being activated.
                         ---@field name? string Optional. The name for the ICLS beacon, used for readability in the mission editor but has no functional impact.
@@ -1456,7 +1452,7 @@ do
                         --- Description: Stops an ongoing transmission of a message or beacon signal from the specified group or unit. This command halts any active `TransmitMessage` task that may currently be broadcasting from the unit or group.
                         --- https://wiki.hoggitworld.com/view/DCS_command_stopTransmission
                         ---@class Commands_Tasks_StopTransmission
-                        ---@field id 'StopTransmission' The identifier for the task, should be 'StopTransmission'.
+                        ---@field id 'stopTransmission' The identifier for the task, should be 'StopTransmission'.
                         ---@field params table Configuration parameters for the StopTransmission task.
                     end
 
@@ -1469,7 +1465,7 @@ do
                         --- Description: Turns smoke on or off for the specified group or unit. This can be used for marking positions or targets. When enabled, smoke will be emitted from the aircraft's smoke pods or similar devices.
                         --- https://wiki.hoggitworld.com/view/DCS_command_smoke_on_off
                         ---@class Commands_Tasks_SmokeOnOff
-                        ---@field id 'SmokeOnOff' The identifier for the task, should be 'SmokeOnOff'.
+                        ---@field id 'SMOKE_ON_OFF' The identifier for the task, should be 'SMOKE_ON_OFF'.
                         ---@field params Taks_Params_SmokeOnOff Configuration parameters for the SmokeOnOff task.
 
                         ---@class Taks_Params_SmokeOnOff
@@ -1523,7 +1519,6 @@ do
                         ---@field name? string Optional name for the ACLS system. This is used for labeling and has no impact on functionality.
                     end
 
-
                     ---Commands_Tasks_DeactivateACLS
                     do
                         --- Tasking Type: Command
@@ -1550,6 +1545,17 @@ do
                         ---@class Taks_Params_LoadingShip
                         ---@field cargo number The cargo level of the ship, from 0 to 100 percent, affecting how high or low the ship sits in the water.
                         ---@field unitId number The unique identifier of the ship whose cargo value is to be set.
+                    end
+
+                    ---Commands_Tasks_Set_Option
+                    do
+                        ---@class Commands_Tasks_Set_Option
+                        ---@field id "Option"
+                        ---@field params Tasks_TaskWrapper_WrappedAction.params_Setting.params
+
+                        ---@class Tasks_TaskWrapper_WrappedAction.params_Setting.params
+                        ---@field name AI.Option.Air.id|AI.Option.Ground.id|AI.Option.Naval.id
+                        ---@field value AI.Option.Air.val|AI.Option.Ground.val|AI.Option.Naval.val|boolean
                     end
                 end
             end

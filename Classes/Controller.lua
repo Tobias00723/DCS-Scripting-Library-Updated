@@ -126,7 +126,7 @@ do
 
         ---Sets the specified task to the units or groups associated with the controller object. Tasks must fit a specified format. For more information see the specific task page you are looking for: Main Tasks: mission, AttackGroup, AttackUnit, Bombing, CarpetBombing, AttackMapObject, BombingRunway, orbit, refueling, land, follow, followBigFormation, escort, Embarking, fireAtPoint, hold, FAC_AttackGroup, EmbarkToTransport, DisembarkFromTransport, CargoTransportation, goToWaypoint, groundEscort. Enroute Tasks: engageTargets, engageTargetsInZone, engageGroup, engageUnit, awacs, tanker, ewr, FAC_engageGroup, FAC.
         ---https://wiki.hoggitworld.com/view/DCS_func_setTask
-        ---@param task Task_Wrappers
+        ---@param task Task
         function Controller.setTask(self, task) end
     end
 end
