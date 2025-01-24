@@ -45,6 +45,16 @@ do
             ---| 6 Two Dash
         end
 
+        do
+            ---@alias Enum_CTF_Color_Tag
+            ---| 0 Disable
+            ---| 1 Green
+            ---| 2 Red
+            ---| 3 White
+            ---| 4 Orange
+            ---| 5 Blue
+        end
+
         --Zone Data
         do
             ---@class Trig_zone_data
@@ -157,7 +167,7 @@ do
             ---@Example 	The following creates a blue smoke plume on an aircraft named "IWishEDWouldDocumentFeaturesMore" that will be enabled as long as the aircraft is above 1000 meters.
             ---trigger.action.ctfColorTag('IWishEDWouldDocumentFeaturesMore', 5, 1000)
             ---@param unitName string
-            ---@param smokeColor number
+            ---@param smokeColor Enum_CTF_Color_Tag
             ---@param altitude number|nil
             function trigger.action.ctfColorTag(unitName, smokeColor, altitude) end
 

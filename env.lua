@@ -79,47 +79,127 @@ do
 
                 ---@class Aircraft.Route.Point
                 ---@field alt number Altitude of the point
-                ---@field type string Type of the route point
                 ---@field action AI.Task.WaypointType Action at the route point
-                ---@field alt_type string Altitude type
-                ---@field form AI.Task.WaypointType Form of the route point
-                ---@field y number Y coordinate of the point
-                ---@field x number X coordinate of the point
+                ---@field alt_type AI.Task.AltitudeType Altitude type
                 ---@field speed number Speed at the route point
                 ---@field task Task_Wrappers details at the route point
-                ---@field airdromeId number ID of the airdrome
+                ---@field type AI.Task.WaypointType Type of the route point
+                ---@field ETA number
+                ---@field ETA_locked boolean
+                ---@field y number Y coordinate of the point
+                ---@field x number X coordinate of the point
+                ---@field speed_locked boolean
+                ---@field formation_template string Form of the route point
+                ---@field airdromeId? number ID of the airdrome
 
                 ---@class Aircraft.Unit
                 ---@field alt number Altitude of the unit
                 ---@field hardpoint_racks boolean Whether hardpoint racks are present
-                ---@field alt_type string Altitude type
+                ---@field alt_type AI.Task.AltitudeType Altitude type
                 ---@field livery_id string Livery ID of the unit
-                ---@field skill string Skill level of the unit
-                ---@field parking string Parking position
+                ---@field skill AI.Skill Skill level of the unit
+                ---@field parking? string Parking position Term_Index from :getparking tostring
                 ---@field speed number Speed of the unit
-                ---@field AddPropAircraft table Additional properties for the aircraft
-                ---@field type string Type of the unit
+                ---@field AddPropAircraft? Aircraft.AddPropAircraft Additional properties for the aircraft
+                ---@field Radio? table<number, Aircraft.Radio>
+                ---@field type TypeNames Type of the unit
                 ---@field unitId number Unit ID
-                ---@field psi number Heading (psi) of the unit
-                ---@field parking_id string Parking ID
+                ---@field psi number pressure of location
+                ---@field onboard_num string Onboard number of the unit
+                ---@field dataCartridge? table
+                ---@field parking_id? string Parking ID
                 ---@field x number X coordinate of the unit
                 ---@field name string Name of the unit
-                ---@field payload Aircraft.Payload Payload of the unit
-                ---@field onboard_num string Onboard number of the unit
-                ---@field callsign table<number, number|string> Callsign details of the unit
-                ---@field heading number Heading of the unit
+                ---@field payload? Aircraft.Payload Payload of the unit
                 ---@field y number Y coordinate of the unit
+                ---@field heading number Heading of the unit
+                ---@field callsign table<number|string, number|string> Callsign details of the unit
+                ---@field datalinks? Aircraft.Datalink DL info
+
+                ---@class Aircraft.AddPropAircraft
+                ---@
+
+
+                ---@class Aircraft.Datalink
+                ---@field Link16? Aircraft.Datalink.Link16
+                ---@field IDM? Aircraft.Datalink.IDM
+                ---@field SADL? Aircraft.Datalink.SADL
+                ---@field Link4? table
+                
+                ---@class Aircraft.Datalink.Link16
+                ---@field settings Aircraft.Datalink.Link16.settings
+                ---@field network Aircraft.Datalink.Link16.network
+
+                ---@class Aircraft.Datalink.Link16.settings
+                ---@field FF1_Channel? number unk
+                ---@field FF2_Channel? number +1 on  FF1
+                ---@field transmitPower number
+                ---@field VOCB_Channel? number unk
+                ---@field VOCA_Channel? number unk
+                ---@field AIC_Channel? number unk
+                ---@field flightLead? boolean true if un is 1
+                ---@field specialChannel? number same as fighterChannel and missionChannel unk dough
+                ---@field fighterChannel? number same as missionChannel and specialChannel unk dough
+                ---@field missionChannel? number same as specialChannel and fighterChannel unk dough
+                ---@field AirKey? number
+                ---@field GatewayKey? number
+
+                ---@class Aircraft.Datalink.Link16.network
+                ---@field teamMembers table<number, Aircraft.Datalink.Link16.network.teamMembers>
+                ---@field donors table seems always empty
+
+                ---@class Aircraft.Datalink.Link16.network.teamMembers
+                ---@field missionUnitId number UnitID to be linked
+                ---@field TDOA? boolean if in team flight? seems most of the time true
+
+                ---@class Aircraft.Datalink.IDM
+                ---@
+                
+                ---@class Aircraft.Datalink.SADL
+                ---@
+
+                ---@class Aircraft.Datalink.Link4
+                ---@
+                --[[["settings"] = 
+												{
+													["flightLead"] = true,
+													["transmitPower"] = 3,
+													["specialChannel"] = 1,
+													["fighterChannel"] = 1,
+													["missionChannel"] = 1,
+												}, -- end of ["settings"]
+												["network"] = 
+												{
+													["teamMembers"] = 
+													{
+														[1] = 
+														{
+															["missionUnitId"] = 7254,
+															["TDOA"] = true,
+														}, -- end of [1]
+													}, -- end of ["teamMembers"]
+													["donors"] = {},
+												}, -- end of ["network"]
+]]
+
+                ---@class Aircraft.Radio
+                ---@field channels table<number, number>
+                ---@field modulations table<number, radio.modulation>
+                ---@field channelsNames table<number, string>
+
 
                 ---@class Aircraft.Payload
                 ---@field pylons table<number, Aircraft.Payload.Pylon> List of pylons
                 ---@field fuel number Amount of fuel
-                ---@field flare number Number of flares
-                ---@field ammo_type number Ammo type
-                ---@field chaff number Number of chaff
-                ---@field gun number Gun amount
+                ---@field flare? number Number of flares
+                ---@field ammo_type? number Ammo type
+                ---@field chaff? number Number of chaff
+                ---@field gun? number Gun amount in %
+                ---@field restricted? table
 
                 ---@class Aircraft.Payload.Pylon
                 ---@field CLSID string CLSID of the pylon
+                ---@field settings? table
             end
 
             ---Vehicle Group DATA
@@ -304,20 +384,22 @@ do
                 ---| Commands_Tasks_LoadingShip
 
                 ---@alias Task_type
-                ---| 'CAP'
-                ---| 'CAS'
-                ---| 'Fighter Sweep'
-                ---| 'Intercept'
-                ---| 'SEAD'
-                ---| 'AntiShip'
-                ---| 'Ground Attack'
-                ---| 'Pinpoint Strike'
-                ---| 'RunwayAttack'
-                ---| 'Escord'
-                ---| 'Transport'
+                ---| 'Nothing'
                 ---| 'AFAC'
-                ---| 'Tanker'
                 ---| 'AWACS'
+                ---| 'Antiship Strike'
+                ---| 'CAS'
+                ---| 'CAP'
+                ---| 'Escort'
+                ---| 'Fighter Sweep'
+                ---| 'Ground Attack'
+                ---| 'Intercept'
+                ---| 'Pinpoint Strike'
+                ---| 'Reconnaissance'
+                ---| 'Refueling'
+                ---| 'Runway Attack'
+                ---| 'SEAD'
+                ---| 'Transport'
 
                 ---@alias Task_Wrappers
                 ---| Tasks_TaskWrapper_mission

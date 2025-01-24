@@ -1833,7 +1833,7 @@ do
             ---|"Ural-375 ZU-23 Insurgent"
             ---|"weapons.missiles.AGM_84S"
             ---|"weapons.adapters.m559"
-            ---|"weapons.missiles.AIM_9X"
+            ---|"AIM_9X"
             ---|"weapons.gunmounts.{C-101-DEFA553}"
             ---|"Coach a tank yellow"
             ---|"weapons.bombs.Mk_82"

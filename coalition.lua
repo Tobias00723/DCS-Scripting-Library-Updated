@@ -48,7 +48,7 @@ do
     do
         ---Dynamically spawns a group of the specified category for the specified country. Group data table is in the same format as created by the mission editor. See country page and group class page for the list of countries by id and group categories. The coalition of the group is defined by the coalition its country belongs to. If the group or any unit within shares a name of an existing group or unit, the existing group or unit will be destroyed when the new group is created. Function can NOT spawn new aircraft with a skill level of "client". However in single player a group can be spawned with the skill level of "Player". When this occurs the existing player aircraft will be destroyed. If no groupId or unitId is specified or the Ids are shared with existing groups or units, a new Id will be created for the new group.
         ---https://wiki.hoggitworld.com/view/DCS_func_addGroup
-        ---@return Group Class
+        ---@return Group|nil
         ---@param countryId country.id
         ---@param groupCategory Group.Category
         ---@param groupData table

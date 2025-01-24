@@ -28,7 +28,7 @@ do
             ---@field time number     -- The time at which the event occurred
             ---@field initiator Unit  -- The unit that fired the weapon
             ---@field weapon Weapon   -- The weapon that hit the target
-            ---@field target Object   -- The object that was hit
+            ---@field target Objects   -- The object that was hit
 
             ---@class Event_TAKEOFF
             ---@field id 3             -- The event ID (always 3 for this event)
@@ -53,7 +53,7 @@ do
             ---@field id 6             -- The event ID (always 6 for this event)
             ---@field time number      -- The time at which the event occurred
             ---@field initiator Unit   -- The unit that has ejected
-            ---@field target Object    -- The object representing the ejector seat or pilot that ejected
+            ---@field target Objects    -- The object representing the ejector seat or pilot that ejected
 
             ---@class Event_REFUELING
             ---@field id 7             -- The event ID (always 7 for this event)
@@ -63,7 +63,7 @@ do
             ---@class Event_DEAD
             ---@field id 8             -- The event ID (always 8 for this event)
             ---@field time number      -- The time at which the event occurred
-            ---@field initiator Object -- The object that was destroyed
+            ---@field initiator Objects -- The object that was destroyed
 
             ---@class Event_PILOT_DEAD
             ---@field id 9             -- The event ID (always 9 for this event)
@@ -137,7 +137,7 @@ do
             ---@field id 23            -- The event ID (always 23 for this event)
             ---@field time number     -- The time at which the event occurred
             ---@field initiator Unit  -- The unit that is shooting
-            ---@field target Object   -- The unit or object that is being targeted
+            ---@field target Objects   -- The unit or object that is being targeted
             ---@field weapon_name string -- The name of the weapon being used
 
             ---@class Event_SHOOTING_END
@@ -193,7 +193,7 @@ do
             ---@class Event_LANDING_AFTER_EJECTION
             ---@field id 31            -- The event ID (always 31 for this event)
             ---@field time number     -- The time at which the event occurred
-            ---@field initiator Object -- The object representing the ejected pilot
+            ---@field initiator Objects -- The object representing the ejected pilot
             ---@field place Unit      -- The aircraft that the pilot ejected from
             ---@field subplace number -- Additional information related to the landing (usually 0)
 
@@ -203,8 +203,8 @@ do
             ---@class Event_DISCARD_CHAIR_AFTER_EJECTION
             ---@field id 33            -- The event ID (always 33 for this event)
             ---@field time number     -- The time at which the event occurred
-            ---@field initiator Object -- The ejector seat object
-            ---@field target Object   -- The pilot object
+            ---@field initiator Objects -- The ejector seat object
+            ---@field target Objects   -- The pilot object
 
             ---@class Event_WEAPON_ADD
             ---@field id 34            -- The event ID (always 34 for this event)
@@ -227,9 +227,9 @@ do
             ---@field id 37
             ---@field time number
             ---@field weapon_name string
-            ---@field initiator Object
-            ---@field target Object
-            ---@field weapon Object
+            ---@field initiator Objects
+            ---@field target Objects
+            ---@field weapon Objects
 
             ---@class Event_AI_ABORT_MISSION
             ---@field id 38            -- The event ID (always 38 for this event)
@@ -288,14 +288,14 @@ do
             ---@field id 54            -- The event ID (always 54 for this event)
             ---@field time number     -- The time at which the event occurred
             ---@field initiator Unit  -- The unit that took off
-            ---@field place Object    -- The object from where the unit took off (Airbase, FARP, or Ship)
+            ---@field place Objects    -- The object from where the unit took off (Airbase, FARP, or Ship)
             ---@field subPlace number -- Additional information related to the takeoff (usually 0)
 
             ---@class Event_RUNWAY_TOUCH
             ---@field id 55            -- The event ID (always 55 for this event)
             ---@field time number     -- The time at which the event occurred
             ---@field initiator Unit  -- The unit that landed
-            ---@field place Object    -- The object where the unit landed (Airbase, FARP, or Ship)
+            ---@field place Objects    -- The object where the unit landed (Airbase, FARP, or Ship)
             ---@field subPlace number -- Additional information related to the landing (usually 0)
 
             ---@class Event_MAC_LMS_RESTART

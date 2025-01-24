@@ -40,7 +40,7 @@ do
         ---Creates an infrared ray emanating from the given object to a point in 3d space. Can be seen with night vision goggles. localRef is technically an optional variable, however the functions format requires an entry to be made. If not used, simply replace with nil.
         ---https://wiki.hoggitworld.com/view/DCS_func_createInfraRed
         ---@return Spot class
-        ---@param source Unit|Object
+        ---@param source Objects
         ---@param localRef vec3
         ---@param point vec3
         function Spot.createInfraRed(source, localRef, point) end
@@ -48,7 +48,7 @@ do
         ---Creates a laser ray emanating from the given object to a point in 3d space. localRef is technically an optional variable, however the functions format requires an entry to be made. If not used, simply replace with nil If optional variable laserCode is not present the beam will automatically be set to a IR beam. If laserCode is specified the beam is a laser which can be used to guide laser guided bombs.Laser code is any 4 digit number between 1111 and 1788.
         ---https://wiki.hoggitworld.com/view/DCS_func_createLaser
         ---@return Spot class
-        ---@param source Unit|Object
+        ---@param source Objects
         ---@param localRef vec3
         ---@param point vec3
         ---@param laseCode number

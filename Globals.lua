@@ -15,6 +15,7 @@ do
 
     --classes
     do
+
         --vec 2
         do
             ---@class vec2

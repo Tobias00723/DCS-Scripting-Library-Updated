@@ -46,11 +46,8 @@ do
 
     ---Represents a weapon object: shell, rocket, missile and bomb
     ---https://wiki.hoggitworld.com/view/DCS_Class_Weapon
-    ---@class Weapon
+    ---@class Weapon : Object
     Weapon = {}
-
-    ---@type number
-    Weapon.id_ = 0
 
     ---Represents a weapon object: shell, rocket, missile and bomb
     ---https://wiki.hoggitworld.com/view/DCS_Class_Weapon
@@ -171,11 +168,6 @@ do
 
     --Functions
     do
-        ---Return an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object. See enumerators Group.Category, Object.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Object.Category.
-        ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
-        ---@return Object.Category, Weapon.Category
-        function Weapon.getCategory(self) end
-
         ---Returns an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object and how the function is called. See enumerators Group.Category, Object.Category, and Spot.Category for further reference.
         ---https://wiki.hoggitworld.com/view/DCS_func_getCategoryEx
         ---@return Weapon.Category
@@ -210,66 +202,15 @@ do
 
         ---Returns the target object that the weapon is guiding to.
         ---https://wiki.hoggitworld.com/view/DCS_func_getTarget
-        ---@return Object class
+        ---@return Objects class
         function Weapon.getTarget(self) end
 
-        --Inhereted fuctions from Object class
+        --overloaded Inhereted fuctions from Object class
         do
-            ---No Docu
-            function Weapon.cancelChoosingCargo() end
-
-            ---Destroys the object, physically removing it from the game world without creating an event. The object simply disappears. If used with a group, the entire group will be destroyed. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_destroy TODO: Examples
-            function Weapon.destroy(self) end
-
-            ---Returns a table of what the unit 'can do' varies from unit to unit also can be obtained by getdesc().attributes
-            ---@param self Unit
-            ---@param ... unknown
-            ---@return Attributes
-            function Weapon.getAttributes(self, ...) end
-
-            ---Returns a string of the name of the object as defined by the mission editor or dynamic spawning functions. Function also works with Unit, Static Object, Airbase When run as Weapon.getName(obj) the value can be different than if run via Weapon.getName(obj) or obj:getName(). It appears to be returning the runtime Id.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getName
-            ---@return string
-            function Weapon.getName(self) end
-
-            ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-            ---@return vec3 class
-            function Weapon.getPoint(self) end
-
-            ---Returns a pos3 table of the objects current position and orientation in 3D space. X, Y, Z values are unit vectors defining the objects orientation. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map.Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getPosition
-            ---@ExampleDesc Position 3 is a table consisting of the point and orientation tables.
-            ---@example Position3 = {   p = Vec3, x = Vec3, y = Vec3, z = Vec3 }
-            ---@return position3 class
-            function Weapon.getPosition(self) end
-
-            ---Return a string of the objects type name. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_getTypeName
-            ---@return string
-            function Weapon.getTypeName(self) end
-
-            ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_getVelocity
-            ---@return vec3 class
-            function Weapon.getVelocity(self) end
-
-            ---Returns a boolean value if the object in question has the passed attribute. See Article list of Attributes or db_attibutes.lua in C:\Program Files\Eagle Dynamics\DCS World\Scripts\Database for more details. Additionally attributes for each object are defined within their DB lua file. DB files provided on github for reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
-            ---https://wiki.hoggitworld.com/view/DCS_func_hasAttribute
-            ---@return boolean
-            ---@param attribute Attributes
-            function Weapon.hasAttribute(self, attribute) end
-
-            ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_inAir
-            ---@return boolean
-            function Weapon.inAir(self) end
-
-            ---Return a boolean value based on whether the object currently exists in the mission. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_isExist
-            ---@return boolean
-            function Weapon.isExist(self) end
+            ---Return an enumerator of the category for the specific object. The enumerator returned is dependent on the category of the object. See enumerators Group.Category, Object.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Object.Category.
+            ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
+            ---@return Object.Category, Weapon.Category
+            function Weapon.getCategory(self) end
         end
     end
 end

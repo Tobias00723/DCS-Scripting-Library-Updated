@@ -98,7 +98,7 @@ do
 
     --Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
     ---https://wiki.hoggitworld.com/view/DCS_Class_Unit
-    ---@class Unit
+    ---@class Unit : Object
     Unit = {}
 
     ---Represents units: airplanes, helicopters, vehicles, ships and armed ground structures.
@@ -145,10 +145,6 @@ do
         IRST = 2,
         RWR = 3
     }
-
-    ---same as Unit.getObjectID
-    ---@type number
-    Unit.id_ = 0
 
     --Functions
     do
@@ -202,7 +198,7 @@ do
 
         ---Returns an instance of the calling class for the object of a specified name. The objects name is defined either in the mission editor or within functions that can dynamically spawn objects. All static objects and unit names must be unique. However groups may have the same name as a unit or static Unit. This function can provide access to non activated units and groups.
         ---https://wiki.hoggitworld.com/view/DCS_func_getByName
-        ---@return Unit|nil
+        ---@return self?
         ---@param name string
         function Unit.getByName(name) end
 
@@ -319,14 +315,14 @@ do
 
         ---Returns a table of friendly cargo objects indexed numerically and sorted by distance from the helicopter. Returns nil if used on any object other than a helicopter.
         ---https://wiki.hoggitworld.com/view/DCS_func_getNearestCargos
-        ---@return table<number, Object>
+        ---@return table<number, Objects>
         function Unit.getNearestCargos(self) end
 
         --No Docu
         --When running on a a-10 nil table as return can only presume its similair to 'getNearestCargos' but only cargo for this aircraft runned on?
         ---@param self Unit
         ---@param ... unknown
-        ---@return table<number, Object>
+        ---@return table<number, Objects>
         function Unit.getNearestCargosForAircraft(self, ...) end
 
         ---Returns a numerical value of the default index of the specified unit within the group as defined within the mission editor or addGroup scripting function. This value is not changed as units within the group are destroyed.
@@ -346,7 +342,7 @@ do
 
         ---Returns two values. The first value is a boolean indicating if any radar on the Unit is operational. The second value is the Object the radar is most interested in and/or actively tracking.
         ---https://wiki.hoggitworld.com/view/DCS_func_getRadar
-        ---@return boolean, Object class
+        ---@return boolean, Objects
         function Unit.getRadar(self) end
 
         --No Docu
@@ -403,71 +399,13 @@ do
         ---@return boolean
         function Unit.vtolableLA(self, ...) end
 
-        --Inhereted fuctions from Object class
+        --ovweload Inhereted fuctions from Object class
         do
-            ---No Docu
-            ---@param self Unit
-            ---@param ... unknown
-            function Unit.cancelChoosingCargo(self, ...) end
-
-            ---Destroys the object, physically removing it from the game world without creating an event. The object simply disappears. If used with a group, the entire group will be destroyed. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_destroy TODO: Examples
-            function Unit.destroy(self) end
-
-            ---No Docu
-            ---Returns a table of what the unit 'can do' varies from unit to unit also can be obtained by getdesc().attributes
-            ---@param self Unit
-            ---@param ... unknown
-            ---@return Attributes
-            function Unit.getAttributes(self, ...) end
-
             ---Return an enumerator of the category for the specific Unit. The enumerator returned is dependent on the category of the Unit. See enumerators Group.Category, Unit.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the Unit.Category.
             ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
             ---@return Object.Category, Unit.Category
             function Unit.getCategory(self) end
-
-            ---Returns a string of the name of the object as defined by the mission editor or dynamic spawning functions. Function also works with Unit, Static Object, Airbase When run as Unit.getName(obj) the value can be different than if run via Unit.getName(obj) or obj:getName(). It appears to be returning the runtime Id.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getName
-            ---@return string
-            function Unit.getName(self) end
-
-            ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-            ---@return vec3 class
-            function Unit.getPoint(self) end
-
-            ---Returns a pos3 table of the objects current position and orientation in 3D space. X, Y, Z values are unit vectors defining the objects orientation. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map.Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getPosition
-            ---@ExampleDesc Position 3 is a table consisting of the point and orientation tables.
-            ---@example Position3 = {   p = Vec3, x = Vec3, y = Vec3, z = Vec3 }
-            ---@return position3 class
-            function Unit.getPosition(self) end
-
-            ---Return a string of the objects type name. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_getTypeName
-            ---@return string
-            function Unit.getTypeName(self) end
-
-            ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_getVelocity
-            ---@return vec3 class
-            function Unit.getVelocity(self) end
-
-            ---Returns a boolean value if the object in question has the passed attribute. See Article list of Attributes or db_attibutes.lua in C:\Program Files\Eagle Dynamics\DCS World\Scripts\Database for more details. Additionally attributes for each object are defined within their DB lua file. DB files provided on github for reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
-            ---https://wiki.hoggitworld.com/view/DCS_func_hasAttribute
-            ---@return boolean
-            ---@param attribute Attributes
-            function Unit.hasAttribute(self, attribute) end
-
-            ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_inAir
-            ---@return boolean
-            function Unit.inAir(self) end
-
-            ---Return a boolean value based on whether the object currently exists in the mission. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_isExist
-            ---@return boolean
-            function Unit.isExist(self) end
         end
     end
 end
+

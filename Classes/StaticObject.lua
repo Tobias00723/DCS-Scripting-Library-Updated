@@ -28,12 +28,8 @@ do
 
     ---Represents static objects added in the Mission Editor or via scripting commands.
     ---https://wiki.hoggitworld.com/view/DCS_Class_Static_Object
-    ---@class StaticObject
+    ---@class StaticObject : Object
     StaticObject = {}
-
-    ---@type number
-    StaticObject.id_ = 0
-
 
     --Functions
     do
@@ -42,7 +38,7 @@ do
 
         ---Returns an instance of the calling class for the object of a specified name. The objects name is defined either in the mission editor or within functions that can dynamically spawn objects. All static objects and unit names must be unique. However groups may have the same name as a unit or static object. This function can provide access to non activated units and groups.
         ---https://wiki.hoggitworld.com/view/DCS_func_getByName
-        ---@return StaticObject|nil
+        ---@return self?
         ---@param name string
         function StaticObject.getByName(name) end
 
@@ -113,68 +109,9 @@ do
         ---@return string
         function StaticObject.getTypeName(self) end
 
-        --Inhereted fuctions from Object class
+        --overloaded Inhereted fuctions from Object class
         do
             ---No Docu
-            function StaticObject.cancelChoosingCargo() end
-
-            ---Destroys the object, physically removing it from the game world without creating an event. The object simply disappears. If used with a group, the entire group will be destroyed. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_destroy TODO: Examples
-            function StaticObject.destroy(self) end
-
-            ---Returns a table of what the unit 'can do' varies from unit to unit also can be obtained by getdesc().attributes
-            ---@param self Unit
-            ---@param ... unknown
-            ---@return Attributes
-            function StaticObject.getAttributes(self, ...) end
-
-            ---Return an enumerator of the category for the specific StaticObject. The enumerator returned is dependent on the category of the StaticObject. See enumerators Group.Category, StaticObject.Category, and Spot.Category for further reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase. When used with any of these objects the category returned is related to the StaticObject.Category.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getCategory
-            ---@return Object.Category
-            function StaticObject.getCategory(self) end
-
-            ---Returns a string of the name of the object as defined by the mission editor or dynamic spawning functions. Function also works with Unit, Static Object, Airbase When run as StaticObject.getName(obj) the value can be different than if run via StaticObject.getName(obj) or obj:getName(). It appears to be returning the runtime Id.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getName
-            ---@return string
-            function StaticObject.getName(self) end
-
-            ---Returns a vec3 table of the x, y, and z coordinates for the position of the given object in 3D space. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getPoint
-            ---@return vec3 class
-            function StaticObject.getPoint(self) end
-
-            ---Returns a pos3 table of the objects current position and orientation in 3D space. X, Y, Z values are unit vectors defining the objects orientation. Coordinates are dependent on the position of the maps origin. In the case of the Caucuses theater, the origin is located in the Crimean region of the map.Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
-            ---https://wiki.hoggitworld.com/view/DCS_func_getPosition
-            ---@ExampleDesc Position 3 is a table consisting of the point and orientation tables.
-            ---@example Position3 = {   p = Vec3, x = Vec3, y = Vec3, z = Vec3 }
-            ---@return position3 class
-            function StaticObject.getPosition(self) end
-
-            ---Return a string of the objects type name. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_getTypeName
-            ---@return string
-            function StaticObject.getTypeName(self) end
-
-            ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_getVelocity
-            ---@return vec3 class
-            function StaticObject.getVelocity(self) end
-
-            ---Returns a boolean value if the object in question has the passed attribute. See Article list of Attributes or db_attibutes.lua in C:\Program Files\Eagle Dynamics\DCS World\Scripts\Database for more details. Additionally attributes for each object are defined within their DB lua file. DB files provided on github for reference. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase.
-            ---https://wiki.hoggitworld.com/view/DCS_func_hasAttribute
-            ---@return boolean
-            ---@param attribute Attributes
-            function StaticObject.hasAttribute(self, attribute) end
-
-            ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_inAir
-            ---@return boolean
-            function StaticObject.inAir(self) end
-
-            ---Return a boolean value based on whether the object currently exists in the mission. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
-            ---https://wiki.hoggitworld.com/view/DCS_func_isExist
-            ---@return boolean
-            function StaticObject.isExist(self) end
         end
     end
 end
