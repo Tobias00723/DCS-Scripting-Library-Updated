@@ -65,7 +65,7 @@ do
 
         ---Returns multiple entries that define a number of values if the target is detected by the Unit or group associated with the controller. Values returned are: |boolean detected, -- boolean value if the target is detected| boolean visible, -- boolean value if target is visible by line of sight| ModelTime lastTime, -- the last model time that the target was detected| boolean type, -- if the type of target is known| boolean distance, -- if distance to the target is known| Vec3 lastPos, -- last known position of the target| Vec3 lastVel -- last know velocity vector of the tar|. Function is available at the unit level for all unit types. When used with a Group Controller the function will return expected values only with Ground and Ship groups.
         ---https://wiki.hoggitworld.com/view/DCS_func_isTargetDetected
-        ---@return boolean detected , boolean visible , number lastTime , boolean type , boolean distance , vec3 lastPos , vec3 lastVel
+        ---@return boolean detected , boolean? visible , number|boolean? lastTime_bool_if_currently_visable  , boolean? type , boolean? distance , vec3? lastPos , vec3? lastVel
         ---@param target Objects
         ---@param detectionType1? Conroller.Detection
         ---@param detectionType2? Conroller.Detection  
