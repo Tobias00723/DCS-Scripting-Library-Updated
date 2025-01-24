@@ -483,7 +483,7 @@ do
         ---@param ObjectCategory Object.Category|table<number, Object.Category>
         ---@param searchVolume table
         ---@param Handler function ObjectSeatchHandler
-        ---@param data any|nil
+        ---@param data? any
         function world.searchObjects(ObjectCategory, searchVolume, Handler, data) end
     end
 end

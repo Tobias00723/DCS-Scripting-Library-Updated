@@ -200,8 +200,7 @@ do
         ---@ExampleDesc Returns the first unit in a group
         ---@Example local unit1 = Group.getByName('tanks'):getUnit(1)
         ---@return Unit
-        ---@param UnitIndex number
-        function Airbase.getUnit(self, UnitIndex) end
+        function Airbase.getUnit(self) end
 
         ---Returns the warehouse object associated with the airbase object. Can then be used to call the warehouse class functions to modify the contents of the warehouse.
         ---https://wiki.hoggitworld.com/view/DCS_func_getWarehouse

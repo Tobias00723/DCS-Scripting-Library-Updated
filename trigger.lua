@@ -141,8 +141,8 @@ do
             ---@param color table
             ---@param fillColor table
             ---@param lineType Enum_LineTypes
-            ---@param readOnly boolean|nil
-            ---@param message string|nil
+            ---@param readOnly? boolean
+            ---@param message? string
             function trigger.action.arrowToAll(coalition, id, startPoint, endPoint, color, fillColor, lineType, readOnly,
                                                message)
             end
@@ -156,8 +156,8 @@ do
             ---@param color table
             ---@param fillColor table
             ---@param lineType Enum_LineTypes
-            ---@param readOnly boolean|nil
-            ---@param message string|nil
+            ---@param readOnly? boolean
+            ---@param message? string
             function trigger.action.circleToAll(coalition, id, center, radius, color, fillColor, lineType, readOnly,
                                                 message)
             end
@@ -168,7 +168,7 @@ do
             ---trigger.action.ctfColorTag('IWishEDWouldDocumentFeaturesMore', 5, 1000)
             ---@param unitName string
             ---@param smokeColor Enum_CTF_Color_Tag
-            ---@param altitude number|nil
+            ---@param altitude? number
             function trigger.action.ctfColorTag(unitName, smokeColor, altitude) end
 
             ---Deactivates the specified group. Calls the Group.destroy function.
@@ -190,7 +190,7 @@ do
             ---@param vec3 vec3
             ---@param smokePreset number
             ---@param density number
-            ---@param name string|nil
+            ---@param name? string
             function trigger.action.effectSmokeBig(vec3, smokePreset, density, name) end
 
             ---Stops a big smoke effect of the passed name. Used in conjunction with trigger.action.effectSmokeBig
@@ -228,8 +228,8 @@ do
             ---@param endPoint vec3
             ---@param color table
             ---@param lineType Enum_LineTypes
-            ---@param readOnly boolean|nil
-            ---@param message string|nil
+            ---@param readOnly? boolean
+            ---@param message? string
             function trigger.action.lineToAll(coalition, id, startPoint, endPoint, color, lineType, readOnly, message) end
 
             ---Adds a mark point to all on the F10 map with attached text. 2.5 added the two new variables of readOnly and message. Read only if true will make it so users cannot remove the mark. Message is a message that is displayed when a mark is added. Set to for no message to be added.
@@ -237,8 +237,8 @@ do
             ---@param id number
             ---@param text string
             ---@param vec3 vec3
-            ---@param readOnly boolean|nil
-            ---@param message string|nil
+            ---@param readOnly? boolean
+            ---@param message? string
             function trigger.action.markToAll(id, text, vec3, readOnly, message) end
 
             ---Adds a mark point to a coalition on the F10 map with attached text. 2.5 added the two new variables of readOnly and message. Read only if true will make it so users cannot remove the mark. Message is a message that is displayed when a mark is added. Set to for no message to be added.
@@ -247,8 +247,8 @@ do
             ---@param text string
             ---@param vec3 vec3
             ---@param coalitionId coalition.side
-            ---@param readOnly boolean|nil
-            ---@param message string|nil
+            ---@param readOnly? boolean
+            ---@param message? string
             function trigger.action.markToCoalition(id, text, vec3, coalitionId, readOnly, message) end
 
             ---Adds a mark point to a group on the F10 map with attached text. 2.5 added the two new variables of readOnly and message. Read only if true will make it so users cannot remove the mark. Message is a message that is displayed when a mark is added. Set to for no message to be added.
@@ -257,8 +257,8 @@ do
             ---@param text string
             ---@param vec3 vec3
             ---@param groupId number
-            ---@param readOnly boolean|nil
-            ---@param message string|nil
+            ---@param readOnly? boolean
+            ---@param message? string
             function trigger.action.markToGroup(id, text, vec3, groupId, readOnly, message) end
 
             ---Creates the defined shape on the F10 map. Uses the same definitions as the specific functions to create different shapes with the only difference being the first parameter is used to define the shape. This function does have an additional type of shape of "freeform" which allows you to create an 3+ vertices shape in any format you wish. Shape Ids:
@@ -365,8 +365,8 @@ do
             ---@param color table
             ---@param fillColor table
             ---@param lineType Enum_LineTypes
-            ---@param readOnly boolean|nil
-            ---@param message string|nil
+            ---@param readOnly? boolean
+            ---@param message? string
             function trigger.action.quadToAll(coalition, id, point1, point2, point3, point4, color, fillColor, lineType,
                                               readOnly, message)
             end
@@ -380,7 +380,7 @@ do
             ---@param loop boolean
             ---@param frequency number
             ---@param power number
-            ---@param name string|nil
+            ---@param name? string
             function trigger.action.radioTransmission(filename, point, modulation, loop, frequency, power, name) end
 
             ---Creates a rectangle on the map from the startpoint in one corner to the endPoint in the opposite corner. Coalition Ids to be used.
@@ -392,8 +392,8 @@ do
             ---@param color table
             ---@param fillColor table
             ---@param lineType number
-            ---@param readOnly boolean|nil
-            ---@param message string|nil
+            ---@param readOnly? boolean
+            ---@param message? string
             function trigger.action.rectToAll(coalition, id, startPoint, EndPoint, color, fillColor, lineType, readOnly,
                                               message)
             end

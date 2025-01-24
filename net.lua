@@ -137,7 +137,7 @@ do
         ---https://wiki.hoggitworld.com/view/DCS_func_get_player_info
         ---@return Net_player_info --only full table if attribute is nil
         ---@param playerID Player_id
-        ---@param attribute 'id'|'name'|'side'|'slot'|'ping'|'ipaddr'|'ucid'|nil
+        ---@param attribute? 'id'|'name'|'side'|'slot'|'ping'|'ipaddr'|'ucid'
         function net.get_player_info(playerID, attribute) end
 
         ---Returns a table of players currently connected to the server.
@@ -202,14 +202,14 @@ do
         ---Sends a chat message.
         ---https://wiki.hoggitworld.com/view/DCS_func_send_chat
         ---@param message string
-        ---@param all boolean|nil
+        ---@param all? boolean
         function net.send_chat(message, all) end
 
         ---Sends a chat message to the player with the passed id. If the optional from Id is set then the player will appear to receive a message from that player.
         ---https://wiki.hoggitworld.com/view/DCS_func_send_chat_to
         ---@param message string
         ---@param playerId Player_id
-        ---@param fromId Player_id|nil
+        ---@param fromId? Player_id
         function net.send_chat_to(message, playerId, fromId) end
 
         --changes the playername in the mission

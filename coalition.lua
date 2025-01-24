@@ -48,7 +48,7 @@ do
     do
         ---Dynamically spawns a group of the specified category for the specified country. Group data table is in the same format as created by the mission editor. See country page and group class page for the list of countries by id and group categories. The coalition of the group is defined by the coalition its country belongs to. If the group or any unit within shares a name of an existing group or unit, the existing group or unit will be destroyed when the new group is created. Function can NOT spawn new aircraft with a skill level of "client". However in single player a group can be spawned with the skill level of "Player". When this occurs the existing player aircraft will be destroyed. If no groupId or unitId is specified or the Ids are shared with existing groups or units, a new Id will be created for the new group.
         ---https://wiki.hoggitworld.com/view/DCS_func_addGroup
-        ---@return Group|nil
+        ---@return Group?
         ---@param countryId country.id
         ---@param groupCategory Group.Category
         ---@param groupData table
@@ -63,7 +63,7 @@ do
 
         ---Dynamically spawns a static object belonging to the specified country into the mission. This function follows the same rules as coalition.addGroup except for the object table not perfectly matching the format of a static object as seen in the mission file. Static Objects name cannot be shared with an existing object, if it is the existing object will be destroyed on the spawning of the new object. - If unitId is not specified or matches an existing object, a new Id will be generated. - Coalition of the object is defined based on the country the object is spawning to.
         ---https://wiki.hoggitworld.com/view/DCS_func_addStaticObject
-        ---@return StaticObject class
+        ---@return StaticObject?
         ---@param countryId country.id
         ---@param groupData table
         function coalition.addStaticObject(countryId, groupData) end
@@ -101,7 +101,7 @@ do
         ---https://wiki.hoggitworld.com/view/DCS_func_getGroups
         ---@return table<number, Group>
         ---@param coalitionId coalition.side
-        ---@param GroupCategory Group.Category|nil
+        ---@param GroupCategory? Group.Category
         function coalition.getGroups(coalitionId, GroupCategory) end
 
         ---Returns the position of a coalitions "bullseye" as specified in the mission editor.

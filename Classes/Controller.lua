@@ -51,7 +51,7 @@ do
     do
         ---Returns a table of detected targets that are detected by the different detection methods. If not detection method is specified, then all forms of detection will be used. Applies only to a Unit Controller. Cannot be used at the group level.
         ---https://wiki.hoggitworld.com/view/DCS_func_getDetectedTargets
-        ---@return Controller.getDetectedTargets
+        ---@return table<number, Controller.getDetectedTargets>
         ---@param detectionType1? Conroller.Detection
         ---@param detectionType2? Conroller.Detection
         ---@param ... Conroller.Detection

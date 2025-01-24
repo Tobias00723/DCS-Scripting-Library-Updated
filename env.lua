@@ -2278,7 +2278,7 @@ do
         ---Prints the passed string to the dcs.log with a prefix of 'error'. The optional variable defines whether or not a message box will pop up when the logging occurs.
         ---https://wiki.hoggitworld.com/view/DCS_func_warning
         ---@param log string
-        ---@param showMessageBox boolean|nil
+        ---@param showMessageBox? boolean
         function env.error(log, showMessageBox) end
 
         ---Returns a string associated with the passed dictionary key value. If the key is not found within the miz the function will return the string that was passed.
@@ -2290,7 +2290,7 @@ do
         ---Prints the passed string to the dcs.log with a prefix of 'info'. The optional variable defines whether or not a message box will pop up when the logging occurs.
         ---https://wiki.hoggitworld.com/view/DCS_func_info
         ---@param log string
-        ---@param showMessageBox? boolean|nil
+        ---@param showMessageBox? boolean
         function env.info(log, showMessageBox) end
 
         ---Prints the passed string to the dcs.log with a prefix of 'error'. The optional variable defines whether or not a message box will pop up when the logging occurs.
@@ -2305,7 +2305,7 @@ do
         ---Prints the passed string to the dcs.log with a prefix of 'warning'. The optional variable defines whether or not a message box will pop up when the logging occurs.
         ---https://wiki.hoggitworld.com/view/DCS_func_warning
         ---@param log string
-        ---@param showMessageBox boolean|nil
+        ---@param showMessageBox? boolean
         function env.warning(log, showMessageBox) end
     end
 end

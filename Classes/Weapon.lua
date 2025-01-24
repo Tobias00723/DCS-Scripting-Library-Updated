@@ -37,9 +37,9 @@ do
                 ---@field type Weapon.WarheadType The type of the warhead
                 ---@field mass number The mass of the warhead
                 ---@field caliber number The caliber of the warhead
-                ---@field explosiveMass number|nil The explosive mass for HE and AP(+HE) warheads
-                ---@field shapedExplosiveMass number|nil The shaped explosive mass for shaped explosive warheads
-                ---@field shapedExplosiveArmorThickness number|nil The armor thickness for shaped explosive warheads
+                ---@field explosiveMass? number The explosive mass for HE and AP(+HE) warheads
+                ---@field shapedExplosiveMass? number The shaped explosive mass for shaped explosive warheads
+                ---@field shapedExplosiveArmorThickness? number The armor thickness for shaped explosive warheads
             end
         end
     end

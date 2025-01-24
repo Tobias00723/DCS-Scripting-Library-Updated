@@ -48,7 +48,7 @@ do
         ---Removes a scheduled function as defined by the functionId from executing. Essentially will "destroy" the function.
         ---https://wiki.hoggitworld.com/view/DCS_func_removeFunction
         ---@return function
-        ---@param functionId number|nil
+        ---@param functionId number
         function timer.removeFunction(functionId) end
 
         ---Schedules a function to run at a time in the future. This is a very powerful function. The function that is called is expected to return nil or a number which will indicate the next time the function will be rescheduled. Use the second argument in that function to retrieve the current time and add the desired amount of delay (expressed in seconds).

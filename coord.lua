@@ -38,7 +38,7 @@ do
         ---@return vec3 vec3
         ---@param latitude number GeoCoord
         ---@param longitude number GeoCoord
-        ---@param altitude number|nil
+        ---@param altitude? number
         function coord.LLtoLO(latitude, longitude, altitude) end
 
         ---Returns an MGRS table from the latitude and longitude coordinates provided. Note that in order to get the MGRS coordinate from a vec3 you must first use coord.LOtoLL on it.

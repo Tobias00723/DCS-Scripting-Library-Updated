@@ -32,7 +32,7 @@ do
         ---@param name string
         ---@param path? table|nil
         ---@param functionToRun function
-        ---@param anyArguement any|nil
+        ---@param anyArguement? any|nil
         function missionCommands.addCommand(name, path, functionToRun, anyArguement) end
 
         ---Adds a command to the "F10 Other" radio menu allowing players to run specified scripting functions. Command is added for the specified coalition. The string name is the text that will be displayed in the F10 Other menu and is also used in the function to remove the command from the menu. Path is an optional value that defines whether or not the command will be in a named submenu. FunctionToCall is the name of the function, with the optional argument value designating any passed values.
@@ -42,7 +42,7 @@ do
         ---@param name string
         ---@param path? table|nil table or nil
         ---@param functionToRun function
-        ---@param anyArguement any|nil
+        ---@param anyArguement? any|nil
         function missionCommands.addCommandForCoalition(coalitionSide, name, path, functionToRun, anyArguement) end
 
         ---Adds a command to the "F10 Other" radio menu allowing players to run specified scripting functions. Command is added for the specified groupId. The string name is the text that will be displayed in the F10 Other menu and is also used in the function to remove the command from the menu. Path is an optional value that defines whether or not the command will be in a named submenu. FunctionToCall is the name of the function, with the optional argument value designating any passed values.
@@ -52,7 +52,7 @@ do
         ---@param name string
         ---@param path? table|nil table or nil
         ---@param functionToRun function
-        ---@param anyArguement any|nil
+        ---@param anyArguement? any|nil
         function missionCommands.addCommandForGroup(groupId, name, path, functionToRun, anyArguement) end
 
         ---Creates a submenu of a specified name for all players. Can be used to create nested sub menues. If the path is not specified, submenu is added to the root menu.
