@@ -58,21 +58,24 @@ do
                 ---@field group table<number, Plane_Group_DATA_group>
                 
                 ---@class Plane_Group_DATA_group
-                ---@field frequency number Frequency of the aircraft
-                ---@field modulation number Modulation setting of the aircraft
-                ---@field groupId number Group ID of the aircraft
+                ---@field frequency? number Frequency of the aircraft
+                ---@field modulation? number Modulation setting of the aircraft
+                ---@field groupId? number Group ID of the aircraft
                 ---@field tasks table List of tasks associated with the aircraft
                 ---@field route Aircraft.Route Details of the flight route
-                ---@field hidden boolean Whether the aircraft is hidden
+                ---@field hidden? boolean Whether the aircraft is hidden
                 ---@field units table<number, Aircraft.Unit> List of units in the aircraft
                 ---@field y number Y coordinate of the aircraft
                 ---@field radioSet boolean Whether the radio is set
                 ---@field name string Name of the aircraft
-                ---@field communication boolean Whether communication is enabled
+                ---@field communication? boolean Whether communication is enabled
                 ---@field x number X coordinate of the aircraft
-                ---@field start_time number Start time of the aircraft's mission
+                ---@field start_time? number Start time of the aircraft's mission
                 ---@field task string Task assigned to the aircraft
-                ---@field uncontrolled boolean Whether the aircraft is uncontrolled
+                ---@field uncontrolled? boolean Whether the aircraft is uncontrolled
+                ---@field lateActivation? boolean set late activation
+                ---@field hiddenOnPlanner? boolean if you can see on F10
+                ---@field hiddenOnMFD? boolean can be seen on MFD
 
                 ---@class Aircraft.Route
                 ---@field points table<number, Aircraft.Route.Point> List of route points
@@ -96,16 +99,16 @@ do
                 ---@field alt number Altitude of the unit
                 ---@field hardpoint_racks boolean Whether hardpoint racks are present
                 ---@field alt_type AI.Task.AltitudeType Altitude type
-                ---@field livery_id string Livery ID of the unit
+                ---@field livery_id? string Livery ID of the unit
                 ---@field skill AI.Skill Skill level of the unit
                 ---@field parking? string Parking position Term_Index from :getparking tostring
                 ---@field speed number Speed of the unit
                 ---@field AddPropAircraft? Aircraft.AddPropAircraft Additional properties for the aircraft
                 ---@field Radio? table<number, Aircraft.Radio>
                 ---@field type TypeNames Type of the unit
-                ---@field unitId number Unit ID
-                ---@field psi number pressure of location
-                ---@field onboard_num string Onboard number of the unit
+                ---@field unitId? number Unit ID
+                ---@field psi? number pressure of location
+                ---@field onboard_num? string Onboard number of the unit
                 ---@field dataCartridge? table
                 ---@field parking_id? string Parking ID
                 ---@field x number X coordinate of the unit

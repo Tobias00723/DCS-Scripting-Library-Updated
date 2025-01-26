@@ -85,7 +85,7 @@ do
 
         ---Pushes the specified task to the front of the tasking queue. If no other tasks are currently active it will function effectively the same as Controller.setTask()For more information see the specific task page you are looking for: Main Tasks: mission, AttackGroup, AttackUnit, Bombing, CarpetBombing, AttackMapObject, BombingRunway, orbit, refueling, land, follow, followBigFormation, escort, Embarking, fireAtPoint, hold, FAC_AttackGroup, EmbarkToTransport, DisembarkFromTransport, CargoTransportation, goToWaypoint, groundEscort. Enroute Tasks: engageTargets, engageTargetsInZone, engageGroup, engageUnit, awacs, tanker, ewr, FAC_engageGroup, FAC.
         ---https://wiki.hoggitworld.com/view/DCS_func_pushTask
-        ---@param task table
+        ---@param task Task
         function Controller.pushTask(self, task) end
 
         ---Resets the current task assigned to the controller.

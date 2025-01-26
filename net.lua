@@ -212,12 +212,10 @@ do
         ---@param fromId? Player_id
         function net.send_chat_to(message, playerId, fromId) end
 
-        --changes the playername in the mission
-        --No docu
+        --changes the playername in the mission OBSOLETE, works only locally
         ---@param name string
         ---@param id Player_id
-        ---@param ... unknown
-        function net.set_name(name, id, ...) end
+        function net.set_name(name, id) end
 
         --No Docu
         function net.set_slot() end
