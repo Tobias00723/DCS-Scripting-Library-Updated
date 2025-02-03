@@ -96,7 +96,7 @@ do
             ---@class Event_BIRTH
             ---@field id 15            -- The event ID (always 15 for this event)
             ---@field time number     -- The time at which the birth event occurred
-            ---@field initiator Unit -- The object that was spawned into the mission
+            ---@field initiator Objects -- The object that was spawned into the mission
 
             ---@class Event_HUMAN_FAILURE
             ---@field id 16            -- The event ID (always 16 for this event)

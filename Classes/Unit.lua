@@ -24,14 +24,112 @@ do
 
             ---Represents the attributes of an aircraft with boolean values.
             ---@class Unit_Attributes
-            ---@field Air? boolean Indicates if the object is classified as Air
-            ---@field Battle_airplanes? boolean Indicates if the object is a battle airplane
-            ---@field NonAndLightArmoredUnits? boolean Indicates if the object is non or lightly armored
-            ---@field Battleplanes? boolean Indicates if the object is a battleplane
-            ---@field Refuelable? boolean Indicates if the object is refuelable
-            ---@field All? boolean Indicates if the object is classified under all
-            ---@field Planes? boolean Indicates if the object is a plane
-            ---@field NonArmoredUnits? boolean Indicates if the object is non-armored
+            ---@field ["AA_flak"]? boolean
+            ---@field ["AA_missile"]? boolean
+            ---@field ["AAA"]? boolean
+            ---@field ["ATGM"]? boolean
+            ---@field ["AWACS"]? boolean
+            ---@field ["Air"]? boolean
+            ---@field ["Air Defence"]? boolean
+            ---@field ["Air Defence vehicles"]? boolean
+            ---@field ["Aircraft Carriers"]? boolean
+            ---@field ["Airfields"]? boolean
+            ---@field ["All"]? boolean
+            ---@field ["AntiAir Armed Vehicles"]? boolean
+            ---@field ["Anti-Ship missiles"]? boolean
+            ---@field ["APC"]? boolean
+            ---@field ["Armed Air Defence"]? boolean
+            ---@field ["Armed ground units"]? boolean
+            ---@field ["Armed ships"]? boolean
+            ---@field ["Armed vehicles"]? boolean
+            ---@field ["Armored vehicles"]? boolean
+            ---@field ["Artillery"]? boolean
+            ---@field ["Attack helicopters"]? boolean
+            ---@field ["Aux"]? boolean
+            ---@field ["Battle airplanes"]? boolean
+            ---@field ["Battleplanes"]? boolean
+            ---@field ["Bomb"]? boolean
+            ---@field ["Bombers"]? boolean
+            ---@field ["Buildings"]? boolean
+            ---@field ["Cars"]? boolean
+            ---@field ["catapult"]? boolean
+            ---@field ["cord"]? boolean
+            ---@field ["Corvettes"]? boolean
+            ---@field ["Cruise missiles"]? boolean
+            ---@field ["Cruisers"]? boolean
+            ---@field ["CustomAimPoint"]? boolean
+            ---@field ["Datalink"]? boolean
+            ---@field ["DetectionByAWACS"]? boolean
+            ---@field ["Destroyers"]? boolean
+            ---@field ["EWR"]? boolean
+            ---@field ["Fighters"]? boolean
+            ---@field ["Fortifications"]? boolean
+            ---@field ["Frigates"]? boolean
+            ---@field ["Grass Airfields"]? boolean
+            ---@field ["Ground Units"]? boolean
+            ---@field ["Ground Units Non Airdefence"]? boolean
+            ---@field ["Ground vehicles"]? boolean
+            ---@field ["Heavy armed ships"]? boolean
+            ---@field ["HeavyArmoredUnits"]? boolean
+            ---@field ["Helicopters"]? boolean
+            ---@field ["Heliports"]? boolean
+            ---@field ["human_vehicle"]? boolean
+            ---@field ["IFV"]? boolean
+            ---@field ["IR Guided SAM"]? boolean
+            ---@field ["Indirect fire"]? boolean
+            ---@field ["Infantry"]? boolean
+            ---@field ["Infantry carriers"]? boolean
+            ---@field ["Interceptors"]? boolean
+            ---@field ["Light armed ships"]? boolean
+            ---@field ["LightArmoredUnits"]? boolean
+            ---@field ["LR SAM"]? boolean
+            ---@field ["MANPADS"]? boolean
+            ---@field ["MANPADS AUX"]? boolean
+            ---@field ["MLRS"]? boolean
+            ---@field ["MR SAM"]? boolean
+            ---@field ["Missile"]? boolean
+            ---@field ["Missiles"]? boolean
+            ---@field ["Mobile AAA"]? boolean
+            ---@field ["Modern Tanks"]? boolean
+            ---@field ["Multirole fighters"]? boolean
+            ---@field ["NonAndLightArmoredUnits"]? boolean
+            ---@field ["NonArmoredUnits"]? boolean
+            ---@field ["Old Tanks"]? boolean
+            ---@field ["Planes"]? boolean
+            ---@field ["Point"]? boolean
+            ---@field ["Prone"]? boolean
+            ---@field ["RADAR_BAND1_FOR_ARM"]? boolean
+            ---@field ["RADAR_BAND2_FOR_ARM"]? boolean
+            ---@field ["Refuelable"]? boolean
+            ---@field ["Rocket"]? boolean
+            ---@field ["Rocket Attack Valid AirDefence"]? boolean
+            ---@field ["SAM"]? boolean
+            ---@field ["SAM AUX"]? boolean
+            ---@field ["SAM CC"]? boolean
+            ---@field ["SAM LL"]? boolean
+            ---@field ["SAM SR"]? boolean
+            ---@field ["SAM TR"]? boolean
+            ---@field ["SAM elements"]? boolean
+            ---@field ["SAM related"]? boolean
+            ---@field ["SR SAM"]? boolean
+            ---@field ["Shell"]? boolean
+            ---@field ["Ships"]? boolean
+            ---@field ["Static AAA"]? boolean
+            ---@field ["Strategic bombers"]? boolean
+            ---@field ["Tankers"]? boolean
+            ---@field ["Tanks"]? boolean
+            ---@field ["Transport helicopters"]? boolean
+            ---@field ["Transports"]? boolean
+            ---@field ["Trucks"]? boolean
+            ---@field ["UAVs"]? boolean
+            ---@field ["Unarmed ships"]? boolean
+            ---@field ["Unarmed vehicles"]? boolean
+            ---@field ["Vehicles"]? boolean
+            ---@field ["Weapon"]? boolean
+            ---@field ["low_reflection_vessel"]? boolean
+            ---@field ["no_tail_trail"]? boolean
+            ---@field ["plane_carrier"]? boolean
+            ---@field ["ski_jump"]? boolean
 
             ---Represents the detailed information of an aircraft.
             ---@class decs_Unit
@@ -53,7 +151,7 @@ do
             ---@field displayName string Display name of the aircraft
             ---@field life number Structural life in years
             ---@field VyMax number Maximum climb rate in m/s
-            ---@field attributes Unit_Attributes The attributes of the aircraft
+            ---@field attributes table<Attributes, boolean> The attributes of the aircraft
             ---@field typeName string Type name of the aircraft
             ---@field Kab number Kab rating
         end
@@ -408,4 +506,3 @@ do
         end
     end
 end
-
