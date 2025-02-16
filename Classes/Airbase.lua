@@ -195,10 +195,8 @@ do
         ---@return string
         function Airbase.getTypeName(self) end
 
-        ---Returns the unit object of the specified unitIndex within the group. If the index is not valid, this function will return nil.
+        ---returns Unit that is corresponded to the airbase. Works only for ships.
         ---https://wiki.hoggitworld.com/view/DCS_func_getUnit
-        ---@ExampleDesc Returns the first unit in a group
-        ---@Example local unit1 = Group.getByName('tanks'):getUnit(1)
         ---@return Unit
         function Airbase.getUnit(self) end
 
