@@ -189,6 +189,7 @@ do
             ---@field isEjected boolean
             ---@field isPlayer boolean
             ---@field isPresent boolean
+            ---@field playerName string
             ---@field role_display_name string
             ---@field role_id string
         end

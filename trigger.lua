@@ -492,7 +492,7 @@ do
 
             ---Sets a user flag to the specified value.
             ---https://wiki.hoggitworld.com/view/DCS_func_setUserFlag
-            ---@param flagNumFlagName string
+            ---@param flagNumFlagName string|number
             ---@param userFlagValue boolean|number
             function trigger.action.setUserFlag(flagNumFlagName, userFlagValue) end
 
@@ -543,8 +543,8 @@ do
 
             ---Returns the value of a user flag.
             ---https://wiki.hoggitworld.com/view/DCS_func_getUserFlag
-            ---@return number
-            ---@param flagNumFlagName string
+            ---@return number|boolean
+            ---@param flagNumFlagName string|number
             function trigger.misc.getUserFlag(flagNumFlagName) end
 
             ---Returns a trigger zone table of a given name

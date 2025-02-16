@@ -192,7 +192,7 @@ do
 
 
                 ---@class Aircraft.Payload
-                ---@field pylons table<number, Aircraft.Payload.Pylon> List of pylons
+                ---@field pylons table<number, Aircraft.Payload.Pylon>|table List of pylons
                 ---@field fuel number Amount of fuel
                 ---@field flare? number Number of flares
                 ---@field ammo_type? number Ammo type
