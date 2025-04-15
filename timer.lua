@@ -63,7 +63,7 @@ do
         ---https://wiki.hoggitworld.com/view/DCS_func_setFunctionTime
         ---@return function
         ---@param functionId number
-        ---@param modelTime any time
+        ---@param modelTime number|any time
         function timer.setFunctionTime(functionId, modelTime) end
     end
 end

@@ -57,6 +57,7 @@ do
 
         ---Creates a submenu of a specified name for all players. Can be used to create nested sub menues. If the path is not specified, submenu is added to the root menu.
         ---https://wiki.hoggitworld.com/view/DCS_func_addSubMenu
+        ---@nodiscard
         ---@return table
         ---@param name string
         ---@param path? table|nil
@@ -64,6 +65,7 @@ do
 
         ---Creates a submenu of a specified name for the specified coalition. Can be used to create nested sub menues. If the path is not specified, submenu is added to the root menu.
         ---https://wiki.hoggitworld.com/view/DCS_func_addSubMenuForCoalition
+        ---@nodiscard
         ---@return table
         ---@param coalitionSide coalition.side
         ---@param name string
@@ -72,6 +74,7 @@ do
 
         ---Creates a submenu of a specified name for the specified group. Can be used to create nested sub menues. If the path is not specified, submenu is added to the root menu.
         ---https://wiki.hoggitworld.com/view/DCS_func_addSubMenuForGroup
+        ---@nodiscard
         ---@return table
         ---@param groupId number
         ---@param name string

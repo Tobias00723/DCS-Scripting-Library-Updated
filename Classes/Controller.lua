@@ -53,9 +53,8 @@ do
         ---https://wiki.hoggitworld.com/view/DCS_func_getDetectedTargets
         ---@return table<number, Controller.getDetectedTargets>
         ---@param detectionType1? Conroller.Detection
-        ---@param detectionType2? Conroller.Detection
-        ---@param ... Conroller.Detection
-        function Controller.getDetectedTargets(self, detectionType1, detectionType2, ...) end
+        ---@param ...? Conroller.Detection
+        function Controller.getDetectedTargets(self, detectionType1, ...) end
         
 
         ---Returns true if the controller currently has a task.

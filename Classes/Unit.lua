@@ -323,9 +323,10 @@ do
         function Unit.getCoalition(self) end
 
         --No Docu
+        --The Communicator object is used to make that object send radio messages.  Radio messages tend to be limited to pre-defined lines, but a way to send a custom one may be possible.  Any generated radio message is only likely to be only heard by the single player/host, but I have not done the experiment to test this.
         ---@param self Unit
         ---@param ... unknown
-        ---@return unknown class empty meta table
+        ---@return Unit 
         function Unit.getCommunicator(self, ...) end
 
         ---Returns the controller of the specified Unit. Ships and ground units can only be controlled at a group level. Airplanes and helicopters can be controlled at both a group and unit level.

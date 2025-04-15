@@ -110,7 +110,7 @@ do
         ---Executes a lua string in a given lua environment in the game.
         ---https://wiki.hoggitworld.com/view/DCS_func_dostring_in
         ---@return string
-        ---@param state 'config'|'mission'|'export'
+        ---@param state 'config'|'mission'|'export'|'gui'|'server'
         ---@param dostring string
         function net.dostring_in(state, dostring) end
 
@@ -136,7 +136,7 @@ do
         ---Returns a table of attributes for a given playerId. If optional attribute present only that value is returned Attributes:
         ---https://wiki.hoggitworld.com/view/DCS_func_get_player_info
         ---@return Net_player_info --only full table if attribute is nil
-        ---@param playerID Player_id
+        ---@param playerID Player_id|number
         ---@param attribute? 'id'|'name'|'side'|'slot'|'ping'|'ipaddr'|'ucid'
         function net.get_player_info(playerID, attribute) end
 
