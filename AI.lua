@@ -79,6 +79,7 @@ do
         JETT_TANKS_IF_EMPTY = 25,
         FORCED_ATTACK = 26,
         PREFER_VERTICAL = 32,
+        ALLOW_FORMATION_SIDE_SWAP = 35,
     }
 
     ---@enum AI.Option.Ground.id

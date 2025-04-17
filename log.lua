@@ -36,10 +36,15 @@ do
         DEBUG = 128,
         TIME_RELATIVE = 128,
         TIME_LOCAL = 129,
+        EXTRA_INFO = 512,
+        MODELTIME = 512,
         ALL = 255,
+        ALL_LEVELS = 255,
         TRACE = 256,
         FULL = 271,
+        NO_HEADER_FOOTER = 16384,
         RELIABLE = 32768,
+        BACKUP = 32768,
     }
 
     --Functions
@@ -67,5 +72,8 @@ do
 
         --no Docu
         function log.write() end
+
+        --no Docu
+        function log.backup() end
     end
 end

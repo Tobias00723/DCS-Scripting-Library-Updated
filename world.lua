@@ -426,7 +426,13 @@ do
             BOX = 1,
             SPHERE = 2,
             PYRAMID = 3
-        }
+        },
+
+        ---@type table<number, function>
+        eventHandlers = {},
+
+        ---@type table<number, function>
+        persistenceHandlers = {}
     }
 
     ---List of all current event handelars
@@ -485,5 +491,21 @@ do
         ---@param Handler function ObjectSeatchHandler
         ---@param data? any
         function world.searchObjects(ObjectCategory, searchVolume, Handler, data) end
+
+        ---Read persistence data identified by name. Returns Lua-value stored in this miz/sav by a given name or nil if no value found.
+        ---TBA
+        ---@return any
+        ---@param name string
+        function world.getPersistenceData(name) end
+
+        ---Registers a handler for generating persistent data when saving simulation state. Name MUST conform to the same restriction described above. Handler MUST be a Lua-function which takes no arguments and returns persistent data as a Lua-value (boolean, number, string, table). The returned value must be JSON-serializable.
+        ---TBA
+        ---@param name string
+        ---@param handler function
+        function world.setPersistenceHandler(name, handler) end
+
+        ---No Docu
+        ---@param ... any unkown
+        function world.runPersistenceHandlers(...) end
     end
 end
