@@ -335,6 +335,17 @@ do
             --- @field pos vec3 The position of the mark in 3D space.
         end
 
+        --VolumeType
+        do
+            --- @class world.searchObjects.search_volume.params
+            --- @field point vec3
+            --- @field radius number
+
+            --- @class world.searchObjects.search_volume
+            --- @field id world.VolumeType
+            --- @field params world.searchObjects.search_volume.params
+        end
+
         ---@class Event_info
         ---@field id number Number that represents the event see [world.event]
     end
@@ -485,9 +496,9 @@ do
 
         ---Searches a defined volume of 3d space for the specified objects within it and then can run function on each returned object. Object category is either a single enum or a table of enums that defines the types of objects that will be searched for Search volume is the defined 3d space that will be searched. Handler is the function that will be run on each object that is found. Any data is a variable that is passed to the handler function, it can be anything.
         ---https://wiki.hoggitworld.com/view/DCS_func_searchObjects
-        ---@return table
+        ---@return number
         ---@param ObjectCategory Object.Category|table<number, Object.Category>
-        ---@param searchVolume table
+        ---@param searchVolume world.searchObjects.search_volume
         ---@param Handler function ObjectSeatchHandler
         ---@param data? any
         function world.searchObjects(ObjectCategory, searchVolume, Handler, data) end
