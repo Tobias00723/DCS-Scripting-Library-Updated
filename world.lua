@@ -498,7 +498,7 @@ do
         ---https://wiki.hoggitworld.com/view/DCS_func_searchObjects
         ---@return number
         ---@param ObjectCategory Object.Category|table<number, Object.Category>
-        ---@param searchVolume world.searchObjects.search_volume
+        ---@param searchVolume world.searchObjects.search_volume|table
         ---@param Handler function ObjectSeatchHandler
         ---@param data? any
         function world.searchObjects(ObjectCategory, searchVolume, Handler, data) end
