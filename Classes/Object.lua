@@ -90,7 +90,7 @@ do
 
         ---Return a string of the objects type name. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase
         ---https://wiki.hoggitworld.com/view/DCS_func_getTypeName
-        ---@return TypeNames
+        ---@return wsType
         function Object.getTypeName(self) end
 
         ---Returns a vec3 table of the objects velocity vectors. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase

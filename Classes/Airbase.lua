@@ -176,7 +176,7 @@ do
         ---Returns a table of parking data for a given airbase. If the optional value is passed only available parking will be returned, otherwise all parking at the base is returned. Term types have the following enumerated values: TODO:
         ---https://wiki.hoggitworld.com/view/DCS_func_getParking
         ---@return table<number, Parking_airfield>
-        ---@param available boolean
+        ---@param available? boolean
         function Airbase.getParking(self, available) end
 
         ---Returns a boolean value for whether or not the ATC for the passed airbase object has been silenced.
