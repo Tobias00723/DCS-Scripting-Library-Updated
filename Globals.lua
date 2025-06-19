@@ -15,7 +15,6 @@ do
 
     --classes
     do
-
         --vec 2
         do
             ---@class vec2
@@ -610,7 +609,7 @@ do
 
     ED_FINAL_VERSION = true ---@type boolean
     ED_PUBLIC_AVAILABLE = true ---@type boolean
-    _APP_VERSION = "2.9.15.9408" ---@type string
+    _APP_VERSION = "2.9.17.11733" ---@type string
     db_path = "./Scripts/Database/" ---@type string
     troopsPath = "./Scripts/Database/troops/" ---@type string
 
@@ -633,6 +632,7 @@ do
         function forceAttackGroup() end
 
         --No Docu
+        -- garbage collecting info
         function gcinfo() end
 
         --No Docu
