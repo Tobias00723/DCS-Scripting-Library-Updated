@@ -181,7 +181,7 @@ do
 
         ---Converts a lua value to a JSON string.
         ---https://wiki.hoggitworld.com/view/DCS_func_lua2json
-        ---@return table
+        ---@return string
         ---@param lua any
         function net.lua2json(lua) end
 

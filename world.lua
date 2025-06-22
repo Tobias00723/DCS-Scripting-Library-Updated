@@ -347,7 +347,7 @@ do
         end
 
         ---@class Event_info
-        ---@field id number Number that represents the event see [world.event]
+        ---@field id world.event Number that represents the event see [world.event]
     end
 
 
