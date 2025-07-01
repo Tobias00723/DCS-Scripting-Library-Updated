@@ -80,6 +80,7 @@ do
         FORCED_ATTACK = 26,
         PREFER_VERTICAL = 32,
         ALLOW_FORMATION_SIDE_SWAP = 35,
+        LANDING_OPTIONS = 36,
     }
 
     ---@enum AI.Option.Ground.id

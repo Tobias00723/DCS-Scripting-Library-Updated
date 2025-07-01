@@ -144,7 +144,7 @@ do
 
         --No Docu
         ---Returns a string that represents the units 'force' ex : The Army, Marine Corps, Navy, Air Force, Space Force and Coast Guard
-        ---@param self Unit
+        ---@param self Airbase
         ---@param ... unknown
         ---@return Force_name
         function Airbase.getForcesName(self, ...) end
