@@ -47,7 +47,7 @@ do
         ---Returns a coordinate of the nearest road from the passed point. NOTE that this function does not use vec2 or vec3. It uses individual values representing a vec2 for x and y. Valid road type values: 'roads' and 'railroads'
         ---https://wiki.hoggitworld.com/view/DCS_func_getClosestPointOnRoads
         ---@return number, number
-        ---@param roadType string
+        ---@param roadType 'roads'|'railroads'|string
         ---@param xCoord number
         ---@param yCoord number
         function land.getClosestPointOnRoads(roadType, xCoord, yCoord) end

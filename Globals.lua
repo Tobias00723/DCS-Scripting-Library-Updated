@@ -617,19 +617,10 @@ do
     --Functions
     do
         --No Docu
-        function addPackage() end
-
-        --No Docu
-        function checkCAPSync() end
-
-        --No Docu
         function class() end
 
         --No Docu
         function doZipFile() end
-
-        --No Docu
-        function forceAttackGroup() end
 
         --No Docu
         -- garbage collecting info
@@ -641,7 +632,6 @@ do
         --No Docu
         function safe_require() end
 
-        --No Docu
-        function setFlightCurrentWP() end
+
     end
 end
