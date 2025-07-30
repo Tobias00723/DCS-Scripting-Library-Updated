@@ -236,7 +236,7 @@ do
                 ---@field y number
                 ---@field x number
                 ---@field ETA_locked boolean
-                ---@field speed boolean
+                ---@field speed number
                 ---@field action AI.Task.VehicleFormation
                 ---@field task Task
                 ---@field speed_locked boolean
@@ -245,7 +245,7 @@ do
                 ---@field skill AI.Skill
                 ---@field coldAtStart boolean
                 ---@field type TypeNames_Ground
-                ---@field unitId number
+                ---@field unitId? number
                 ---@field x number
                 ---@field y number
                 ---@field name string
