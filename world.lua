@@ -148,15 +148,17 @@ do
 
             ---@class Event_MARK_ADDED
             ---@field id 25            -- The event ID (always 25 for this event)
+            ---@field idx number
             ---@field time number     -- The time at which the event occurred
             ---@field initiator Unit  -- The unit that added the mark
-            ---@field coalition number -- The coalition ID associated with the mark
+            ---@field coalition coalition.side -- The coalition ID associated with the mark
             ---@field groupID number  -- The group ID associated with the mark
             ---@field text string     -- The text of the mark
             ---@field pos vec3        -- The position of the mark
 
             ---@class Event_MARK_CHANGE
             ---@field id 26            -- The event ID (always 26 for this event)
+            ---@field idx number
             ---@field time number     -- The time at which the event occurred
             ---@field initiator Unit  -- The unit that changed the mark
             ---@field coalition number -- The coalition ID associated with the mark
@@ -166,6 +168,7 @@ do
 
             ---@class Event_MARK_REMOVE
             ---@field id 27            -- The event ID (always 27 for this event)
+            ---@field idx number
             ---@field time number     -- The time at which the event occurred
             ---@field initiator Unit  -- The unit that removed the mark
             ---@field coalition number -- The coalition ID associated with the mark
@@ -354,93 +357,97 @@ do
     ---The world singleton contains functions centered around two different but extremely useful functions. 1. Events and event handlers are all governed within world.2. A number of functions to get information about the game world.
     ---https://wiki.hoggitworld.com/view/DCS_singleton_world
     ---@class world
-    world = {
+    world               =
+    {
         ---@enum world.event
-        event = {
-            S_EVENT_INVALID = 0,
-            S_EVENT_SHOT = 1,
-            S_EVENT_HIT = 2,
-            S_EVENT_TAKEOFF = 3,
-            S_EVENT_LAND = 4,
-            S_EVENT_CRASH = 5,
-            S_EVENT_EJECTION = 6,
-            S_EVENT_REFUELING = 7,
-            S_EVENT_DEAD = 8,
-            S_EVENT_PILOT_DEAD = 9,
-            S_EVENT_BASE_CAPTURED = 10,
-            S_EVENT_MISSION_START = 11,
-            S_EVENT_MISSION_END = 12,
-            S_EVENT_TOOK_CONTROL = 13,
-            S_EVENT_REFUELING_STOP = 14,
-            S_EVENT_BIRTH = 15,
-            S_EVENT_HUMAN_FAILURE = 16,
-            S_EVENT_DETAILED_FAILURE = 17,
-            S_EVENT_ENGINE_STARTUP = 18,
-            S_EVENT_ENGINE_SHUTDOWN = 19,
-            S_EVENT_PLAYER_ENTER_UNIT = 20,
-            S_EVENT_PLAYER_LEAVE_UNIT = 21,
-            S_EVENT_PLAYER_COMMENT = 22,
-            S_EVENT_SHOOTING_START = 23,
-            S_EVENT_SHOOTING_END = 24,
-            S_EVENT_MARK_ADDED = 25,
-            S_EVENT_MARK_CHANGE = 26,
-            S_EVENT_MARK_REMOVED = 27,
-            S_EVENT_KILL = 28,
-            S_EVENT_SCORE = 29,
-            S_EVENT_UNIT_LOST = 30,
-            S_EVENT_LANDING_AFTER_EJECTION = 31,
-            S_EVENT_PARATROOPER_LENDING = 32,
+        event               =
+        {
+            S_EVENT_INVALID                      = 0,
+            S_EVENT_SHOT                         = 1,
+            S_EVENT_HIT                          = 2,
+            S_EVENT_TAKEOFF                      = 3,
+            S_EVENT_LAND                         = 4,
+            S_EVENT_CRASH                        = 5,
+            S_EVENT_EJECTION                     = 6,
+            S_EVENT_REFUELING                    = 7,
+            S_EVENT_DEAD                         = 8,
+            S_EVENT_PILOT_DEAD                   = 9,
+            S_EVENT_BASE_CAPTURED                = 10,
+            S_EVENT_MISSION_START                = 11,
+            S_EVENT_MISSION_END                  = 12,
+            S_EVENT_TOOK_CONTROL                 = 13,
+            S_EVENT_REFUELING_STOP               = 14,
+            S_EVENT_BIRTH                        = 15,
+            S_EVENT_HUMAN_FAILURE                = 16,
+            S_EVENT_DETAILED_FAILURE             = 17,
+            S_EVENT_ENGINE_STARTUP               = 18,
+            S_EVENT_ENGINE_SHUTDOWN              = 19,
+            S_EVENT_PLAYER_ENTER_UNIT            = 20,
+            S_EVENT_PLAYER_LEAVE_UNIT            = 21,
+            S_EVENT_PLAYER_COMMENT               = 22,
+            S_EVENT_SHOOTING_START               = 23,
+            S_EVENT_SHOOTING_END                 = 24,
+            S_EVENT_MARK_ADDED                   = 25,
+            S_EVENT_MARK_CHANGE                  = 26,
+            S_EVENT_MARK_REMOVED                 = 27,
+            S_EVENT_KILL                         = 28,
+            S_EVENT_SCORE                        = 29,
+            S_EVENT_UNIT_LOST                    = 30,
+            S_EVENT_LANDING_AFTER_EJECTION       = 31,
+            S_EVENT_PARATROOPER_LENDING          = 32,
             S_EVENT_DISCARD_CHAIR_AFTER_EJECTION = 33,
-            S_EVENT_WEAPON_ADD = 34,
-            S_EVENT_TRIGGER_ZONE = 35,
-            S_EVENT_LANDING_QUALITY_MARK = 36,
-            S_EVENT_BDA = 37,
-            S_EVENT_AI_ABORT_MISSION = 38,
-            S_EVENT_DAYNIGHT = 39,
-            S_EVENT_FLIGHT_TIME = 40,
-            S_EVENT_PLAYER_SELF_KILL_PILOT = 41,
-            S_EVENT_PLAYER_CAPTURE_AIRFIELD = 42,
-            S_EVENT_EMERGENCY_LANDING = 43,
-            S_EVENT_UNIT_CREATE_TASK = 44,
-            S_EVENT_UNIT_DELETE_TASK = 45,
-            S_EVENT_SIMULATION_START = 46,
-            S_EVENT_WEAPON_REARM = 47,
-            S_EVENT_WEAPON_DROP = 48,
-            S_EVENT_UNIT_TASK_COMPLETE = 49,
-            S_EVENT_UNIT_TASK_STAGE = 50,
-            S_EVENT_MAC_EXTRA_SCORE = 51,
-            S_EVENT_MISSION_RESTART = 52,
-            S_EVENT_MISSION_WINNER = 53,
-            S_EVENT_RUNWAY_TAKEOFF = 54,
-            S_EVENT_RUNWAY_TOUCH = 55,
-            S_EVENT_MAC_LMS_RESTART = 56,
-            S_EVENT_SIMULATION_FREEZE = 57,
-            S_EVENT_SIMULATION_UNFREEZE = 58,
-            S_EVENT_HUMAN_AIRCRAFT_REPAIR_START = 59,
+            S_EVENT_WEAPON_ADD                   = 34,
+            S_EVENT_TRIGGER_ZONE                 = 35,
+            S_EVENT_LANDING_QUALITY_MARK         = 36,
+            S_EVENT_BDA                          = 37,
+            S_EVENT_AI_ABORT_MISSION             = 38,
+            S_EVENT_DAYNIGHT                     = 39,
+            S_EVENT_FLIGHT_TIME                  = 40,
+            S_EVENT_PLAYER_SELF_KILL_PILOT       = 41,
+            S_EVENT_PLAYER_CAPTURE_AIRFIELD      = 42,
+            S_EVENT_EMERGENCY_LANDING            = 43,
+            S_EVENT_UNIT_CREATE_TASK             = 44,
+            S_EVENT_UNIT_DELETE_TASK             = 45,
+            S_EVENT_SIMULATION_START             = 46,
+            S_EVENT_WEAPON_REARM                 = 47,
+            S_EVENT_WEAPON_DROP                  = 48,
+            S_EVENT_UNIT_TASK_COMPLETE           = 49,
+            S_EVENT_UNIT_TASK_STAGE              = 50,
+            S_EVENT_MAC_EXTRA_SCORE              = 51,
+            S_EVENT_MISSION_RESTART              = 52,
+            S_EVENT_MISSION_WINNER               = 53,
+            S_EVENT_RUNWAY_TAKEOFF               = 54,
+            S_EVENT_RUNWAY_TOUCH                 = 55,
+            S_EVENT_MAC_LMS_RESTART              = 56,
+            S_EVENT_SIMULATION_FREEZE            = 57,
+            S_EVENT_SIMULATION_UNFREEZE          = 58,
+            S_EVENT_HUMAN_AIRCRAFT_REPAIR_START  = 59,
             S_EVENT_HUMAN_AIRCRAFT_REPAIR_FINISH = 60,
-            S_EVENT_MAX = 61,
+            S_EVENT_MAX                          = 61,
         },
         ---@enum world.BirthPlace
-        BirthPlace = {
-            wsBirthPlace_Air = 1,
-            wsBirthPlace_Ship = 3,
-            wsBirthPlace_RunWay = 4,
-            wsBirthPlace_Park = 5,
-            wsBirthPlace_Heliport_Hot = 9,
+        BirthPlace          =
+        {
+            wsBirthPlace_Air           = 1,
+            wsBirthPlace_Ship          = 3,
+            wsBirthPlace_RunWay        = 4,
+            wsBirthPlace_Park          = 5,
+            wsBirthPlace_Heliport_Hot  = 9,
             wsBirthPlace_Heliport_Cold = 10,
-            wsBirthPlace_Ship_Cold = 11,
-            wsBirthPlace_Ship_Hot = 12
+            wsBirthPlace_Ship_Cold     = 11,
+            wsBirthPlace_Ship_Hot      = 12
         },
         ---@enum world.VolumeType
-        VolumeType = {
+        VolumeType          =
+        {
             SEGMENT = 0,
-            BOX = 1,
-            SPHERE = 2,
+            BOX     = 1,
+            SPHERE  = 2,
             PYRAMID = 3
         },
 
         ---@type table<number, function>
-        eventHandlers = {},
+        eventHandlers       = {},
 
         ---@type table<number, function>
         persistenceHandlers = {}
@@ -458,13 +465,13 @@ do
         ---https://wiki.hoggitworld.com/view/DCS_func_addEventHandler
         ---@return function
         ---@param handler table EventHandler
-        function world.addEventHandler(handler) end
+        function world.addEventHandler( handler ) end
 
         ---Returns a table of airbase objects belonging to the specified coalition. Objects can be ships, static objects(FARP), or airbases on the map. When the function is run as world.getAirbases() no input values required, and the function returns all airbases, ships, and farps on the map.
         ---https://wiki.hoggitworld.com/view/DCS_func_getAirbases
         ---@return table<number, Airbase>
         ---@param coalitionid? coalition.side
-        function world.getAirbases(coalitionid) end
+        function world.getAirbases( coalitionid ) end
 
         ---Returns a table of mark panels and drawn shapes indexed numerically that are present within the mission. Panel is designed with the mark points in mind, but still returns data for shapes created via markups.
         ---https://wiki.hoggitworld.com/view/DCS_func_getMarkPanels
@@ -480,19 +487,19 @@ do
         ---[Event info](https://wiki.hoggitworld.com/view/Category:Events)
         ---@param self table
         ---@param event_info Event_info EventHandler
-        function world.onEvent(self, event_info) end
+        function world.onEvent( self, event_info ) end
 
         ---Removes the specified event handler from handling events. Use this when an event handler has outlived its usefulness.
         ---https://wiki.hoggitworld.com/view/DCS_func_removeEventHandler
         ---@return function
         ---@param handler any EventHandler
-        function world.removeEventHandler(handler) end
+        function world.removeEventHandler( handler ) end
 
         ---Searches the defined area passed to the function to remove craters, object wreckage, and any other debris within the search volume. Will not remove wreckage of scenery objects. See pages for the correct format of each volume type:
         ---https://wiki.hoggitworld.com/view/DCS_func_removeJunk
         ---@return number
         ---@param searchVolume table
-        function world.removeJunk(searchVolume) end
+        function world.removeJunk( searchVolume ) end
 
         ---Searches a defined volume of 3d space for the specified objects within it and then can run function on each returned object. Object category is either a single enum or a table of enums that defines the types of objects that will be searched for Search volume is the defined 3d space that will be searched. Handler is the function that will be run on each object that is found. Any data is a variable that is passed to the handler function, it can be anything.
         ---https://wiki.hoggitworld.com/view/DCS_func_searchObjects
@@ -501,22 +508,22 @@ do
         ---@param searchVolume world.searchObjects.search_volume|table
         ---@param Handler function ObjectSeatchHandler
         ---@param data? any
-        function world.searchObjects(ObjectCategory, searchVolume, Handler, data) end
+        function world.searchObjects( ObjectCategory, searchVolume, Handler, data ) end
 
         ---Read persistence data identified by name. Returns Lua-value stored in this miz/sav by a given name or nil if no value found.
         ---TBA
         ---@return any
         ---@param name string
-        function world.getPersistenceData(name) end
+        function world.getPersistenceData( name ) end
 
         ---Registers a handler for generating persistent data when saving simulation state. Name MUST conform to the same restriction described above. Handler MUST be a Lua-function which takes no arguments and returns persistent data as a Lua-value (boolean, number, string, table). The returned value must be JSON-serializable.
         ---TBA
         ---@param name string
         ---@param handler function
-        function world.setPersistenceHandler(name, handler) end
+        function world.setPersistenceHandler( name, handler ) end
 
         ---No Docu
         ---@param ... any unkown
-        function world.runPersistenceHandlers(...) end
+        function world.runPersistenceHandlers( ... ) end
     end
 end

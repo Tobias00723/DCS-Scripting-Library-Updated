@@ -930,9 +930,11 @@ do
                         ---@field params Task_Params_FireAtPoint Configuration parameters for the FireAtPoint task.
 
                         ---@class Task_Params_FireAtPoint
-                        ---@field point vec2 The vec2 coordinate or x and y values defining where the AI will aim (required).
-                        ---@field radius? number Optional radius in meters defining the area AI will attempt to hit.
-                        ---@field expendQty? AI.Task.WeaponExpend Specifies the number of shots to be fired (optional).
+                        ---@field x number The vec2 coordinate or x and y values defining where the AI will aim (required).
+                        ---@field y number The vec2 coordinate or x and y values defining where the AI will aim (required).
+                        ---@field templateId string unkown
+                        ---@field zoneRadius? number Optional radius in meters defining the area AI will attempt to hit.
+                        ---@field expendQty? number Specifies the number of shots to be fired (optional).
                         ---@field expendQtyEnabled? boolean If true, the `expendQty` value will be used (optional).
                         ---@field weaponType? Weapon.flag Specifies the weapon type to be used for the task (optional).
                         ---@field altitude? number Specifies the altitude at which the AI will aim (optional).
