@@ -1,19 +1,26 @@
 --[[
-
-    Script by Tobias00723
-    from the TGFB server
-    Discord : https://discord.gg/hEHd4A3czx
-    any questions?                   ^^
-    find me on my discord server ^^
-
-    These scripts are opensource and free to use for everybody.
-    But i would appreaciate some credit if you "borrow" some code ;p
-
+    Script by Tobias00723                          ████████
+    from the TGFB server                      ████████  ████████
+    Discord : https://discord.gg/hEHd4A3czx ██████          ██████
+    any questions?                   ^^   ████     ▒      ▒     █████
+    find me on my discord server     ^^ ████      ▒▒      ▒▒▒      ███
+    _________________________________ ████       ▒▒▒      ▒▒▒       ███
+                                      ███       ▒▒▒▒      ▒▒▒▒       ███
+                                     ██       ▒▒▒▒        ▒▒▒▒▒      ███
+                                    ███      ▒▒▒▒▒▒        ▒▒▒▒▒▒      ███
+        Script as is.               ███     ▓▒▒▒▒▒▒        ▒▒▒▒▒▒▒     ███
+                                    ███    ▒▒▒▒▒▒▒▒        ▓▒▒▒▒▒▒▓    ███
+        Enjoy The open sauce!       ███   ▓▒▒▓▒▒▓▒▓         ▒▒▓▒▒▒▒▒   ███
+                                    ███  ▓▒▓▓▒▓▓▒▓          ▓▓▒▓▓▓▓▓▓  ███
+   If used credit, is appreaciated.  █  ▓▓▓▒▓ ▓▓▓▒          ▓▓▓▓ ▒▓▒▓▓  █
+        Happy "borrowing" :)           ▓▓▓▓    ▓▓▓   ████    ▓▓▓   ▓▓▓▓
+    _________________________________ ▓▓▓      ▓▓    ▓▓▓▓    ▓▓      ▓▓▓
+                                     ▓▓        ▓▓    ▓▓▓▓    ▓▓        ▓▓
+                                    ▓▓          ▓    ▓▓▓▓     ▓         ▓▓
+    Copyright (c) 2025 TGFB                          ▓▓▓▓
+    All rights reserved.                             ▓▓▓▓
 ]]
 
---[[
-
-]]
 
 do
     ---@meta
