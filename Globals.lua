@@ -209,6 +209,7 @@ do
             ---| TypeNames_Heli
             ---| TypeNames_Ground
             ---| TypeNames_ship
+            ---| TypeNames_Structures
 
             --AC
             do
@@ -714,6 +715,12 @@ do
                 ---|  "USS_Arleigh_Burke_IIa"
                 ---|  "VINSON"
                 ---|  "ZWEZDNY"
+            end
+
+            --Structures
+            do
+                ---@alias TypeNames_Structures
+                ---| string
             end
         end
     end
