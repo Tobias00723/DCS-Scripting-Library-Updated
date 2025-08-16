@@ -650,7 +650,7 @@ do
         ---Aircraft and weapons are indexed by strings.
         ---https://wiki.hoggitworld.com/view/DCS_func_getInventory
         ---@return table
-        ---@param itemName string|table string or table
+        ---@param itemName? string|table string or table
         function Warehouse.getInventory( self, itemName ) end
 
         ---Returns the number of the passed type of item currently in a warehouse object.
