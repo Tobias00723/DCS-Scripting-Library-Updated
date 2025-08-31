@@ -111,7 +111,7 @@ do
         ---Executes a lua string in a given lua environment in the game.
         ---https://wiki.hoggitworld.com/view/DCS_func_dostring_in
         ---@return string
-        ---@param state 'config'|'mission'|'export'|'gui'|'server'
+        ---@param state 'config'|'mission'|'export'|'gui'|'server'|'scripting'
         ---@param dostring string
         function net.dostring_in(state, dostring) end
 
