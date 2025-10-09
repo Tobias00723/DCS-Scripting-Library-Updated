@@ -193,7 +193,7 @@ do
             ---@field time number     -- The time at which the event occurred
             ---@field initiator Unit  -- The unit that killed the target
             ---@field weapon Weapon   -- The weapon used in the kill
-            ---@field target Unit    -- The unit that was killed
+            ---@field target Objects    -- The unit that was killed
             ---@field weapon_name string -- The name of the weapon used
 
             ---@class Event_SCORE

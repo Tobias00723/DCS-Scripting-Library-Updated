@@ -61,21 +61,22 @@ do
         ---https://wiki.hoggitworld.com/view/DCS_func_removeFunction
         ---@return function
         ---@param functionId number
-        function timer.removeFunction(functionId) end
+        function timer.removeFunction( functionId ) end
 
         ---Schedules a function to run at a time in the future. This is a very powerful function. The function that is called is expected to return nil or a number which will indicate the next time the function will be rescheduled. Use the second argument in that function to retrieve the current time and add the desired amount of delay (expressed in seconds).
         ---https://wiki.hoggitworld.com/view/DCS_func_scheduleFunction
+        ---@generic ARG
         ---@return any functionId
-        ---@param functionToCall function
-        ---@param anyFunctionArguement any functionArgs
+        ---@param anyFunctionArguement ARG functionArgs
+        ---@param functionToCall fun(ARG?:ARG, time?:number):number?
         ---@param modelTime number time
-        function timer.scheduleFunction(functionToCall, anyFunctionArguement, modelTime) end
+        function timer.scheduleFunction( functionToCall, anyFunctionArguement, modelTime ) end
 
         ---Re-Schedules an already scheduled function to run at a different time in the future.
         ---https://wiki.hoggitworld.com/view/DCS_func_setFunctionTime
         ---@return function
         ---@param functionId number
         ---@param modelTime number
-        function timer.setFunctionTime(functionId, modelTime) end
+        function timer.setFunctionTime( functionId, modelTime ) end
     end
 end
