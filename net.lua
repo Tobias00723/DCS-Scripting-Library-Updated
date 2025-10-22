@@ -223,5 +223,21 @@ do
 
         --No Docu
         function net.trace() end
+
+        ---No docu
+        ---@param playerID Player_id
+        ---@return coalition.side
+        function net.get_coalition(playerID, ...) end
+
+        ---No docu
+        ---@param playerID Player_id
+        ---@param coal coalition.side
+        function net.set_coalition(playerID, coal, ...) end
+
+        --No Docu
+        function net.resetJoinCooldownEndForAll() end
+
+        --No Docu
+        function net.resetJoinCooldownEndForPlayer() end
     end
 end

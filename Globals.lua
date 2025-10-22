@@ -727,7 +727,7 @@ do
 
     ED_FINAL_VERSION    = true ---@type boolean
     ED_PUBLIC_AVAILABLE = true ---@type boolean
-    _APP_VERSION        = "2.9.19.13478" ---@type string
+    _APP_VERSION        = "2.9.21.16362" ---@type string
     db_path             = "./Scripts/Database/" ---@type string
     troopsPath          = "./Scripts/Database/troops/" ---@type string
 
