@@ -230,9 +230,11 @@ do
         function net.get_coalition(playerID, ...) end
 
         ---No docu
-        ---@param playerID Player_id
-        ---@param coal coalition.side
-        function net.set_coalition(playerID, coal, ...) end
+        ---seems to only work on host (Player id : 1)
+        ---Crash DCS when coalition is not valid
+        ---@param coal? coalition.side 0 if nill
+        ---@param Password? string
+        function net.set_coalition(coal, Password , ...) end
 
         --No Docu
         function net.resetJoinCooldownEndForAll() end
