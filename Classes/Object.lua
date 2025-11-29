@@ -63,7 +63,10 @@ do
 
     --Functions
     do
-        ---No Docu
+        ---same as choosecargo but disables the ability to select it for cargo
+        ---seems to not work
+        ---unselects the cargo for uh1h unhighlights the cargo for pickup
+        ---only works on SP
         function Object.cancelChoosingCargo(self, ...) end
 
         ---Destroys the object, physically removing it from the game world without creating an event. The object simply disappears. If used with a group, the entire group will be destroyed. Function also works with Unit, Weapon, Static Object, Scenery Object, Airbase

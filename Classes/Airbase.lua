@@ -125,7 +125,6 @@ do
         function Airbase.getCoalition(self) end
 
         --No Docu
-        ---@param self Unit
         ---@param ... unknown
         ---@return unknown class empty meta table
         function Airbase.getCommunicator(self, ...) end

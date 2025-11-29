@@ -426,15 +426,18 @@ do
         function Unit.getName(self) end
 
         ---Returns a table of friendly cargo objects indexed numerically and sorted by distance from the helicopter. Returns nil if used on any object other than a helicopter.
+        ---up to ~2.5 km
         ---https://wiki.hoggitworld.com/view/DCS_func_getNearestCargos
-        ---@return table<number, Objects>
+        ---@return table<number, StaticObject>
         function Unit.getNearestCargos(self) end
 
         --No Docu
         --When running on a a-10 nil table as return can only presume its similair to 'getNearestCargos' but only cargo for this aircraft runned on?
+        --seems a safer version of get neearest cargo as it works for all planes and helis
+        --return only very close cargo
         ---@param self Unit
         ---@param ... unknown
-        ---@return table<number, Objects>
+        ---@return table<number, StaticObject>
         function Unit.getNearestCargosForAircraft(self, ...) end
 
         ---Returns a numerical value of the default index of the specified unit within the group as defined within the mission editor or addGroup scripting function. This value is not changed as units within the group are destroyed.
@@ -528,6 +531,9 @@ do
 
         --No Docu
         ---appears to do nothing (even on ch-47F)
+        ---physically opens the ramp on the C130
+        ---if already open will close in one frame to open fast again
+        ---Only works on SP
         ---@param self Unit
         ---@param ... unknown
         function Unit.openRamp(self, ...) end
