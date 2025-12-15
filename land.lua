@@ -71,7 +71,7 @@ do
         ---
         ---newPoint= {x = point.x, y = land.getHeight({x = point.x, y = point.z}), z= point.z}
         ---@return number
-        ---@param vec2 vec2
+        ---@param vec2 vec2|table<'1'|'2',number>
         function land.getHeight(vec2) end
 
         ---Returns an intercept point at which a ray drawn from the origin in the passed normalized direction for a specified distance. If no intersection found the function will return nil.
