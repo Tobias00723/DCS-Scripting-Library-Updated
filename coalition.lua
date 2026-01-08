@@ -147,6 +147,7 @@ do
         function coalition.getStaticObjects(coalitionId) end
 
         --No Docu
+        --Crashes DCS
         function coalition.remove_dyn_group() end
     end
 end

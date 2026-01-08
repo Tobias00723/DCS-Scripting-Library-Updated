@@ -66,7 +66,7 @@ do
         ---Schedules a function to run at a time in the future. This is a very powerful function. The function that is called is expected to return nil or a number which will indicate the next time the function will be rescheduled. Use the second argument in that function to retrieve the current time and add the desired amount of delay (expressed in seconds).
         ---https://wiki.hoggitworld.com/view/DCS_func_scheduleFunction
         ---@generic ARG
-        ---@return any functionId
+        ---@return number functionId
         ---@param anyFunctionArguement ARG functionArgs
         ---@param functionToCall fun(ARG?:ARG, time?:number):number?
         ---@param modelTime number time

@@ -300,6 +300,7 @@ do
         --No Docu
         ---@param self Unit
         ---@param ... unknown
+        ---@return Airbase
         function Unit.getAirbase(self, ...) end
 
         ---Returns an ammo table for all types of loaded ammunition on a given Unit. Ammo table is indexed by ammo type and contains a weapon description table and a count variable defining "how much" is on board.

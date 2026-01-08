@@ -543,7 +543,7 @@ do
         do
             --No Docu
             ---comment
-            ---@param trgdata table
+            ---@param trgdata {actions:string, func:string, flag:boolean, conditions:string}
             ---@return table<"func", string>
             function trigger.misc.addTrigger(trgdata) end
 
